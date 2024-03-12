@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import MyDonationSinglePet from '../../components/myDonationSinglePet/MyDonationSinglePet';
+import MyDonationSinglePet from '../../../components/myDonationSinglePet/MyDonationSinglePet';
 
 const ForgotPassword = () => {
   return (

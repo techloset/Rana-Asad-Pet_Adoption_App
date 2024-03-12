@@ -8,8 +8,8 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import FavoriteSinglePet from '../../components/favoriteSinglePet/FavoriteSinglePet';
-import DonationRequestSinglePet from '../../components/donationRequestSinglePet/DonationRequestSinglePet';
+import FavoriteSinglePet from '../../../components/favoriteSinglePet/FavoriteSinglePet';
+import DonationRequestSinglePet from '../../../components/donationRequestSinglePet/DonationRequestSinglePet';
 
 const DonationRequest = () => {
   return (
