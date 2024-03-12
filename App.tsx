@@ -8,9 +8,12 @@ import Profile from './src/screens/profile/Profile';
 import UpdataPassword from './src/screens/updataPassword/UpdataPassword';
 import DonateScreen from './src/screens/donateScreen/DonateScreen';
 import MyDonations from './src/screens/myDonations/MyDonations';
+import Favorites from './src/screens/favorites/Favorites';
+import MyDonationSinglePet from './src/components/myDonationSinglePet/MyDonationSinglePet';
+import DonationRequest from './src/screens/donationRequest/DonationRequest';
 
 const App = () => {
-  return <MyDonations />;
+  return <DonationRequest />;
 };
 
 export default App;

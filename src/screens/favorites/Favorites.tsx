@@ -8,9 +8,9 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import MyDonationSinglePet from '../../components/myDonationSinglePet/MyDonationSinglePet';
+import FavoriteSinglePet from '../../components/favoriteSinglePet/FavoriteSinglePet';
 
-const ForgotPassword = () => {
+const Favorites = () => {
   return (
     <ScrollView style={styles.container}>
       <View
@@ -21,7 +21,7 @@ const ForgotPassword = () => {
           paddingHorizontal: 30,
         }}>
         <Text style={{fontSize: 24, fontWeight: '700', color: '#101C1D'}}>
-          My Donations
+          Favorites
         </Text>
         <Image
           style={{
@@ -80,25 +80,26 @@ const ForgotPassword = () => {
           </Text>
           <Image
             style={{
-              width: 20,
-              height: 20,
+              width: 16,
+              height: 15,
               marginLeft: 60,
             }}
-            source={require('../../assets/donate/Delete.png')}
+            source={require('../../assets/adoption/heartRed.png')}
           />
         </View>
       </View> */}
 
-      <MyDonationSinglePet />
-      <MyDonationSinglePet />
-      <MyDonationSinglePet />
-      <MyDonationSinglePet />
-      <MyDonationSinglePet />
+      <FavoriteSinglePet />
+      <FavoriteSinglePet />
+      <FavoriteSinglePet />
+      <FavoriteSinglePet />
+      <FavoriteSinglePet />
+      <FavoriteSinglePet />
     </ScrollView>
   );
 };
 
-export default ForgotPassword;
+export default Favorites;
 
 const styles = StyleSheet.create({
   container: {
@@ -119,13 +120,13 @@ const styles = StyleSheet.create({
     height: 141,
     borderRadius: 25,
     backgroundColor: '#C4C4C4',
-    zIndex: 100,
+    zIndex: 20,
   },
   two: {
     width: 147,
     height: 126,
+    zIndex: 1,
     right: 20,
-    zIndex: 2,
     paddingLeft: 45,
     paddingTop: 10,
     borderRadius: 20,
