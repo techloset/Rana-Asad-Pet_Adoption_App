@@ -1,4 +1,5 @@
 import {
+  Alert,
   Image,
   ScrollView,
   StyleSheet,
@@ -9,10 +10,49 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {CheckBox, Icon} from 'react-native-elements';
-import {LoginScreenProps} from '../../../types/types';
+import {LoginScreenProps, User} from '../../constants/types';
+import auth from '@react-native-firebase/auth';
+import {useDispatch} from 'react-redux';
+
+const initialState = {email: '', password: ''};
 
 const Login = ({navigation}: LoginScreenProps) => {
+  const dispatch = useDispatch();
   const [isChecked, setIsChecked] = useState(false);
+
+  const [state, setState] = useState(initialState);
+
+  const handleChange = (name: string, value: string) => {
+    setState(s => ({...s, [name]: value}));
+  };
+
+  const handleLogin = async () => {
+    let {email, password} = state;
+
+    if (!email) {
+      return Alert.alert('please enter email correctly');
+    }
+    if (password.length < 6) {
+      return Alert.alert('please enter password correctly');
+    }
+
+    auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(userCredential => {
+        const user = userCredential.user;
+        navigation.navigate('ForgotPassword');
+        console.log('login user', user);
+        console.log('User account signed in!');
+      })
+      .catch(error => {
+        if (error.code === 'auth/invalid-email') {
+          Alert.alert('That email address is invalid!');
+          console.log('That email address is invalid!');
+        }
+        Alert.alert('Login Error', error);
+        console.error('error => ', error);
+      });
+  };
 
   const handleNavigationToLogin = () => {
     navigation.navigate('SignUp');
@@ -31,11 +71,20 @@ const Login = ({navigation}: LoginScreenProps) => {
         </View>
         <View>
           <Text style={styles.label}>Email</Text>
-          <TextInput style={styles.input} placeholder="" />
+          <TextInput
+            style={styles.input}
+            onChangeText={val => handleChange('email', val)}
+            placeholder=""
+          />
         </View>
         <View>
           <Text style={styles.label2}>Password</Text>
-          <TextInput style={styles.input} secureTextEntry placeholder="" />
+          <TextInput
+            style={styles.input}
+            onChangeText={val => handleChange('password', val)}
+            secureTextEntry
+            placeholder=""
+          />
         </View>
         <View>
           <Text
@@ -44,13 +93,6 @@ const Login = ({navigation}: LoginScreenProps) => {
             Forgot Password?
           </Text>
         </View>
-        {/* <View style={styles.checkboxContainer}>
-          <Text style={styles.checkBoxLabel}>
-            I agree to the{' '}
-            <Text style={styles.underlineText}>Terms of service</Text> and{' '}
-            <Text style={styles.underlineText}>Privacy policy</Text>
-          </Text>
-        </View> */}
 
         <View style={styles.containerbox}>
           <CheckBox
@@ -87,7 +129,9 @@ const Login = ({navigation}: LoginScreenProps) => {
         </View>
 
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <TouchableOpacity style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={handleLogin}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
         </View>

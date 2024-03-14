@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import Login from '../../screens/login/Login';
 import SignUp from '../../screens/signUp/SignUp';
 import ForgotPassword from '../../screens/forgotPassword/ForgotPassword';
-import SplashScreen from '../../screens/splash/SplashScreen';
 import Profile from '../../screens/profile/Profile';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TabNavigation from '../tab/TabNavigation';
@@ -20,7 +19,6 @@ export type RootStackparams = {
   Login: undefined;
   SignUp: undefined;
   ForgotPassword: undefined;
-  SplashScreen: undefined;
   Home: undefined;
   Profile: undefined;
   PetSearch: undefined;
@@ -38,9 +36,8 @@ const StackNavigation: React.FC = () => {
   if (!user) {
     return (
       <Stack.Navigator
-        initialRouteName="SplashScreen"
+        initialRouteName="Login"
         screenOptions={{headerShown: false}}>
-        <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />

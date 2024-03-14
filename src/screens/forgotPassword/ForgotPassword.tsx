@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import {LoginScreenProps} from '../../../types/types';
+import {LoginScreenProps} from '../../constants/types';
 
 const ForgotPassword = ({navigation}: LoginScreenProps) => {
   const handleGoBack = () => {

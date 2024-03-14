@@ -21,6 +21,7 @@ const gender = [
 
 const DonateScreen = () => {
   const [value, setValue] = useState(String);
+  console.log('value, ', value);
 
   return (
     <ScrollView style={styles.container}>
@@ -82,23 +83,6 @@ const DonateScreen = () => {
               }}
             />
           </View>
-
-          {/* <View>
-            <Text style={styles.label}>Vaccinated</Text>
-            <TextInput
-              style={styles.input}
-              placeholderTextColor={'black'}
-              placeholder=""
-            />
-          </View> */}
-          {/* <View>
-            <Text style={styles.label}>Gender</Text>
-            <TextInput
-              style={styles.input}
-              placeholderTextColor={'black'}
-              placeholder=""
-            />
-          </View> */}
 
           <View style={styles.containerDropDown}>
             <Text style={styles.label}>Gender</Text>

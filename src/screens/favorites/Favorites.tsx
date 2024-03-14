@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import FavoriteSinglePet from '../../components/favoriteSinglePet/FavoriteSinglePet';
-import {LoginScreenProps} from '../../../types/types';
+import {LoginScreenProps} from '../../constants/types';
 
 const Favorites = ({navigation}: LoginScreenProps) => {
   const handleGoToPetSearch = () => {

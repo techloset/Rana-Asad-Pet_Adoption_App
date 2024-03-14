@@ -2,7 +2,7 @@ import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import SearchBar from '../../components/searchBar/SearchBar';
 import FavoriteSinglePet from '../../components/favoriteSinglePet/FavoriteSinglePet';
-import {LoginScreenProps} from '../../../types/types';
+import {LoginScreenProps} from '../../constants/types';
 
 const PetSearch = ({navigation}: LoginScreenProps) => {
   return (

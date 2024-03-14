@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {Image} from 'react-native-elements';
-import {LoginScreenProps} from '../../../types/types';
+import {LoginScreenProps} from '../../constants/types';
 
 const MyPetDetails = ({navigation}: LoginScreenProps) => {
   const handleGoToBack = () => {

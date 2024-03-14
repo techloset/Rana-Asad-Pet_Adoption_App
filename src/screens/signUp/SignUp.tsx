@@ -1,4 +1,5 @@
 import {
+  Alert,
   Image,
   ScrollView,
   StyleSheet,
@@ -8,15 +9,15 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import {CheckBox, Icon} from 'react-native-elements';
-import {LoginScreenProps} from '../../../types/types';
+import {CheckBox} from 'react-native-elements';
+import {SignUpScreenProps} from '../../constants/types';
+import {useSignUp} from './useSignUp';
 
-const SignUp = ({navigation}: LoginScreenProps) => {
-  const [isChecked, setIsChecked] = useState(false);
+const SignUp: React.FC<SignUpScreenProps> = ({navigation}) => {
+  const {state, handleChange, handleSignUp} = useSignUp({navigation});
 
-  const handleNavigationToLogin = () => {
-    navigation.navigate('Login');
-  };
+  const [isChecked, setIsChecked] = useState(true);
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.smallContainer}>
@@ -27,23 +28,33 @@ const SignUp = ({navigation}: LoginScreenProps) => {
         </View>
         <View>
           <Text style={styles.label}>Username</Text>
-          <TextInput style={styles.input} placeholder="" />
+          <TextInput
+            style={styles.input}
+            value={state.userName}
+            onChangeText={val => handleChange('userName', val)}
+            placeholder=""
+          />
         </View>
         <View>
           <Text style={styles.label}>Email</Text>
-          <TextInput style={styles.input} placeholder="" />
+          <TextInput
+            style={styles.input}
+            value={state.email}
+            keyboardType="email-address"
+            onChangeText={val => handleChange('email', val)}
+            placeholder=""
+          />
         </View>
         <View>
           <Text style={styles.label2}>Password</Text>
-          <TextInput style={styles.input} secureTextEntry placeholder="" />
+          <TextInput
+            style={styles.input}
+            value={state.password}
+            onChangeText={val => handleChange('password', val)}
+            secureTextEntry
+            placeholder=""
+          />
         </View>
-        {/* <View style={styles.checkboxContainer}>
-          <Text style={styles.checkBoxLabel}>
-            I agree to the{' '}
-            <Text style={styles.underlineText}>Terms of service</Text> and{' '}
-            <Text style={styles.underlineText}>Privacy policy</Text>
-          </Text>
-        </View> */}
 
         <View style={styles.containerbox}>
           <CheckBox
@@ -80,7 +91,9 @@ const SignUp = ({navigation}: LoginScreenProps) => {
         </View>
 
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <TouchableOpacity style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={handleSignUp}>
             <Text style={styles.buttonText}>Sign Up</Text>
           </TouchableOpacity>
         </View>
@@ -92,7 +105,9 @@ const SignUp = ({navigation}: LoginScreenProps) => {
           }}>
           <Text
             style={styles.buttonTextSignUp}
-            onPress={handleNavigationToLogin}>
+            onPress={() => {
+              navigation.navigate('Login');
+            }}>
             Login
           </Text>
         </View>
