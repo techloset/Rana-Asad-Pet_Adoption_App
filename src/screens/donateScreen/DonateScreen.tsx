@@ -12,6 +12,9 @@ import React, {useState} from 'react';
 import {Dropdown} from 'react-native-element-dropdown';
 import ImagePicker from 'react-native-image-crop-picker';
 import {useAppSelector} from '../../store/Store';
+import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
+import {LoginScreenProps} from '../../constants/types';
 
 const data = [
   {label: 'No', value: 'No'},
@@ -39,7 +42,7 @@ interface DonationScreen {
   like: boolean;
 }
 
-const DonateScreen = () => {
+const DonateScreen = ({navigation}: LoginScreenProps) => {
   const userData = useAppSelector(state => state.user.userData);
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -64,8 +67,28 @@ const DonateScreen = () => {
     setState(prevState => ({...prevState, [name]: value}));
   };
 
-  const handleDonation = () => {
-    console.log('Donation Data :', state);
+  const handleDonation = async () => {
+    try {
+      const uploadUri = selectedImage!;
+      const imageName = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
+
+      const storageRef = storage().ref(`images/${imageName}`);
+      await storageRef.putFile(uploadUri);
+
+      const imageURL = await storageRef.getDownloadURL();
+
+      await firestore()
+        .collection('donationPets')
+        .add({
+          ...state,
+          image: imageURL,
+          createdAt: firestore.FieldValue.serverTimestamp(),
+        });
+
+      console.log('Donation added successfully');
+    } catch (error) {
+      console.log('Error adding donation:', error);
+    }
   };
 
   const handleImagePicker = async () => {
@@ -83,19 +106,24 @@ const DonateScreen = () => {
     }
   };
 
+  const handleGoBack = () => {
+    navigation.goBack();
+  };
   return (
     <ScrollView style={styles.container}>
-      <View style={{flex: 1}}>
-        <Image
-          style={{
-            width: 25,
-            height: 22,
-            marginTop: 20,
-            marginLeft: 20,
-          }}
-          source={require('../../assets/login/forgot.png')}
-        />
-      </View>
+      <TouchableOpacity onPress={handleGoBack}>
+        <View style={{flex: 1}}>
+          <Image
+            style={{
+              width: 25,
+              height: 22,
+              marginTop: 20,
+              marginLeft: 20,
+            }}
+            source={require('../../assets/login/forgot.png')}
+          />
+        </View>
+      </TouchableOpacity>
       <View style={styles.secondContainer}>
         <View style={styles.smallContainer}>
           {/* <View>
