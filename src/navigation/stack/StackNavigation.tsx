@@ -12,6 +12,7 @@ import DonationRequest from '../../screens/donationRequest/DonationRequest';
 import UpdataPassword from '../../screens/updataPassword/UpdataPassword';
 import Details from '../../screens/details/Details';
 import MyPetDetails from '../../screens/myPetDetails/MyPetDetails';
+import {useAppSelector} from '../../store/Store';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,9 +32,9 @@ export type RootStackparams = {
 };
 
 const StackNavigation: React.FC = () => {
-  const [user, setUser] = useState(true);
+  const userData = useAppSelector(state => state.user.userData);
 
-  if (!user) {
+  if (!userData) {
     return (
       <Stack.Navigator
         initialRouteName="Login"

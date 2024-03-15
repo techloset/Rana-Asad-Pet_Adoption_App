@@ -1,19 +1,64 @@
 import {
+  Alert,
   Image,
   ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
+  TouchableHighlight,
   TouchableOpacity,
   View,
 } from 'react-native';
 import React, {useState} from 'react';
 import {LoginScreenProps} from '../../constants/types';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+import ImagePicker from 'react-native-image-crop-picker';
+import {useAppSelector} from '../../store/Store';
 
 const Profile = ({navigation}: LoginScreenProps) => {
+  const [newUserName, setNewUserName] = useState('');
+  const [newEmail, setNewEmail] = useState('');
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const userData = useAppSelector(state => state.user.userData);
+
   const handleGoToUpdataPassword = () => {
     navigation.navigate('UpdataPassword');
+  };
+
+  const updateProfile = async () => {
+    try {
+      await firestore().collection('Users').doc(userData?.uid).update({
+        userName: newUserName,
+        email: newEmail,
+        photoURL: selectedImage,
+      });
+
+      setNewUserName('');
+      setNewEmail('');
+      navigation.navigate('Home');
+      console.log('Success', 'Profile updated successfully');
+    } catch (error) {
+      console.log('Error', 'Failed to update profile');
+    }
+  };
+
+  const handleImagePicker = async () => {
+    try {
+      const image = await ImagePicker.openPicker({
+        width: 300,
+        height: 300,
+        cropping: true,
+        includeBase64: false,
+        cropperCircleOverlay: true,
+      });
+
+      setSelectedImage(image.path);
+    } catch (error) {
+      console.log('Error selecting image:', error);
+    }
   };
 
   return (
@@ -31,28 +76,29 @@ const Profile = ({navigation}: LoginScreenProps) => {
           </Text>
         </View>
         <View style={{alignItems: 'center'}}>
-          <ImageBackground
-            source={require('../../assets/login/profilePicture.png')}
-            style={{
-              width: 125,
-              height: 125,
-              marginVertical: 30,
-              // borderWidth: 1,
-              borderStyle: 'dashed',
-              borderRadius: 70,
-            }}>
-            <View
-              style={{alignItems: 'flex-end', marginTop: 100, marginRight: 10}}>
-              <Image source={require('../../assets/login/border.png')} />
-            </View>
-          </ImageBackground>
+          <TouchableOpacity activeOpacity={0.8} onPress={handleImagePicker}>
+            <Image
+              style={{
+                width: 125,
+                height: 125,
+                marginVertical: 30,
+                borderWidth: 1,
+                borderRadius: 70,
+              }}
+              source={{uri: selectedImage || userData?.photoURL}}
+            />
+          </TouchableOpacity>
+          <View style={{alignItems: 'flex-end', top: -50, left: 35}}>
+            <Image source={require('../../assets/login/border.png')} />
+          </View>
         </View>
         <View>
           <Text style={styles.label}>Username</Text>
           <TextInput
             style={styles.input}
             placeholderTextColor={'#101C1D'}
-            placeholder="Muhammad Talha"
+            placeholder={userData?.userName}
+            onChangeText={setNewUserName}
           />
         </View>
         <View>
@@ -60,17 +106,20 @@ const Profile = ({navigation}: LoginScreenProps) => {
           <TextInput
             style={styles.input}
             placeholderTextColor={'#101C1D'}
-            placeholder="info@techloset.com"
+            onChangeText={setNewEmail}
+            placeholder={userData?.email}
           />
         </View>
         <View>
           <Text style={styles.label2} onPress={handleGoToUpdataPassword}>
-            Updata Password
+            Update Password
           </Text>
         </View>
 
         <View style={{top: 130}}>
-          <TouchableOpacity style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={updateProfile}>
             <Text style={styles.buttonText}>Update Profile</Text>
           </TouchableOpacity>
         </View>
@@ -92,7 +141,7 @@ const styles = StyleSheet.create({
     height: 660,
   },
   label: {
-    marginTop: 40,
+    marginTop: 20,
     fontSize: 18,
     fontWeight: '600',
     color: '#101C1D',

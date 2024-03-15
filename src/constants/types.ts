@@ -9,23 +9,16 @@ export type SignUpScreenProps = {
   navigation: StackNavigationProp<RootStackparams, 'SignUp'>;
 };
 
-export interface User {
+export interface UserData {
   uid: string;
   userName: string;
-  email: string;
   password: string;
   photoURL: string;
-  loading: boolean;
-  error: AuthError | null;
+  email: string;
 }
 
-export interface AuthError {
-  code: string;
-  message: string;
+export interface UserState {
+  userData: UserData | null;
+  isLoading: boolean;
+  error: string | null;
 }
-
-export type AuthState = {
-  user: User | null;
-  loading: boolean;
-  error: AuthError | null;
-};

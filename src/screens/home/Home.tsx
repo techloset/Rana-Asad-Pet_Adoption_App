@@ -1,9 +1,21 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {Image} from 'react-native';
 import SearchBar from '../../components/searchBar/SearchBar';
+import {useAppSelector} from '../../store/Store';
+import {UserData} from '../../constants/types';
 
 const Home = () => {
+  const userData = useAppSelector(state => state.user.userData);
+
+  console.log('photoURL', userData?.photoURL);
+
   return (
     <View>
       <View>
@@ -22,13 +34,14 @@ const Home = () => {
               }}
               source={require('../../assets/adoption/drawerLogo.png')}
             />
-            <View
+            <Image
               style={{
                 width: 46,
                 height: 46,
                 borderRadius: 123,
                 backgroundColor: '#C4C4C4',
-              }}></View>
+              }}
+              source={{uri: userData?.photoURL}}></Image>
           </View>
 
           <View>
@@ -61,13 +74,14 @@ const Home = () => {
                   alignItems: 'center',
                   backgroundColor: '',
                 }}>
-                <View
+                <Image
                   style={{
                     backgroundColor: '#C4C4C4',
                     width: 72,
                     height: 72,
                     borderRadius: 62,
-                  }}></View>
+                  }}
+                  source={{uri: userData?.photoURL}}></Image>
                 <Text
                   style={{
                     color: '#101C1D',
@@ -87,13 +101,14 @@ const Home = () => {
                   alignItems: 'center',
                   backgroundColor: '',
                 }}>
-                <View
+                <Image
                   style={{
                     backgroundColor: '#C4C4C4',
                     width: 72,
                     height: 72,
                     borderRadius: 62,
-                  }}></View>
+                  }}
+                  source={{uri: userData?.photoURL}}></Image>
                 <Text
                   style={{
                     color: '#101C1D',
@@ -113,13 +128,14 @@ const Home = () => {
                   alignItems: 'center',
                   backgroundColor: '',
                 }}>
-                <View
+                <Image
                   style={{
                     backgroundColor: '#C4C4C4',
                     width: 72,
                     height: 72,
                     borderRadius: 62,
-                  }}></View>
+                  }}
+                  source={{uri: userData?.photoURL}}></Image>
                 <Text
                   style={{
                     color: '#101C1D',
@@ -139,13 +155,14 @@ const Home = () => {
                   alignItems: 'center',
                   backgroundColor: '',
                 }}>
-                <View
+                <Image
                   style={{
                     backgroundColor: '#C4C4C4',
                     width: 72,
                     height: 72,
                     borderRadius: 62,
-                  }}></View>
+                  }}
+                  source={{uri: userData?.photoURL}}></Image>
                 <Text
                   style={{
                     color: '#101C1D',
@@ -165,13 +182,14 @@ const Home = () => {
                   alignItems: 'center',
                   backgroundColor: '',
                 }}>
-                <View
+                <Image
                   style={{
                     backgroundColor: '#C4C4C4',
                     width: 72,
                     height: 72,
                     borderRadius: 62,
-                  }}></View>
+                  }}
+                  source={{uri: userData?.photoURL}}></Image>
                 <Text
                   style={{
                     color: '#101C1D',
@@ -191,13 +209,14 @@ const Home = () => {
                   alignItems: 'center',
                   backgroundColor: '',
                 }}>
-                <View
+                <Image
                   style={{
                     backgroundColor: '#C4C4C4',
                     width: 72,
                     height: 72,
                     borderRadius: 62,
-                  }}></View>
+                  }}
+                  source={{uri: userData?.photoURL}}></Image>
                 <Text
                   style={{
                     color: '#101C1D',
@@ -225,19 +244,18 @@ const Home = () => {
                 marginVertical: 10,
                 height: 235,
               }}>
-              <View
+              <ImageBackground
                 style={{
                   width: 321,
                   height: 161,
                   marginTop: 20,
-                  backgroundColor: '#C4C4C4',
                   borderRadius: 20,
-                }}>
+                }}
+                source={{uri: userData?.photoURL}}>
                 <View
                   style={{
                     width: 175,
                     height: 125,
-                    backgroundColor: '#C4C4C4',
                     marginTop: 18,
                     marginLeft: 18,
                   }}>
@@ -254,20 +272,19 @@ const Home = () => {
                     $250
                   </Text>
                 </View>
-              </View>
-              <View
+              </ImageBackground>
+              <ImageBackground
                 style={{
                   width: 321,
                   height: 161,
                   marginTop: 20,
-                  backgroundColor: '#C4C4C4',
                   borderRadius: 20,
-                }}>
+                }}
+                source={{uri: userData?.photoURL}}>
                 <View
                   style={{
                     width: 175,
                     height: 125,
-                    backgroundColor: '#C4C4C4',
                     marginTop: 18,
                     marginLeft: 18,
                   }}>
@@ -284,20 +301,19 @@ const Home = () => {
                     $250
                   </Text>
                 </View>
-              </View>
-              <View
+              </ImageBackground>
+              <ImageBackground
                 style={{
                   width: 321,
-                  marginTop: 20,
                   height: 161,
-                  backgroundColor: '#C4C4C4',
+                  marginTop: 20,
                   borderRadius: 20,
-                }}>
+                }}
+                source={{uri: userData?.photoURL}}>
                 <View
                   style={{
                     width: 175,
                     height: 125,
-                    backgroundColor: '#C4C4C4',
                     marginTop: 18,
                     marginLeft: 18,
                   }}>
@@ -314,7 +330,7 @@ const Home = () => {
                     $250
                   </Text>
                 </View>
-              </View>
+              </ImageBackground>
             </ScrollView>
           </View>
         </View>

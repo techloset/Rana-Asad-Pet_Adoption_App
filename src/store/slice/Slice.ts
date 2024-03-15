@@ -1,85 +1,41 @@
-// authSlice.ts
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {AppDispatch} from '../Store';
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
+import {RootState} from '../Store';
+import {UserData, UserState} from '../../constants/types';
 
-interface User {
-  uid: string;
-  email: string;
-  password: string;
-  pictureURL: string;
-}
-
-interface AuthState {
-  user: User | null;
-  loading: boolean;
-  error: string | null;
-}
-
-const initialState: AuthState = {
-  user: null,
-  loading: false,
+const initialState: UserState = {
+  userData: null,
+  isLoading: false,
   error: null,
 };
 
-const authSlice = createSlice({
-  name: 'auth',
+const userSlice = createSlice({
+  name: 'user',
   initialState,
   reducers: {
-    setUser(state, action: PayloadAction<User | null>) {
-      state.user = action.payload;
+    fetchUserDataStart: state => {
+      state.isLoading = true;
+      state.error = null;
+      console.log('fetchUserDataStart');
     },
-    setLoading(state, action: PayloadAction<boolean>) {
-      state.loading = action.payload;
+    fetchUserDataSuccess: (state, action: PayloadAction<UserData>) => {
+      state.userData = action.payload;
+      state.isLoading = false;
+      state.error = null;
+      console.log('fetchUserDataSuccess');
     },
-    setError(state, action: PayloadAction<string | null>) {
+    fetchUserDataFailure: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
       state.error = action.payload;
+      console.log('fetchUserDataFailure');
     },
   },
 });
 
-export const {setUser, setLoading, setError} = authSlice.actions;
+export const {fetchUserDataStart, fetchUserDataSuccess, fetchUserDataFailure} =
+  userSlice.actions;
 
-export const signUp =
-  (email: string, password: string, userName: string, pictureURL: string) =>
-  async (dispatch: AppDispatch) => {
-    try {
-      dispatch(setLoading(true));
-      const response = await auth().createUserWithEmailAndPassword(
-        email,
-        password,
-      );
-      const {uid} = response.user!;
-      await firestore().collection('users').doc(uid).set({
-        email,
-        userName,
-        pictureURL,
-      });
-      dispatch(setUser({uid, email, password, pictureURL}));
-      dispatch(setLoading(false));
-    } catch (error: any) {
-      dispatch(setError(error.message));
-      dispatch(setLoading(false));
-    }
-  };
+export const selectUserData = (state: RootState) => state.user.userData;
+export const selectIsLoading = (state: RootState) => state.user.isLoading;
+export const selectError = (state: RootState) => state.user.error;
 
-export const login =
-  (email: string, password: string) => async (dispatch: AppDispatch) => {
-    try {
-      dispatch(setLoading(true));
-      const response = await auth().signInWithEmailAndPassword(email, password);
-      const {uid} = response.user!;
-      const userDoc = await firestore().collection('users').doc(uid).get();
-      if (userDoc.exists) {
-        const userData = userDoc.data() as User;
-        dispatch(setUser(userData));
-      }
-      dispatch(setLoading(false));
-    } catch (error: any) {
-      dispatch(setError(error.message));
-      dispatch(setLoading(false));
-    }
-  };
-
-export default authSlice.reducer;
+export default userSlice.reducer;

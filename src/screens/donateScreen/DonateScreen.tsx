@@ -1,4 +1,5 @@
 import {
+  Alert,
   Image,
   ScrollView,
   StyleSheet,
@@ -9,19 +10,78 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {Dropdown} from 'react-native-element-dropdown';
+import ImagePicker from 'react-native-image-crop-picker';
+import {useAppSelector} from '../../store/Store';
 
 const data = [
-  {label: 'No', value: '1'},
-  {label: 'Yes', value: '2'},
+  {label: 'No', value: 'No'},
+  {label: 'Yes', value: 'Yes'},
 ];
-const gender = [
-  {label: 'Male', value: '1'},
-  {label: 'Female', value: '2'},
+const genderList = [
+  {label: 'Male', value: 'Male'},
+  {label: 'Female', value: 'Female'},
 ];
 
+interface DonationScreen {
+  petType: string;
+  vaccinated: string;
+  gender: string;
+  petBreed: string;
+  amount: string;
+  weight: string;
+  location: string;
+  description: string;
+  image: string;
+  userUID: string;
+  userEmail: string;
+  userPhotoURL: string;
+  userUserName: string;
+  like: boolean;
+}
+
 const DonateScreen = () => {
-  const [value, setValue] = useState(String);
-  console.log('value, ', value);
+  const userData = useAppSelector(state => state.user.userData);
+
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [state, setState] = useState<DonationScreen>({
+    petType: '',
+    vaccinated: '',
+    gender: '',
+    petBreed: '',
+    amount: '',
+    weight: '',
+    location: '',
+    description: '',
+    image: '',
+    userUID: userData?.uid || '',
+    userEmail: userData?.email || '',
+    userPhotoURL: userData?.photoURL || '',
+    userUserName: userData?.userName || '',
+    like: false,
+  });
+
+  const handleChange = (name: keyof DonationScreen, value: string) => {
+    setState(prevState => ({...prevState, [name]: value}));
+  };
+
+  const handleDonation = () => {
+    console.log('Donation Data :', state);
+  };
+
+  const handleImagePicker = async () => {
+    try {
+      const image = await ImagePicker.openPicker({
+        width: 300,
+        height: 300,
+        cropping: true,
+        includeBase64: false,
+      });
+      setSelectedImage(image.path);
+      setState(prevState => ({...prevState, image: image.path}));
+    } catch (error) {
+      console.log('Error selecting image:', error);
+    }
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -50,15 +110,20 @@ const DonateScreen = () => {
               labelField="label"
               valueField="value"
               placeholder=""
-              value={value}
+              value={state.petType}
               onChange={item => {
-                setValue(item?.value);
+                handleChange('petType', item?.value);
               }}
             />
           </View>
           <View>
             <Text style={styles.label}>Pet Breed</Text>
-            <TextInput style={styles.input} placeholder="" />
+            <TextInput
+              style={styles.input}
+              value={state.petBreed}
+              onChangeText={val => handleChange('petBreed', val)}
+              placeholder=""
+            />
           </View>
           <View>
             <Text style={styles.label}>Amount</Text>
@@ -66,6 +131,8 @@ const DonateScreen = () => {
               style={styles.input}
               placeholderTextColor={'black'}
               placeholder="$"
+              value={state.amount}
+              onChangeText={val => handleChange('amount', val)}
             />
           </View>
 
@@ -77,9 +144,9 @@ const DonateScreen = () => {
               labelField="label"
               valueField="value"
               placeholder=""
-              value={value}
+              value={state.vaccinated}
               onChange={item => {
-                setValue(item?.value);
+                handleChange('vaccinated', item?.value);
               }}
             />
           </View>
@@ -87,14 +154,14 @@ const DonateScreen = () => {
           <View style={styles.containerDropDown}>
             <Text style={styles.label}>Gender</Text>
             <Dropdown
-              data={gender}
+              data={genderList}
               maxHeight={300}
               labelField="label"
               valueField="value"
               placeholder=""
-              value={value}
+              value={state.gender}
               onChange={item => {
-                setValue(item?.value);
+                handleChange('gender', item?.value);
               }}
             />
           </View>
@@ -102,6 +169,8 @@ const DonateScreen = () => {
             <Text style={styles.label}>Weight</Text>
             <TextInput
               style={styles.input}
+              value={state.weight}
+              onChangeText={val => handleChange('weight', val)}
               placeholderTextColor={'black'}
               placeholder="KG"
             />
@@ -112,6 +181,8 @@ const DonateScreen = () => {
               style={styles.input}
               placeholderTextColor={'black'}
               placeholder=""
+              value={state.location}
+              onChangeText={val => handleChange('location', val)}
             />
           </View>
           <View>
@@ -121,40 +192,37 @@ const DonateScreen = () => {
               placeholder=""
               multiline
               numberOfLines={4}
+              value={state.description}
+              onChangeText={val => handleChange('description', val)}
             />
           </View>
 
           <View>
             <Text style={styles.label}>Image</Text>
-            <View
-              style={{
-                height: 161,
-                marginTop: 20,
-                backgroundColor: '#E2E2E2',
-                borderRadius: 20,
-                borderColor: '#000000',
-                borderWidth: 1,
-                borderStyle: 'dashed',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Image
-                style={{
-                  width: 48,
-                  height: 48,
-                  marginTop: 20,
-                  marginLeft: 20,
-                }}
-                source={require('../../assets/donate/Upload.png')}
-              />
-              <Text style={{fontSize: 14, fontWeight: '600'}}>
-                Upload Image
-              </Text>
-            </View>
+            <TouchableOpacity onPress={handleImagePicker}>
+              <View style={styles.imageContainer}>
+                {selectedImage ? (
+                  <Image
+                    source={{uri: selectedImage}}
+                    style={styles.imagePreview}
+                  />
+                ) : (
+                  <View style={styles.uploadPlaceholder}>
+                    <Image
+                      source={require('../../assets/donate/Upload.png')}
+                      style={styles.uploadIcon}
+                    />
+                    <Text style={styles.uploadText}>Upload Image</Text>
+                  </View>
+                )}
+              </View>
+            </TouchableOpacity>
           </View>
 
           <View style={{justifyContent: 'center', alignItems: 'center'}}>
-            <TouchableOpacity style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.buttonContainer}
+              onPress={handleDonation}>
               <Text style={styles.buttonText}>Donate</Text>
             </TouchableOpacity>
           </View>
@@ -254,5 +322,39 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 5,
+  },
+
+  // --------------------
+
+  imageContainer: {
+    height: 161,
+    marginTop: 20,
+    backgroundColor: '#E2E2E2',
+    borderRadius: 20,
+    borderColor: '#000000',
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imagePreview: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'stretch',
+    borderRadius: 20,
+  },
+  uploadPlaceholder: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  uploadIcon: {
+    width: 48,
+    height: 48,
+    marginTop: 20,
+    marginLeft: 20,
+  },
+  uploadText: {
+    fontSize: 14,
+    fontWeight: '600',
   },
 });

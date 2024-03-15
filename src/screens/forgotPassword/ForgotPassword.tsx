@@ -1,4 +1,5 @@
 import {
+  Alert,
   Image,
   StyleSheet,
   Text,
@@ -6,10 +7,28 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
-import {LoginScreenProps} from '../../constants/types';
+import React, {useEffect, useState} from 'react';
+import {LoginScreenProps, UserData} from '../../constants/types';
+import auth from '@react-native-firebase/auth';
 
 const ForgotPassword = ({navigation}: LoginScreenProps) => {
+  const [forgotEmail, setForgotEmail] = useState('');
+
+  const handleRecoverPassword = async () => {
+    try {
+      if (forgotEmail.trim() === '') {
+        Alert.alert('Error', 'Please enter your email');
+      } else {
+        await auth().sendPasswordResetEmail(forgotEmail);
+        console.log('Password Recovery');
+        navigation.navigate('Login');
+      }
+    } catch (error) {
+      console.error('Password recovery failed:', error);
+      Alert.alert('Error', 'Failed to recover password. Please try again.');
+    }
+  };
+
   const handleGoBack = () => {
     navigation.goBack();
   };
@@ -43,7 +62,11 @@ const ForgotPassword = ({navigation}: LoginScreenProps) => {
         </View>
         <View>
           <Text style={styles.label}>Email</Text>
-          <TextInput style={styles.input} placeholder="" />
+          <TextInput
+            style={styles.input}
+            onChangeText={setForgotEmail}
+            placeholder=""
+          />
         </View>
 
         <View>
@@ -53,7 +76,9 @@ const ForgotPassword = ({navigation}: LoginScreenProps) => {
         </View>
 
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <TouchableOpacity style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={handleRecoverPassword}>
             <Text style={styles.buttonText}>Recover</Text>
           </TouchableOpacity>
         </View>

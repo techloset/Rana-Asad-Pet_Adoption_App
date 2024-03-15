@@ -10,8 +10,11 @@ import {
 import React, {useState} from 'react';
 import FavoriteSinglePet from '../../components/favoriteSinglePet/FavoriteSinglePet';
 import {LoginScreenProps} from '../../constants/types';
+import {useAppSelector} from '../../store/Store';
 
 const Favorites = ({navigation}: LoginScreenProps) => {
+  const userData = useAppSelector(state => state.user.userData);
+
   const handleGoToPetSearch = () => {
     navigation.navigate('PetSearch');
   };

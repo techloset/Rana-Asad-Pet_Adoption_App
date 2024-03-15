@@ -6,12 +6,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {useAppSelector} from '../../store/Store';
 
 const FavoriteSinglePet = () => {
+  const userData = useAppSelector(state => state.user.userData);
+
   return (
     <View style={styles.smallContainer}>
-      <View style={styles.one}></View>
+      <Image style={styles.one} source={{uri: userData?.photoURL}}></Image>
       <View style={styles.two}>
         <Text
           style={{
