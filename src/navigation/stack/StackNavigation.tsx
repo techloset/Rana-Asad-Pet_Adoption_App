@@ -1,18 +1,20 @@
-import React, {useState} from 'react';
-import Login from '../../screens/login/Login';
-import SignUp from '../../screens/signUp/SignUp';
-import ForgotPassword from '../../screens/forgotPassword/ForgotPassword';
-import Profile from '../../screens/profile/Profile';
+import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TabNavigation from '../tab/TabNavigation';
 import PetSearch from '../../screens/petSearch/PetSearch';
 import Favorites from '../../screens/favorites/Favorites';
+import Profile from '../../screens/profile/Profile';
 import MyDonations from '../../screens/myDonations/MyDonations';
 import DonationRequest from '../../screens/donationRequest/DonationRequest';
 import UpdataPassword from '../../screens/updataPassword/UpdataPassword';
 import Details from '../../screens/details/Details';
 import MyPetDetails from '../../screens/myPetDetails/MyPetDetails';
 import {useAppSelector} from '../../store/Store';
+import {DonationPetData} from '../../constants/types';
+import SearchSinglePet from '../../components/searchSinglePet/SearchSinglePet';
+import Login from '../../screens/login/Login';
+import SignUp from '../../screens/signUp/SignUp';
+import ForgotPassword from '../../screens/forgotPassword/ForgotPassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,7 +29,8 @@ export type RootStackparams = {
   UpdataPassword: undefined;
   MyDonations: undefined;
   DonationRequest: undefined;
-  Details: undefined;
+  Details: {pet: DonationPetData};
+  SearchSinglePet: undefined;
   MyPetDetails: undefined;
 };
 
@@ -46,21 +49,24 @@ const StackNavigation: React.FC = () => {
     );
   } else {
     return (
-      <>
-        <Stack.Navigator
-          initialRouteName="TabNavigation"
-          screenOptions={{headerShown: false}}>
-          <Stack.Screen name="TabNavigation" component={TabNavigation} />
-          <Stack.Screen name="PetSearch" component={PetSearch} />
-          <Stack.Screen name="Favorite" component={Favorites} />
-          <Stack.Screen name="Profile" component={Profile} />
-          <Stack.Screen name="MyDonations" component={MyDonations} />
-          <Stack.Screen name="DonationRequest" component={DonationRequest} />
-          <Stack.Screen name="UpdataPassword" component={UpdataPassword} />
-          <Stack.Screen name="Details" component={Details} />
-          <Stack.Screen name="MyPetDetails" component={MyPetDetails} />
-        </Stack.Navigator>
-      </>
+      <Stack.Navigator
+        initialRouteName="TabNavigation"
+        screenOptions={{headerShown: false}}>
+        <Stack.Screen name="TabNavigation" component={TabNavigation} />
+        <Stack.Screen name="PetSearch" component={PetSearch} />
+        <Stack.Screen name="Favorite" component={Favorites} />
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="MyDonations" component={MyDonations} />
+        <Stack.Screen name="DonationRequest" component={DonationRequest} />
+        <Stack.Screen name="UpdataPassword" component={UpdataPassword} />
+        <Stack.Screen
+          name="SearchSinglePet"
+          component={SearchSinglePet}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen name="Details" component={Details} />
+        <Stack.Screen name="MyPetDetails" component={MyPetDetails} />
+      </Stack.Navigator>
     );
   }
 };

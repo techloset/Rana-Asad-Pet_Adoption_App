@@ -8,9 +8,10 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import FavoriteSinglePet from '../../components/favoriteSinglePet/FavoriteSinglePet';
+import FavoriteSinglePet from '../../components/searchSinglePet/SearchSinglePet';
 import {LoginScreenProps} from '../../constants/types';
 import {useAppSelector} from '../../store/Store';
+import FavoritePets from '../../components/favoritePets/FavoritePets';
 
 const Favorites = ({navigation}: LoginScreenProps) => {
   const userData = useAppSelector(state => state.user.userData);
@@ -98,12 +99,7 @@ const Favorites = ({navigation}: LoginScreenProps) => {
         </View>
       </View> */}
 
-      <FavoriteSinglePet />
-      <FavoriteSinglePet />
-      <FavoriteSinglePet />
-      <FavoriteSinglePet />
-      <FavoriteSinglePet />
-      <FavoriteSinglePet />
+      <FavoritePets />
     </ScrollView>
   );
 };

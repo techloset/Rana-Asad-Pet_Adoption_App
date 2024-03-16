@@ -10,6 +10,7 @@ import {Image} from 'react-native';
 import SearchBar from '../../components/searchBar/SearchBar';
 import {useAppSelector} from '../../store/Store';
 import {UserData} from '../../constants/types';
+import HomePageForYouSinglePet from '../../components/homePageForYou/HomePageForYouSinglePet';
 
 const Home = () => {
   const userData = useAppSelector(state => state.user.userData);
@@ -244,7 +245,7 @@ const Home = () => {
                 marginVertical: 10,
                 height: 235,
               }}>
-              <ImageBackground
+              {/* <ImageBackground
                 style={{
                   width: 321,
                   height: 161,
@@ -330,7 +331,8 @@ const Home = () => {
                     $250
                   </Text>
                 </View>
-              </ImageBackground>
+              </ImageBackground> */}
+              <HomePageForYouSinglePet />
             </ScrollView>
           </View>
         </View>

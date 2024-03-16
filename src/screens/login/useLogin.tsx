@@ -2,7 +2,7 @@ import {Alert} from 'react-native';
 import {useState} from 'react';
 import {LoginScreenProps, UserData} from '../../constants/types';
 import {useAppDispatch} from '../../store/Store';
-import {fetchUserDataSuccess} from '../../store/slice/Slice';
+import {fetchUserDataSuccess} from '../../store/slice/userSlice';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
@@ -62,11 +62,12 @@ export const useLogin = ({navigation}: LoginScreenProps) => {
 
   const fetchUserData = async (uid: string) => {
     try {
-      const userRef = firestore().collection('Users').doc(uid); // Use firestore module
+      const userRef = firestore().collection('Users').doc(uid);
       const doc = await userRef.get();
 
       if (doc.exists) {
         const userData = doc.data();
+        console.log('login userdata', userData);
         return userData as UserData;
       } else {
         console.log('No user data found!');

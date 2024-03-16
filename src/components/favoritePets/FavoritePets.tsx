@@ -6,15 +6,29 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {useAppSelector} from '../../store/Store';
+import React, {useEffect, useMemo} from 'react';
+import {useAppDispatch, useAppSelector} from '../../store/Store';
+import {fetchCollectionData} from '../../store/slice/donationPetsSlice';
+import {DonationPetData} from '../../constants/types';
+import {FlatList} from 'react-native';
 
-const FavoriteSinglePet = () => {
-  const userData = useAppSelector(state => state.user.userData);
+const FavoritePets = () => {
+  const dispatch = useAppDispatch();
+  const donationData = useAppSelector(state => state.donationPets.data);
 
-  return (
+  useEffect(() => {
+    dispatch(fetchCollectionData());
+    console.log('donation data :', donationData);
+  }, [dispatch]);
+
+  const memoizedData = useMemo(() => {
+    // Filter donationData to include only items where item.like is true
+    return donationData.filter((item: DonationPetData) => item.like);
+  }, [donationData]);
+
+  const renderPetItem = ({item}: {item: DonationPetData}) => (
     <View style={styles.smallContainer}>
-      <Image style={styles.one} source={{uri: userData?.photoURL}}></Image>
+      <Image style={styles.one} source={{uri: item.image}}></Image>
       <View style={styles.two}>
         <Text
           style={{
@@ -22,7 +36,7 @@ const FavoriteSinglePet = () => {
             fontWeight: '700',
             color: '#101C1D',
           }}>
-          Cavachon
+          {item.petType.slice(0, 8)}
         </Text>
         <Text
           style={{
@@ -40,7 +54,7 @@ const FavoriteSinglePet = () => {
               fontWeight: '500',
               color: '#101C1D',
             }}>
-            FSD
+            {item.location}
           </Text>
           <Image
             style={{
@@ -58,22 +72,41 @@ const FavoriteSinglePet = () => {
             fontWeight: '500',
             color: '#101C1D',
           }}>
-          Male
+          {item.gender}
         </Text>
-        <Image
-          style={{
-            width: 16,
-            height: 15,
-            marginLeft: 60,
-          }}
-          source={require('../../assets/adoption/heartRed.png')}
-        />
+        {item.like ? (
+          <Image
+            style={{
+              width: 16,
+              height: 15,
+              marginLeft: 60,
+            }}
+            source={require('../../assets/adoption/heartRed.png')}
+          />
+        ) : (
+          <Image
+            style={{
+              width: 16,
+              height: 15,
+              marginLeft: 60,
+            }}
+            source={require('../../assets/adoption/heartWhite.png')}
+          />
+        )}
       </View>
     </View>
   );
+
+  return (
+    <FlatList
+      data={memoizedData}
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={renderPetItem}
+    />
+  );
 };
 
-export default FavoriteSinglePet;
+export default FavoritePets;
 
 const styles = StyleSheet.create({
   smallContainer: {

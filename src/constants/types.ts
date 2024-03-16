@@ -22,3 +22,29 @@ export interface UserState {
   isLoading: boolean;
   error: string | null;
 }
+
+export interface DonationPetData {
+  uid: string;
+  petType: string;
+  petBreed: string;
+  amount: string;
+  vaccinated: string;
+  gender: string;
+  weight: string;
+  location: string;
+  description: string;
+  image: string;
+  createAt: string;
+  userUID: string | '';
+  userPhotoURL: string | '';
+  currentUserEmail: string | '';
+  currentUserName: string | '';
+  like: boolean;
+  email: string;
+}
+
+export interface DonationPetState {
+  data: DonationPetData[];
+  loading: boolean;
+  error: string | null;
+}

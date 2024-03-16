@@ -6,6 +6,7 @@ import {Provider} from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import {store} from './src/store/Store';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import HomePageForYouSinglePet from './src/components/homePageForYou/HomePageForYouSinglePet';
 
 export default function App() {
   useEffect(() => {

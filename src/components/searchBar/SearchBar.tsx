@@ -1,7 +1,8 @@
 import {Image, StyleSheet, Text, TextInput, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 
 const SearchBar = () => {
+  const [searchTest, setSearchTest] = useState('');
   return (
     <View style={{alignItems: 'center', marginVertical: 10}}>
       <View
@@ -16,6 +17,7 @@ const SearchBar = () => {
           <TextInput
             placeholder="Search for a pet"
             placeholderTextColor={'#101C1D'}
+            onChangeText={val => setSearchTest(val)}
             style={{
               backgroundColor: '#F2F3FA',
               color: '#101C1D',

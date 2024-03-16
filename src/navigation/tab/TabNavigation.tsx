@@ -42,8 +42,8 @@ const TabNavigation = () => {
           }}
         />
         <Tab.Screen
-          name="DonateScreen"
-          component={DonateScreen}
+          name="PetSearch"
+          component={PetSearch}
           options={{
             tabBarIcon: ({focused}) => (
               <View
@@ -66,8 +66,8 @@ const TabNavigation = () => {
         />
 
         <Tab.Screen
-          name="favorites"
-          component={Favorites}
+          name="DonateScreen"
+          component={DonateScreen}
           options={{
             tabBarIcon: ({focused}) => (
               <View

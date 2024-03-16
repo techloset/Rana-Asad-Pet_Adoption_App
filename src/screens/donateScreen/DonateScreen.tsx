@@ -8,17 +8,24 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useId, useState} from 'react';
 import {Dropdown} from 'react-native-element-dropdown';
 import ImagePicker from 'react-native-image-crop-picker';
 import {useAppSelector} from '../../store/Store';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-import {LoginScreenProps} from '../../constants/types';
+import {LoginScreenProps, UserData} from '../../constants/types';
 
 const data = [
-  {label: 'No', value: 'No'},
+  {label: 'Dog', value: 'Dog'},
+  {label: 'Cat', value: 'Cat'},
+  {label: 'Rabbit ', value: 'Rabbit '},
+  {label: 'Horse', value: 'Horse'},
+  {label: 'Cavachon dog', value: 'Cavachon dog'},
+];
+const vaccinatedData = [
   {label: 'Yes', value: 'Yes'},
+  {label: 'No', value: 'No'},
 ];
 const genderList = [
   {label: 'Male', value: 'Male'},
@@ -31,19 +38,29 @@ interface DonationScreen {
   gender: string;
   petBreed: string;
   amount: string;
+  uid: string;
   weight: string;
   location: string;
   description: string;
   image: string;
   userUID: string;
-  userEmail: string;
+  currentUserEmail: string;
   userPhotoURL: string;
-  userUserName: string;
+  currentUserName: string;
   like: boolean;
 }
 
 const DonateScreen = ({navigation}: LoginScreenProps) => {
+  const [currentUserData, setCurrentUserData] = useState<UserData | null>(null);
   const userData = useAppSelector(state => state.user.userData);
+
+  useEffect(() => {
+    if (userData) {
+      setCurrentUserData(userData);
+    }
+  }, [userData]);
+
+  console.log('donation data :', userData);
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [state, setState] = useState<DonationScreen>({
@@ -56,10 +73,11 @@ const DonateScreen = ({navigation}: LoginScreenProps) => {
     location: '',
     description: '',
     image: '',
-    userUID: userData?.uid || '',
-    userEmail: userData?.email || '',
-    userPhotoURL: userData?.photoURL || '',
-    userUserName: userData?.userName || '',
+    uid: '',
+    currentUserEmail: currentUserData?.email || '',
+    userUID: currentUserData?.uid || '',
+    userPhotoURL: currentUserData?.photoURL || '',
+    currentUserName: currentUserData?.userName || '',
     like: false,
   });
 
@@ -85,6 +103,27 @@ const DonateScreen = ({navigation}: LoginScreenProps) => {
           createdAt: firestore.FieldValue.serverTimestamp(),
         });
 
+      setState({
+        petType: '',
+        vaccinated: '',
+        gender: '',
+        petBreed: '',
+        amount: '',
+        weight: '',
+        location: '',
+        description: '',
+        image: '',
+        uid: '',
+        currentUserEmail: currentUserData?.email || '',
+        userUID: currentUserData?.uid || '',
+        userPhotoURL: currentUserData?.photoURL || '',
+        currentUserName: currentUserData?.userName || '',
+        like: false,
+      });
+
+      setSelectedImage(null);
+
+      navigation.navigate('Home');
       console.log('Donation added successfully');
     } catch (error) {
       console.log('Error adding donation:', error);
@@ -167,7 +206,7 @@ const DonateScreen = ({navigation}: LoginScreenProps) => {
           <View style={styles.containerDropDown}>
             <Text style={styles.label}>Vaccinated</Text>
             <Dropdown
-              data={data}
+              data={vaccinatedData}
               maxHeight={300}
               labelField="label"
               valueField="value"

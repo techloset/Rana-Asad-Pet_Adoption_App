@@ -26,7 +26,7 @@ const SignUp: React.FC<SignUpScreenProps> = ({navigation}) => {
             Sign Up
           </Text>
         </View>
-        <View>
+        <View style={{marginTop: 30}}>
           <Text style={styles.label}>Username</Text>
           <TextInput
             style={styles.input}
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
   label: {
-    marginTop: 40,
+    marginTop: 20,
     fontSize: 18,
     fontWeight: '600',
     color: '#101C1D',

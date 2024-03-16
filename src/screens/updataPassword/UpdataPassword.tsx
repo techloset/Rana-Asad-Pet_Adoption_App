@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -5,64 +6,85 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Alert,
 } from 'react-native';
-import React from 'react';
+import auth from '@react-native-firebase/auth';
+import {LoginScreenProps} from '../../constants/types';
 
-const UpdataPassword = () => {
+const UpdatePassword = ({navigation}: LoginScreenProps) => {
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const handleUpdatePassword = async () => {
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      console.log('Error', 'All fields are required.');
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      console.log('Error', 'New password and confirm password do not match.');
+      return;
+    }
+
+    try {
+      const user = auth().currentUser;
+      if (user) {
+        const credential = auth.EmailAuthProvider.credential(
+          user?.email || '',
+          currentPassword,
+        );
+        await user.reauthenticateWithCredential(credential);
+        await user.updatePassword(newPassword);
+        console.log('Success', 'Password updated successfully.');
+        navigation.navigate('Home');
+      }
+    } catch (error: any) {
+      console.log('Error', error.message);
+    }
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.smallContainer}>
-        <View>
-          <Text
-            style={{
-              fontWeight: '700',
-              textAlign: 'center',
-              fontSize: 24,
-              color: '#101C1D',
-            }}>
-            Update Password
-          </Text>
-        </View>
+        <Text style={styles.label}>Current Password</Text>
+        <TextInput
+          style={styles.input}
+          secureTextEntry
+          placeholderTextColor="#101C1D"
+          value={currentPassword}
+          onChangeText={setCurrentPassword}
+        />
 
-        <View>
-          <Text style={styles.label}>Current Password</Text>
-          <TextInput
-            style={styles.input}
-            secureTextEntry
-            placeholderTextColor={'#101C1D'}
-            placeholder=""
-          />
-        </View>
-        <View>
-          <Text style={styles.label2}>New Password</Text>
-          <TextInput
-            style={styles.input}
-            secureTextEntry
-            placeholderTextColor={'#101C1D'}
-            placeholder=""
-          />
-        </View>
-        <View>
-          <Text style={styles.label2}>New Password</Text>
-          <TextInput
-            style={styles.input}
-            secureTextEntry
-            placeholderTextColor={'#101C1D'}
-            placeholder=""
-          />
-        </View>
+        <Text style={styles.label}>New Password</Text>
+        <TextInput
+          style={styles.input}
+          secureTextEntry
+          placeholderTextColor="#101C1D"
+          value={newPassword}
+          onChangeText={setNewPassword}
+        />
 
-        <View style={{top: 190}}>
-          <TouchableOpacity style={styles.buttonContainer}>
-            <Text style={styles.buttonText}>Update Profile</Text>
-          </TouchableOpacity>
-        </View>
+        <Text style={styles.label}>Confirm New Password</Text>
+        <TextInput
+          style={styles.input}
+          secureTextEntry
+          placeholderTextColor="#101C1D"
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+        />
+
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={handleUpdatePassword}>
+          <Text style={styles.buttonText}>Update Password</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
 };
 
-export default UpdataPassword;
+export default UpdatePassword;
 
 const styles = StyleSheet.create({
   container: {
@@ -80,12 +102,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#101C1D',
   },
-  label2: {
-    marginTop: 20,
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#101C1D',
-  },
   input: {
     borderBottomWidth: 2,
     width: 302,
@@ -94,7 +110,6 @@ const styles = StyleSheet.create({
     borderColor: '#101C1D',
     fontSize: 16,
   },
-
   buttonContainer: {
     width: '100%',
     height: 74,

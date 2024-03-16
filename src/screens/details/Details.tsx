@@ -9,18 +9,41 @@ import {
 import React, {useState} from 'react';
 import {Image} from 'react-native-elements';
 import {LoginScreenProps} from '../../constants/types';
+import {RootStackparams} from '../../navigation/stack/StackNavigation';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteProp} from '@react-navigation/native';
+import {BackgroundImage} from 'react-native-elements/dist/config';
 
-const Details = ({navigation}: LoginScreenProps) => {
+type DetailsScreenRouteProp = RouteProp<RootStackparams, 'Details'>;
+
+type DetailsScreenNavigationProp = StackNavigationProp<
+  RootStackparams,
+  'Details'
+>;
+
+type Props = {
+  route: DetailsScreenRouteProp;
+  navigation: DetailsScreenNavigationProp;
+};
+
+const Details: React.FC<Props> = ({route, navigation}) => {
+  const {pet} = route.params;
+
   const handleGoToBack = () => {
     navigation.goBack();
   };
+
   return (
     <ScrollView style={{flex: 1}}>
       <View>
         <View>
           <ImageBackground
-            style={{width: '100%', height: 768}}
-            source={require('../../assets/pets/heerni.jpg')}>
+            style={styles.backgroundImage}
+            source={
+              pet.image
+                ? {uri: pet.image}
+                : require('../../assets/pets/heerni.jpg')
+            }>
             <View style={{flex: 1}}>
               <View
                 style={{
@@ -42,20 +65,32 @@ const Details = ({navigation}: LoginScreenProps) => {
                   </TouchableOpacity>
                 </View>
                 <View>
-                  <Image
-                    style={{
-                      width: 25,
-                      height: 22,
-                      marginTop: 20,
-                      marginRight: 20,
-                    }}
-                    source={require('../../assets/adoption/heartRed.png')}
-                  />
+                  {pet.like ? (
+                    <Image
+                      style={{
+                        width: 25,
+                        height: 22,
+                        marginTop: 20,
+                        marginRight: 20,
+                      }}
+                      source={require('../../assets/adoption/heartRed.png')}
+                    />
+                  ) : (
+                    <Image
+                      style={{
+                        width: 25,
+                        height: 22,
+                        marginTop: 20,
+                        marginRight: 20,
+                      }}
+                      source={require('../../assets/adoption/heartWhite.png')}
+                    />
+                  )}
                 </View>
               </View>
               <View
                 style={{
-                  flex: 1.5,
+                  flex: 1.4,
                   backgroundColor: 'white',
                   borderTopLeftRadius: 30,
                   borderTopRightRadius: 30,
@@ -87,7 +122,7 @@ const Details = ({navigation}: LoginScreenProps) => {
                           fontWeight: '700',
                           color: '#101C1D',
                         }}>
-                        Cavachon
+                        {pet.petType}
                       </Text>
                       <Text
                         style={{
@@ -95,7 +130,7 @@ const Details = ({navigation}: LoginScreenProps) => {
                           fontWeight: '700',
                           color: '#101C1D',
                         }}>
-                        Dog
+                        {pet.petBreed}
                       </Text>
                     </View>
                     <View>
@@ -105,7 +140,7 @@ const Details = ({navigation}: LoginScreenProps) => {
                           fontWeight: '700',
                           color: '#F6A530',
                         }}>
-                        $250
+                        ${pet.amount}
                       </Text>
                     </View>
                   </View>
@@ -161,7 +196,7 @@ const Details = ({navigation}: LoginScreenProps) => {
                           color: '#101C1D',
                           marginTop: 3,
                         }}>
-                        Male
+                        {pet.gender}
                       </Text>
                     </View>
                     <View
@@ -215,7 +250,7 @@ const Details = ({navigation}: LoginScreenProps) => {
                           color: '#101C1D',
                           marginTop: 3,
                         }}>
-                        Yes
+                        {pet.vaccinated}
                       </Text>
                     </View>
                   </View>
@@ -262,12 +297,12 @@ const Details = ({navigation}: LoginScreenProps) => {
                         </View>
                         <View
                           style={{
-                            marginLeft: 110,
                             flexDirection: 'row',
+                            right: -90,
                             gap: 7,
                             alignItems: 'center',
                           }}>
-                          <Text>FSD</Text>
+                          <Text>{pet.location.slice(0, 10)}</Text>
                           <Image
                             style={{
                               width: 13,
@@ -290,9 +325,7 @@ const Details = ({navigation}: LoginScreenProps) => {
                           lineHeight: 15,
                           letterSpacing: 1,
                         }}>
-                        There are many variations of passages of Lorem Ipsum
-                        available, but the majority have suffered alteration
-                        in... Read More
+                        {pet.description.slice(0, 160)}
                       </Text>
                     </View>
                   </View>
@@ -322,7 +355,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#101C1D',
     borderRadius: 34,
     color: 'white',
-    marginTop: 20,
+    bottom: -30,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -330,5 +363,9 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     fontWeight: '700',
+  },
+  backgroundImage: {
+    width: '100%',
+    height: 768,
   },
 });

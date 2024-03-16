@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import FavoriteSinglePet from '../../components/favoriteSinglePet/FavoriteSinglePet';
+import FavoriteSinglePet from '../../components/searchSinglePet/SearchSinglePet';
 import DonationRequestSinglePet from '../../components/donationRequestSinglePet/DonationRequestSinglePet';
 
 const DonationRequest = () => {

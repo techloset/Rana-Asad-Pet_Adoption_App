@@ -1,16 +1,14 @@
+import React, {useState} from 'react';
 import {
-  Alert,
-  Image,
-  ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
-  TouchableHighlight,
   TouchableOpacity,
   View,
+  Alert,
+  Image,
 } from 'react-native';
-import React, {useState} from 'react';
 import {LoginScreenProps} from '../../constants/types';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
@@ -30,18 +28,22 @@ const Profile = ({navigation}: LoginScreenProps) => {
 
   const updateProfile = async () => {
     try {
+      const updateImageURL = selectedImage || userData?.photoURL || '';
+      const updatedUserName = newUserName || userData?.userName || '';
+      const updatedEmail = newEmail || userData?.email || '';
+
       await firestore().collection('Users').doc(userData?.uid).update({
-        userName: newUserName,
-        email: newEmail,
-        photoURL: selectedImage,
+        userName: updatedUserName,
+        photoURL: updateImageURL,
       });
 
       setNewUserName('');
       setNewEmail('');
+      setSelectedImage(null);
       navigation.navigate('Home');
       console.log('Success', 'Profile updated successfully');
-    } catch (error) {
-      console.log('Error', 'Failed to update profile');
+    } catch (error: any) {
+      console.log('Error', 'Failed to update profile:', error.message);
     }
   };
 
