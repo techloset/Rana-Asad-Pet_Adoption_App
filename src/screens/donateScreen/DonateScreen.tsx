@@ -14,7 +14,11 @@ import ImagePicker from 'react-native-image-crop-picker';
 import {useAppSelector} from '../../store/Store';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-import {LoginScreenProps, UserData} from '../../constants/types';
+import {
+  DonationScreen,
+  LoginScreenProps,
+  UserData,
+} from '../../constants/types';
 
 const data = [
   {label: 'Dog', value: 'Dog'},
@@ -31,24 +35,6 @@ const genderList = [
   {label: 'Male', value: 'Male'},
   {label: 'Female', value: 'Female'},
 ];
-
-interface DonationScreen {
-  petType: string;
-  vaccinated: string;
-  gender: string;
-  petBreed: string;
-  amount: string;
-  uid: string;
-  weight: string;
-  location: string;
-  description: string;
-  image: string;
-  userUID: string;
-  currentUserEmail: string;
-  userPhotoURL: string;
-  currentUserName: string;
-  like: boolean;
-}
 
 const DonateScreen = ({navigation}: LoginScreenProps) => {
   const [currentUserData, setCurrentUserData] = useState<UserData | null>(null);
@@ -165,10 +151,6 @@ const DonateScreen = ({navigation}: LoginScreenProps) => {
       </TouchableOpacity>
       <View style={styles.secondContainer}>
         <View style={styles.smallContainer}>
-          {/* <View>
-            <Text style={styles.label}>Pet Type</Text>
-            <TextInput style={styles.input} placeholder="" />
-          </View> */}
           <View style={styles.containerDropDown}>
             <Text style={styles.label}>Pet Type</Text>
             <Dropdown

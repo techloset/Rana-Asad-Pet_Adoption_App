@@ -11,7 +11,6 @@ const HomePageForYouSinglePet = () => {
 
   useEffect(() => {
     dispatch(fetchCollectionData());
-    console.log('donation data :', donationData);
   }, [dispatch]);
 
   const memoizedData = useMemo(() => donationData, [donationData]);

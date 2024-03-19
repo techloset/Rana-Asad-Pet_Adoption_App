@@ -15,8 +15,6 @@ import HomePageForYouSinglePet from '../../components/homePageForYou/HomePageFor
 const Home = () => {
   const userData = useAppSelector(state => state.user.userData);
 
-  console.log('photoURL', userData?.photoURL);
-
   return (
     <View>
       <View>

@@ -9,6 +9,42 @@ export type SignUpScreenProps = {
   navigation: StackNavigationProp<RootStackparams, 'SignUp'>;
 };
 
+export interface DonationScreen {
+  petType: string;
+  vaccinated: string;
+  gender: string;
+  petBreed: string;
+  amount: string;
+  uid: string;
+  weight: string;
+  location: string;
+  description: string;
+  image: string;
+  userUID: string;
+  currentUserEmail: string;
+  userPhotoURL: string;
+  currentUserName: string;
+  like: boolean;
+}
+
+export interface AddToFavoriteTypes {
+  petType: string;
+  vaccinated: string;
+  gender: string;
+  petBreed: string;
+  amount: string;
+  uid: string;
+  weight: string;
+  location: string;
+  description: string;
+  image: string;
+  like: boolean;
+}
+
+export interface AddToFavorite {
+  cart: AddToFavoriteTypes[];
+}
+
 export interface UserData {
   uid: string;
   userName: string;

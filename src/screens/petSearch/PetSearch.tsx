@@ -8,7 +8,7 @@ import SearchSinglePet from '../../components/searchSinglePet/SearchSinglePet';
 import {TextInput} from 'react-native';
 
 const PetSearch = ({navigation}: LoginScreenProps) => {
-  const [searchTest, setSearchTest] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const userData = useAppSelector(state => state.user.userData);
 
   return (
@@ -28,7 +28,7 @@ const PetSearch = ({navigation}: LoginScreenProps) => {
                 <TextInput
                   placeholder="Search for a pet"
                   placeholderTextColor={'#101C1D'}
-                  onChangeText={val => setSearchTest(val)}
+                  onChangeText={text => setSearchTerm(text)}
                   style={{
                     backgroundColor: '#F2F3FA',
                     color: '#101C1D',
@@ -132,7 +132,7 @@ const PetSearch = ({navigation}: LoginScreenProps) => {
         </View>
 
         <View style={{marginVertical: 30}}>
-          <SearchSinglePet navigation={navigation} />
+          <SearchSinglePet navigation={navigation} searchTerm={searchTerm} />
         </View>
       </View>
     </ScrollView>

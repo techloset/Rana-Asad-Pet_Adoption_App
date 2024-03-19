@@ -6,43 +6,20 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Alert,
 } from 'react-native';
-import auth from '@react-native-firebase/auth';
 import {LoginScreenProps} from '../../constants/types';
+import useUpdatePassword from './useUpdatePassword';
 
 const UpdatePassword = ({navigation}: LoginScreenProps) => {
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
-  const handleUpdatePassword = async () => {
-    if (!currentPassword || !newPassword || !confirmPassword) {
-      console.log('Error', 'All fields are required.');
-      return;
-    }
-
-    if (newPassword !== confirmPassword) {
-      console.log('Error', 'New password and confirm password do not match.');
-      return;
-    }
-
-    try {
-      const user = auth().currentUser;
-      if (user) {
-        const credential = auth.EmailAuthProvider.credential(
-          user?.email || '',
-          currentPassword,
-        );
-        await user.reauthenticateWithCredential(credential);
-        await user.updatePassword(newPassword);
-        console.log('Success', 'Password updated successfully.');
-        navigation.navigate('Home');
-      }
-    } catch (error: any) {
-      console.log('Error', error.message);
-    }
-  };
+  const {
+    currentPassword,
+    setCurrentPassword,
+    newPassword,
+    setNewPassword,
+    confirmPassword,
+    setConfirmPassword,
+    handleUpdatePassword,
+  } = useUpdatePassword({navigation});
 
   return (
     <ScrollView style={styles.container}>
