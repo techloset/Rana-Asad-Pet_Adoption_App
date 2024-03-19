@@ -9,10 +9,51 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import MyDonationSinglePet from '../../components/myDonationSinglePet/MyDonationSinglePet';
+import {useAppDispatch, useAppSelector} from '../../store/Store';
+import {DonationPetData, LoginScreenProps} from '../../constants/types';
+import {FlatList} from 'react-native';
 
-const MyDonations = () => {
+const MyDonations = ({navigation}: LoginScreenProps) => {
+  const dispatch = useAppDispatch();
+  const donationData = useAppSelector(state => state.donationPets.data);
+  const userData = useAppSelector(state => state.user.userData);
+
+  const filteredDonationData = donationData.filter(
+    item => item.currentUserEmail === userData?.email,
+  );
+
+  const renderPetItem = ({item}: {item: DonationPetData}) => (
+    <TouchableOpacity activeOpacity={0.8} onPress={() => handlePetPress(item)}>
+      <View style={styles.smallContainer}>
+        <Image style={styles.one} source={{uri: item.image}}></Image>
+        <View style={styles.two}>
+          <Text style={styles.petType}>{item.petType.slice(0, 8)}</Text>
+          <Text style={styles.age}>Age 4 Months</Text>
+          <View style={{flexDirection: 'row', marginTop: 5}}>
+            <Text style={styles.location}>{item.location.slice(0, 10)}</Text>
+            <Image
+              style={{width: 9, height: 13, marginLeft: 10}}
+              source={require('../../assets/donate/location.png')}
+            />
+          </View>
+          <Text style={styles.gender}>{item.gender}</Text>
+          <TouchableOpacity>
+            <Image
+              style={styles.likeIcon}
+              source={require('../../assets/donate/Delete.png')}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+
+  const handlePetPress = (pet: DonationPetData) => {
+    navigation.navigate('Details', {pet});
+  };
+
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View
         style={{
           flexDirection: 'row',
@@ -31,70 +72,13 @@ const MyDonations = () => {
           source={require('../../assets/donate/plus.png')}
         />
       </View>
-      {/* <View style={styles.smallContainer}>
-        <View style={styles.one}></View>
-        <View style={styles.two}>
-          <Text
-            style={{
-              fontSize: 18,
-              fontWeight: '700',
-              color: '#101C1D',
-            }}>
-            Cavachon
-          </Text>
-          <Text
-            style={{
-              marginTop: 5,
-              fontSize: 10,
-              fontWeight: '500',
-              color: '#101C1D',
-            }}>
-            Age 4 Months
-          </Text>
-          <View style={{flexDirection: 'row', marginTop: 5}}>
-            <Text
-              style={{
-                fontSize: 10,
-                fontWeight: '500',
-                color: '#101C1D',
-              }}>
-              FSD
-            </Text>
-            <Image
-              style={{
-                width: 9,
-                height: 13,
-                marginLeft: 10,
-              }}
-              source={require('../../assets/donate/location.png')}
-            />
-          </View>
-          <Text
-            style={{
-              marginTop: 7,
-              fontSize: 10,
-              fontWeight: '500',
-              color: '#101C1D',
-            }}>
-            Male
-          </Text>
-          <Image
-            style={{
-              width: 20,
-              height: 20,
-              marginLeft: 60,
-            }}
-            source={require('../../assets/donate/Delete.png')}
-          />
-        </View>
-      </View> */}
 
-      <MyDonationSinglePet />
-      <MyDonationSinglePet />
-      <MyDonationSinglePet />
-      <MyDonationSinglePet />
-      <MyDonationSinglePet />
-    </ScrollView>
+      <FlatList
+        data={filteredDonationData}
+        keyExtractor={(item, index) => item.uid.toString() || index.toString()}
+        renderItem={renderPetItem}
+      />
+    </View>
   );
 };
 
@@ -130,5 +114,32 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     borderRadius: 20,
     backgroundColor: '#FFFFFF',
+  },
+  petType: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#101C1D',
+  },
+  age: {
+    marginTop: 5,
+    fontSize: 10,
+    fontWeight: '500',
+    color: '#101C1D',
+  },
+  location: {
+    fontSize: 10,
+    fontWeight: '500',
+    color: '#101C1D',
+  },
+  gender: {
+    marginTop: 7,
+    fontSize: 10,
+    fontWeight: '500',
+    color: '#101C1D',
+  },
+  likeIcon: {
+    width: 16,
+    height: 15,
+    marginLeft: 60,
   },
 });

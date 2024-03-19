@@ -8,11 +8,13 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {Image} from 'react-native-elements';
-import {LoginScreenProps} from '../../constants/types';
-import {RootStackparams} from '../../navigation/stack/StackNavigation';
+import {AddToFavoriteTypes, LoginScreenProps} from '../../constants/types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 import {BackgroundImage} from 'react-native-elements/dist/config';
+import {addToFavorite} from '../../store/slice/addToFavoriteSlice';
+import {useAppDispatch} from '../../store/Store';
+import {RootStackparams} from '../../navigation/stack/StackNavigation';
 
 type DetailsScreenRouteProp = RouteProp<RootStackparams, 'Details'>;
 
@@ -27,10 +29,28 @@ type Props = {
 };
 
 const Details: React.FC<Props> = ({route, navigation}) => {
+  const dispatch = useAppDispatch();
   const {pet} = route.params;
 
   const handleGoToBack = () => {
     navigation.goBack();
+  };
+
+  const handleAddToCart = (item: AddToFavoriteTypes) => {
+    let cartProduct = {
+      petType: item.petType,
+      vaccinated: item.vaccinated,
+      gender: item.gender,
+      petBreed: item.petBreed,
+      amount: item.amount,
+      weight: item.weight,
+      location: item.location,
+      description: item.description,
+      image: item.image,
+      uid: item.uid,
+      like: false,
+    };
+    dispatch(addToFavorite(cartProduct));
   };
 
   return (
@@ -65,17 +85,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
                   </TouchableOpacity>
                 </View>
                 <View>
-                  {pet.like ? (
-                    <Image
-                      style={{
-                        width: 25,
-                        height: 22,
-                        marginTop: 20,
-                        marginRight: 20,
-                      }}
-                      source={require('../../assets/adoption/heartRed.png')}
-                    />
-                  ) : (
+                  <TouchableOpacity onPress={() => handleAddToCart(pet)}>
                     <Image
                       style={{
                         width: 25,
@@ -85,7 +95,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
                       }}
                       source={require('../../assets/adoption/heartWhite.png')}
                     />
-                  )}
+                  </TouchableOpacity>
                 </View>
               </View>
               <View

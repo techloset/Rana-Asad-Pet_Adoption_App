@@ -5,21 +5,22 @@ import StackNavigation from './src/navigation/stack/StackNavigation';
 import {Provider} from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import {store} from './src/store/Store';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import HomePageForYouSinglePet from './src/components/homePageForYou/HomePageForYouSinglePet';
+import {listenForAuthStateChanges} from './src/store/slice/userSlice';
 
 export default function App() {
   useEffect(() => {
+    store.dispatch(listenForAuthStateChanges());
+  }, []);
+  useEffect(() => {
     SplashScreen.hide();
   }, []);
+
   return (
-    <NavigationContainer>
-      <GestureHandlerRootView style={{flex: 1}}>
-        <Provider store={store}>
-          <StackNavigation />
-          <StatusBar backgroundColor={'#eaeaea'} barStyle={'dark-content'} />
-        </Provider>
-      </GestureHandlerRootView>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <StatusBar backgroundColor={'#eaeaea'} barStyle={'dark-content'} />
+        <StackNavigation />
+      </NavigationContainer>
+    </Provider>
   );
 }

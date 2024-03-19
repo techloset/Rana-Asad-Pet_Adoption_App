@@ -16,12 +16,7 @@ import {
 } from '../../constants/types';
 import {addToFavorite} from '../../store/slice/addToFavoriteSlice';
 
-interface SearchSinglePetProps {
-  navigation: any;
-  searchTerm: string;
-}
-
-const SearchSinglePet = ({navigation, searchTerm, data}: any) => {
+const SearchSinglePet = ({navigation, searchTerm}: any) => {
   const dispatch = useAppDispatch();
   const donationData = useAppSelector(state => state.donationPets.data);
 
@@ -88,7 +83,7 @@ const SearchSinglePet = ({navigation, searchTerm, data}: any) => {
   return (
     <FlatList
       data={memoizedData}
-      keyExtractor={(item, index) => index.toString()}
+      keyExtractor={(item, index) => item.uid.toString() || index.toString()}
       renderItem={renderPetItem}
     />
   );

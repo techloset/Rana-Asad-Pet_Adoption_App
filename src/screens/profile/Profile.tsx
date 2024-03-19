@@ -13,9 +13,12 @@ import {LoginScreenProps} from '../../constants/types';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import ImagePicker from 'react-native-image-crop-picker';
-import {useAppSelector} from '../../store/Store';
+import {useAppDispatch, useAppSelector} from '../../store/Store';
+import {createAsyncThunk} from '@reduxjs/toolkit';
+import {clearUserData} from '../../store/slice/userSlice';
 
 const Profile = ({navigation}: LoginScreenProps) => {
+  const dispatch = useAppDispatch();
   const [newUserName, setNewUserName] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -25,6 +28,19 @@ const Profile = ({navigation}: LoginScreenProps) => {
   const handleGoToUpdataPassword = () => {
     navigation.navigate('UpdataPassword');
   };
+
+  const logoutUser = createAsyncThunk(
+    'user/logoutUser',
+    async (_, {dispatch}) => {
+      try {
+        await auth().signOut();
+        dispatch(clearUserData());
+      } catch (error) {
+        console.error('Error logging out:', error);
+        throw error;
+      }
+    },
+  );
 
   const updateProfile = async () => {
     try {
@@ -61,6 +77,10 @@ const Profile = ({navigation}: LoginScreenProps) => {
     } catch (error) {
       console.log('Error selecting image:', error);
     }
+  };
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
   };
 
   return (
@@ -115,6 +135,11 @@ const Profile = ({navigation}: LoginScreenProps) => {
         <View>
           <Text style={styles.label2} onPress={handleGoToUpdataPassword}>
             Update Password
+          </Text>
+        </View>
+        <View>
+          <Text style={styles.label2} onPress={handleLogout}>
+            Logout
           </Text>
         </View>
 

@@ -40,7 +40,11 @@ const Home = () => {
                 borderRadius: 123,
                 backgroundColor: '#C4C4C4',
               }}
-              source={{uri: userData?.photoURL}}></Image>
+              source={
+                userData?.photoURL
+                  ? {uri: userData.photoURL}
+                  : require('../../assets/login/profilePicture.png')
+              }></Image>
           </View>
 
           <View>

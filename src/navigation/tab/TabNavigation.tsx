@@ -7,6 +7,7 @@ import Home from '../../screens/home/Home';
 import {Image, StyleSheet, View} from 'react-native';
 import DonateScreen from '../../screens/donateScreen/DonateScreen';
 import FavoritePets from '../../components/favoritePets/FavoritePets';
+import MyDonations from '../../screens/myDonations/MyDonations';
 
 const Tab = createBottomTabNavigator();
 
@@ -67,8 +68,8 @@ const TabNavigation = () => {
         />
 
         <Tab.Screen
-          name="Favorites"
-          component={Favorites}
+          name="MyDonations"
+          component={MyDonations}
           options={{
             tabBarIcon: ({focused}) => (
               <View

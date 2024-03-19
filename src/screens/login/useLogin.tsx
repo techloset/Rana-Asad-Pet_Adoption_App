@@ -39,17 +39,16 @@ export const useLogin = ({navigation}: LoginScreenProps) => {
         password,
       );
       const user = userCredential.user;
-      console.log('login UID', user.uid);
 
-      if (user) {
-        const userData = await fetchUserData(user.uid);
-        if (userData) {
-          dispatch(fetchUserDataSuccess(userData));
-          //   navigation.navigate('ForgotPassword');
-        } else {
-          console.log('user fetch not found!');
-        }
-      }
+      // if (user) {
+      //   const userData = await fetchUserData(user.uid);
+      //   if (userData) {
+      //     dispatch(fetchUserDataSuccess(userData));
+      //     //   navigation.navigate('ForgotPassword');
+      //   } else {
+      //     console.log('user fetch not found!');
+      //   }
+      // }
     } catch (error: any) {
       if (error.code === 'auth/invalid-email') {
         Alert.alert('That email address is invalid!');
@@ -60,24 +59,24 @@ export const useLogin = ({navigation}: LoginScreenProps) => {
     }
   };
 
-  const fetchUserData = async (uid: string) => {
-    try {
-      const userRef = firestore().collection('Users').doc(uid);
-      const doc = await userRef.get();
+  // const fetchUserData = async (uid: string) => {
+  //   try {
+  //     const userRef = firestore().collection('Users').doc(uid);
+  //     const doc = await userRef.get();
 
-      if (doc.exists) {
-        const userData = doc.data();
-        console.log('login userdata', userData);
-        return userData as UserData;
-      } else {
-        console.log('No user data found!');
-        return null;
-      }
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-      return null;
-    }
-  };
+  //     if (doc.exists) {
+  //       const userData = doc.data();
+  //       console.log('login userdata', userData);
+  //       return userData as UserData;
+  //     } else {
+  //       console.log('No user data found!');
+  //       return null;
+  //     }
+  //   } catch (error) {
+  //     console.error('Error fetching user data:', error);
+  //     return null;
+  //   }
+  // };
 
   return {
     state,

@@ -33,7 +33,6 @@ export const fetchCollectionData = createAsyncThunk(
         email: doc.data().email,
         amount: doc.data().amount,
       }));
-      console.log('data', data);
       return data;
     } catch (error) {
       throw error;

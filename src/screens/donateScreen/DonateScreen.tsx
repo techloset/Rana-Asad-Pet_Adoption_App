@@ -37,16 +37,9 @@ const genderList = [
 ];
 
 const DonateScreen = ({navigation}: LoginScreenProps) => {
-  const [currentUserData, setCurrentUserData] = useState<UserData | null>(null);
   const userData = useAppSelector(state => state.user.userData);
 
-  useEffect(() => {
-    if (userData) {
-      setCurrentUserData(userData);
-    }
-  }, [userData]);
-
-  console.log('donation data :', userData);
+  // console.log('donation data :', userData);
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [state, setState] = useState<DonationScreen>({
@@ -60,11 +53,10 @@ const DonateScreen = ({navigation}: LoginScreenProps) => {
     description: '',
     image: '',
     uid: '',
-    currentUserEmail: currentUserData?.email || '',
-    userUID: currentUserData?.uid || '',
-    userPhotoURL: currentUserData?.photoURL || '',
-    currentUserName: currentUserData?.userName || '',
-    like: false,
+    currentUserEmail: userData?.email || '',
+    userUID: userData?.uid || '',
+    userPhotoURL: userData?.photoURL || '',
+    currentUserName: userData?.userName || '',
   });
 
   const handleChange = (name: keyof DonationScreen, value: string) => {
@@ -100,11 +92,10 @@ const DonateScreen = ({navigation}: LoginScreenProps) => {
         description: '',
         image: '',
         uid: '',
-        currentUserEmail: currentUserData?.email || '',
-        userUID: currentUserData?.uid || '',
-        userPhotoURL: currentUserData?.photoURL || '',
-        currentUserName: currentUserData?.userName || '',
-        like: false,
+        currentUserEmail: userData?.email || '',
+        userUID: userData?.uid || '',
+        userPhotoURL: userData?.photoURL || '',
+        currentUserName: userData?.userName || '',
       });
 
       setSelectedImage(null);

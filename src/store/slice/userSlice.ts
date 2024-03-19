@@ -1,11 +1,43 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from '../Store';
 import {UserData, UserState} from '../../constants/types';
+import {AppDispatch} from '../store';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 const initialState: UserState = {
   userData: null,
   isLoading: false,
   error: null,
+};
+
+export const listenForAuthStateChanges =
+  () => async (dispatch: AppDispatch) => {
+    auth().onAuthStateChanged(async user => {
+      if (user) {
+        dispatch(fetchUserDataStart());
+        try {
+          const userData = await fetchDataFromFirestore(user.uid);
+          dispatch(fetchUserDataSuccess(userData));
+        } catch (error: any) {
+          dispatch(fetchUserDataFailure(error.message));
+        }
+      } else {
+        dispatch(fetchUserDataSuccess(null));
+      }
+    });
+  };
+
+const fetchDataFromFirestore = async (
+  uid: string,
+): Promise<UserData | null> => {
+  const userRef = firestore().collection('Users').doc(uid);
+  const doc = await userRef.get();
+  if (doc.exists) {
+    return doc.data() as UserData;
+  } else {
+    return null;
+  }
 };
 
 const userSlice = createSlice({
@@ -15,27 +47,34 @@ const userSlice = createSlice({
     fetchUserDataStart: state => {
       state.isLoading = true;
       state.error = null;
-      console.log('fetchUserDataStart');
     },
-    fetchUserDataSuccess: (state, action: PayloadAction<UserData>) => {
+    fetchUserDataSuccess: (state, action: PayloadAction<UserData | null>) => {
       state.userData = action.payload;
       state.isLoading = false;
       state.error = null;
-      console.log('fetchUserDataSuccess');
     },
     fetchUserDataFailure: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
-      console.log('fetchUserDataFailure');
+    },
+    clearUserData(state) {
+      state.userData = null;
+      state.isLoading = false;
+      state.error = null;
     },
   },
 });
 
-export const {fetchUserDataStart, fetchUserDataSuccess, fetchUserDataFailure} =
-  userSlice.actions;
+export const {
+  fetchUserDataStart,
+  fetchUserDataSuccess,
+  fetchUserDataFailure,
+  clearUserData,
+} = userSlice.actions;
 
 export const selectUserData = (state: RootState) => state.user.userData;
 export const selectIsLoading = (state: RootState) => state.user.isLoading;
 export const selectError = (state: RootState) => state.user.error;
 
-export default userSlice.reducer;
+const userReducer = userSlice.reducer;
+export default userReducer;

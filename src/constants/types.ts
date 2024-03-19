@@ -24,7 +24,6 @@ export interface DonationScreen {
   currentUserEmail: string;
   userPhotoURL: string;
   currentUserName: string;
-  like: boolean;
 }
 
 export interface AddToFavoriteTypes {
@@ -38,7 +37,6 @@ export interface AddToFavoriteTypes {
   location: string;
   description: string;
   image: string;
-  like: boolean;
 }
 
 export interface AddToFavorite {
