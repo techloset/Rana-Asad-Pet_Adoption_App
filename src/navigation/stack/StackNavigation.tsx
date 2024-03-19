@@ -117,6 +117,7 @@ import ForgotPassword from '../../screens/forgotPassword/ForgotPassword';
 import auth from '@react-native-firebase/auth';
 import {fetchUserDataSuccess} from '../../store/slice/userSlice';
 import {UserData} from '../../constants/types';
+import DonateScreen from '../../screens/donateScreen/DonateScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -130,6 +131,7 @@ export type RootStackparams = {
   Favorite: undefined;
   UpdataPassword: undefined;
   MyDonations: undefined;
+  DonateScreen: undefined;
   DonationRequest: undefined;
   Details: {pet: DonationPetData};
   SearchSinglePet: undefined;
@@ -187,6 +189,7 @@ const StackNavigation: React.FC = () => {
         <Stack.Screen name="Favorite" component={Favorites} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="MyDonations" component={MyDonations} />
+        <Stack.Screen name="DonateScreen" component={DonateScreen} />
         <Stack.Screen name="DonationRequest" component={DonationRequest} />
         <Stack.Screen name="UpdataPassword" component={UpdataPassword} />
         <Stack.Screen

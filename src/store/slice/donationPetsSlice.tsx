@@ -43,7 +43,11 @@ export const fetchCollectionData = createAsyncThunk(
 const donationPetsSlice = createSlice({
   name: 'donationPets',
   initialState,
-  reducers: {},
+  reducers: {
+    removeDonationPet: (state, action) => {
+      state.data = state.data.filter(pet => pet.uid !== action.payload);
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchCollectionData.pending, state => {
@@ -59,5 +63,7 @@ const donationPetsSlice = createSlice({
       });
   },
 });
+
+export const {removeDonationPet} = donationPetsSlice.actions;
 
 export default donationPetsSlice.reducer;

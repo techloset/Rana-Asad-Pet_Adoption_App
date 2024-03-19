@@ -7,11 +7,16 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import MyDonationSinglePet from '../../components/myDonationSinglePet/MyDonationSinglePet';
 import {useAppDispatch, useAppSelector} from '../../store/Store';
 import {DonationPetData, LoginScreenProps} from '../../constants/types';
 import {FlatList} from 'react-native';
+import {firebase} from '@react-native-firebase/firestore';
+import {
+  fetchCollectionData,
+  removeDonationPet,
+} from '../../store/slice/donationPetsSlice';
 
 const MyDonations = ({navigation}: LoginScreenProps) => {
   const dispatch = useAppDispatch();
@@ -21,6 +26,29 @@ const MyDonations = ({navigation}: LoginScreenProps) => {
   const filteredDonationData = donationData.filter(
     item => item.currentUserEmail === userData?.email,
   );
+
+  useEffect(() => {
+    dispatch(fetchCollectionData());
+  }, []);
+
+  const handleDeleteItem = (uid: string) => {
+    firebase
+      .firestore()
+      .collection('donationPets')
+      .doc(uid)
+      .delete()
+      .then(() => {
+        console.log('Document successfully deleted!');
+        dispatch(removeDonationPet(uid));
+      })
+      .catch((error: string) => {
+        console.error('Error removing document: ', error);
+      });
+  };
+
+  const handleNavigateToAddDonation = () => {
+    navigation.navigate('DonateScreen');
+  };
 
   const renderPetItem = ({item}: {item: DonationPetData}) => (
     <TouchableOpacity activeOpacity={0.8} onPress={() => handlePetPress(item)}>
@@ -37,7 +65,7 @@ const MyDonations = ({navigation}: LoginScreenProps) => {
             />
           </View>
           <Text style={styles.gender}>{item.gender}</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => handleDeleteItem(item.uid)}>
             <Image
               style={styles.likeIcon}
               source={require('../../assets/donate/Delete.png')}
@@ -49,7 +77,7 @@ const MyDonations = ({navigation}: LoginScreenProps) => {
   );
 
   const handlePetPress = (pet: DonationPetData) => {
-    navigation.navigate('Details', {pet});
+    navigation.navigate('MyPetDetails', {pet});
   };
 
   return (
@@ -64,13 +92,15 @@ const MyDonations = ({navigation}: LoginScreenProps) => {
         <Text style={{fontSize: 24, fontWeight: '700', color: '#101C1D'}}>
           My Donations
         </Text>
-        <Image
-          style={{
-            width: 22,
-            height: 22,
-          }}
-          source={require('../../assets/donate/plus.png')}
-        />
+        <TouchableOpacity onPress={handleNavigateToAddDonation}>
+          <Image
+            style={{
+              width: 22,
+              height: 22,
+            }}
+            source={require('../../assets/donate/plus.png')}
+          />
+        </TouchableOpacity>
       </View>
 
       <FlatList
