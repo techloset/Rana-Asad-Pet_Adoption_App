@@ -8,6 +8,7 @@ const MyDonations = ({navigation}: LoginScreenProps) => {
   const handlePetPress = (pet: DonationPetData) => {
     navigation.navigate('MyPetDetails', {pet});
   };
+
   const {filteredDonationData, handleDeleteItem} = useMyDonations(navigation);
 
   return (
@@ -94,6 +95,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: '#C4C4C4',
     zIndex: 100,
+    resizeMode: 'stretch',
   },
   two: {
     width: 147,

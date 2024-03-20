@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -13,9 +13,12 @@ import {LoginScreenProps} from '../../constants/types';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import ImagePicker from 'react-native-image-crop-picker';
-import {useAppDispatch, useAppSelector} from '../../store/Store';
+import {store, useAppDispatch, useAppSelector} from '../../store/Store';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {clearUserData, fetchUserDataSuccess} from '../../store/slice/userSlice';
+import {
+  clearUserData,
+  listenForAuthStateChanges,
+} from '../../store/slice/userSlice';
 
 const Profile = ({navigation}: LoginScreenProps) => {
   const dispatch = useAppDispatch();
@@ -50,8 +53,11 @@ const Profile = ({navigation}: LoginScreenProps) => {
 
       await firestore().collection('Users').doc(userData?.uid).update({
         userName: updatedUserName,
+        email: updatedEmail,
         photoURL: updateImageURL,
       });
+
+      dispatch(listenForAuthStateChanges());
 
       setNewUserName('');
       setNewEmail('');
@@ -143,7 +149,7 @@ const Profile = ({navigation}: LoginScreenProps) => {
           </Text>
         </View>
 
-        <View style={{top: 130}}>
+        <View style={{top: 90}}>
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={updateProfile}>

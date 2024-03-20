@@ -17,7 +17,7 @@ type DetailsScreenNavigationProp = StackNavigationProp<
   'Details'
 >;
 
-type Props = {
+export type Props = {
   route: DetailsScreenRouteProp;
   navigation: DetailsScreenNavigationProp;
 };

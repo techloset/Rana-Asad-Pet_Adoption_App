@@ -20,32 +20,35 @@ const HomePageForYouSinglePet = () => {
       data={memoizedData}
       keyExtractor={(item, index) => index.toString()}
       renderItem={({item}) => (
-        <ImageBackground
-          style={{
-            width: 321,
-            height: 161,
-            marginTop: 20,
-            borderRadius: 20,
-          }}
-          source={{uri: item.image}}>
-          <View
+        <View>
+          <ImageBackground
+            resizeMode="stretch"
             style={{
-              width: 175,
-              height: 125,
-              marginTop: 18,
-              marginLeft: 18,
-            }}>
-            <Text style={{fontWeight: '800', fontSize: 29, color: 'white'}}>
-              {item.petType}
-            </Text>
-            <Text style={{fontWeight: '600', fontSize: 14, color: 'white'}}>
-              Age 4 Months
-            </Text>
-            <Text style={{fontWeight: '800', fontSize: 25, color: '#101C1D'}}>
-              ${item.amount}
-            </Text>
-          </View>
-        </ImageBackground>
+              width: 321,
+              height: 161,
+              marginTop: 20,
+            }}
+            imageStyle={styles.imageStyle}
+            source={{uri: item.image}}>
+            <View
+              style={{
+                width: 175,
+                height: 125,
+                marginTop: 18,
+                marginLeft: 18,
+              }}>
+              <Text style={{fontWeight: '800', fontSize: 29, color: 'white'}}>
+                {item.petType}
+              </Text>
+              <Text style={{fontWeight: '600', fontSize: 14, color: 'white'}}>
+                Age 4 Months
+              </Text>
+              <Text style={{fontWeight: '800', fontSize: 25, color: '#101C1D'}}>
+                ${item.amount}
+              </Text>
+            </View>
+          </ImageBackground>
+        </View>
       )}
     />
   );
@@ -53,4 +56,8 @@ const HomePageForYouSinglePet = () => {
 
 export default HomePageForYouSinglePet;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  imageStyle: {
+    borderRadius: 20,
+  },
+});

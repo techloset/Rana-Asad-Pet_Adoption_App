@@ -1,10 +1,9 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {RootState, store} from '../Store';
+import {RootState} from '../Store';
 import {UserData, UserState} from '../../constants/types';
 import {AppDispatch} from '../store';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import {useEffect} from 'react';
 
 const initialState: UserState = {
   userData: null,
@@ -40,10 +39,6 @@ const fetchDataFromFirestore = async (
     return null;
   }
 };
-
-useEffect(() => {
-  store.dispatch(listenForAuthStateChanges());
-}, []);
 
 const userSlice = createSlice({
   name: 'user',

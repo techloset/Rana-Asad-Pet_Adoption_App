@@ -2,7 +2,6 @@ import {Alert} from 'react-native';
 import {useState} from 'react';
 import {LoginScreenProps, UserData} from '../../constants/types';
 import {useAppDispatch} from '../../store/Store';
-import {fetchUserDataSuccess} from '../../store/slice/userSlice';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 

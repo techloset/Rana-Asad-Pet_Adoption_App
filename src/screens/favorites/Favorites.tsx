@@ -128,6 +128,7 @@ const styles = StyleSheet.create({
     height: 141,
     borderRadius: 25,
     backgroundColor: '#C4C4C4',
+    resizeMode: 'stretch',
     zIndex: 20,
   },
   two: {

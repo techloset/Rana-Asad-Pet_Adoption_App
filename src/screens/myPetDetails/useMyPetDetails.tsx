@@ -28,10 +28,6 @@ const useMyPetDetails = ({route, navigation}: UseMyPetDetailsProps) => {
     navigation.setOptions({title: pet.petType});
   }, [navigation, pet]);
 
-  const handleGoToBack = () => {
-    navigation.goBack();
-  };
-
   const handleDeleteItem = (uid: string) => {
     firebase
       .firestore()
@@ -48,7 +44,7 @@ const useMyPetDetails = ({route, navigation}: UseMyPetDetailsProps) => {
       });
   };
 
-  return {handleGoToBack, handleDeleteItem};
+  return {handleDeleteItem};
 };
 
 export default useMyPetDetails;

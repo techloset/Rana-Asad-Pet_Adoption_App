@@ -44,9 +44,9 @@ const PetSearch = ({navigation}: LoginScreenProps) => {
           <CategoryButton label="Monkey" />
         </View>
       </View>
-      <View style={styles.searchResultsContainer}>
+      <ScrollView style={styles.searchResultsContainer}>
         <SearchSinglePet navigation={navigation} searchTerm={searchTerm} />
-      </View>
+      </ScrollView>
     </View>
   );
 };

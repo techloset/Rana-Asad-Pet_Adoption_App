@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {
   FlatList,
   Image,
@@ -18,9 +18,8 @@ import {addToFavorite} from '../../store/slice/addToFavoriteSlice';
 
 const SearchSinglePet = ({navigation, searchTerm}: any) => {
   const dispatch = useAppDispatch();
+  const [likedPets, setLikedPets] = useState<Record<string, boolean>>({});
   const donationData = useAppSelector(state => state.donationPets.data);
-
-  console.log('hello world');
 
   useEffect(() => {
     dispatch(fetchCollectionData());
@@ -48,33 +47,11 @@ const SearchSinglePet = ({navigation, searchTerm}: any) => {
       like: false,
     };
     dispatch(addToFavorite(cartProduct));
+    setLikedPets(prevState => ({
+      ...prevState,
+      [item.uid]: !prevState[item.uid],
+    }));
   };
-
-  const renderPetItem = ({item}: {item: DonationPetData}) => (
-    <TouchableOpacity activeOpacity={0.8} onPress={() => handlePetPress(item)}>
-      <View style={styles.smallContainer}>
-        <Image style={styles.one} source={{uri: item.image}}></Image>
-        <View style={styles.two}>
-          <Text style={styles.petType}>{item.petType.slice(0, 8)}</Text>
-          <Text style={styles.age}>Age 4 Months</Text>
-          <View style={{flexDirection: 'row', marginTop: 5}}>
-            <Text style={styles.location}>{item.location}</Text>
-            <Image
-              style={{width: 9, height: 13, marginLeft: 10}}
-              source={require('../../assets/donate/location.png')}
-            />
-          </View>
-          <Text style={styles.gender}>{item.gender}</Text>
-          <TouchableOpacity onPress={() => handleAddToCart(item)}>
-            <Image
-              style={styles.likeIcon}
-              source={require('../../assets/adoption/heartWhite.png')}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
 
   const handlePetPress = (pet: DonationPetData) => {
     navigation.navigate('Details', {pet});
@@ -84,7 +61,37 @@ const SearchSinglePet = ({navigation, searchTerm}: any) => {
     <FlatList
       data={memoizedData}
       keyExtractor={(item, index) => item.uid.toString() || index.toString()}
-      renderItem={renderPetItem}
+      renderItem={({item}) => (
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => handlePetPress(item)}>
+          <View style={styles.smallContainer}>
+            <Image style={styles.one} source={{uri: item.image}}></Image>
+            <View style={styles.two}>
+              <Text style={styles.petType}>{item.petType.slice(0, 8)}</Text>
+              <Text style={styles.age}>Age 4 Months</Text>
+              <View style={{flexDirection: 'row', marginTop: 5}}>
+                <Text style={styles.location}>{item.location}</Text>
+                <Image
+                  style={{width: 9, height: 13, marginLeft: 10}}
+                  source={require('../../assets/donate/location.png')}
+                />
+              </View>
+              <Text style={styles.gender}>{item.gender}</Text>
+              <TouchableOpacity onPress={() => handleAddToCart(item)}>
+                <Image
+                  style={styles.likeIcon}
+                  source={
+                    likedPets[item.uid]
+                      ? require('../../assets/adoption/heartRed.png')
+                      : require('../../assets/adoption/heartWhite.png')
+                  }
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableOpacity>
+      )}
     />
   );
 };
@@ -104,6 +111,7 @@ const styles = StyleSheet.create({
     height: 141,
     borderRadius: 25,
     backgroundColor: '#C4C4C4',
+    resizeMode: 'stretch',
     zIndex: 100,
   },
   two: {

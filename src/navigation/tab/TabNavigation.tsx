@@ -68,8 +68,8 @@ const TabNavigation = () => {
         />
 
         <Tab.Screen
-          name="MyDonations"
-          component={MyDonations}
+          name="Favorites"
+          component={Favorites}
           options={{
             tabBarIcon: ({focused}) => (
               <View
