@@ -10,17 +10,12 @@ import React, {useEffect, useState} from 'react';
 import {LoginScreenProps} from '../../constants/types';
 import {useAppDispatch, useAppSelector} from '../../store/Store';
 import {deleteItem} from '../../store/slice/addToFavoriteSlice';
+import useFavorites from './useFavorites';
 
 const Favorites = ({navigation}: LoginScreenProps) => {
-  const dispatch = useAppDispatch();
-  const cart = useAppSelector(state => state.addToFavorite.cart);
-
-  const handleGoToPetSearch = () => {
-    navigation.navigate('PetSearch');
-  };
-  const handleDeleteItem = (itemUid: string) => {
-    dispatch(deleteItem(itemUid));
-  };
+  const {cart, handleGoToPetSearch, handleDeleteItem} = useFavorites({
+    navigation,
+  });
   return (
     <ScrollView style={styles.container}>
       <View

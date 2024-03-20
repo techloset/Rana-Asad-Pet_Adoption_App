@@ -6,52 +6,18 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import {Image} from 'react-native-elements';
-import {AddToFavoriteTypes, LoginScreenProps} from '../../constants/types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
-import {BackgroundImage} from 'react-native-elements/dist/config';
-import {addToFavorite} from '../../store/slice/addToFavoriteSlice';
-import {useAppDispatch} from '../../store/Store';
 import {RootStackparams} from '../../navigation/stack/StackNavigation';
-
-type DetailsScreenRouteProp = RouteProp<RootStackparams, 'Details'>;
-
-type DetailsScreenNavigationProp = StackNavigationProp<
-  RootStackparams,
-  'Details'
->;
-
-type Props = {
-  route: DetailsScreenRouteProp;
-  navigation: DetailsScreenNavigationProp;
-};
+import {Props} from '../../constants/types';
+import useAddToFavorite from './useDetails';
 
 const Details: React.FC<Props> = ({route, navigation}) => {
-  const dispatch = useAppDispatch();
   const {pet} = route.params;
 
-  const handleGoToBack = () => {
-    navigation.goBack();
-  };
-
-  const handleAddToCart = (item: AddToFavoriteTypes) => {
-    let cartProduct = {
-      petType: item.petType,
-      vaccinated: item.vaccinated,
-      gender: item.gender,
-      petBreed: item.petBreed,
-      amount: item.amount,
-      weight: item.weight,
-      location: item.location,
-      description: item.description,
-      image: item.image,
-      uid: item.uid,
-      like: false,
-    };
-    dispatch(addToFavorite(cartProduct));
-  };
+  const handleAddToFavorite = useAddToFavorite();
 
   return (
     <ScrollView style={{flex: 1}}>
@@ -72,7 +38,10 @@ const Details: React.FC<Props> = ({route, navigation}) => {
                   justifyContent: 'space-between',
                 }}>
                 <View>
-                  <TouchableOpacity onPress={handleGoToBack}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.goBack();
+                    }}>
                     <Image
                       style={{
                         width: 25,
@@ -85,7 +54,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
                   </TouchableOpacity>
                 </View>
                 <View>
-                  <TouchableOpacity onPress={() => handleAddToCart(pet)}>
+                  <TouchableOpacity onPress={() => handleAddToFavorite(pet)}>
                     <Image
                       style={{
                         width: 25,

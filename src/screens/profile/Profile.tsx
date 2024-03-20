@@ -15,7 +15,7 @@ import auth from '@react-native-firebase/auth';
 import ImagePicker from 'react-native-image-crop-picker';
 import {useAppDispatch, useAppSelector} from '../../store/Store';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {clearUserData} from '../../store/slice/userSlice';
+import {clearUserData, fetchUserDataSuccess} from '../../store/slice/userSlice';
 
 const Profile = ({navigation}: LoginScreenProps) => {
   const dispatch = useAppDispatch();

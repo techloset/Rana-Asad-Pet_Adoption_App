@@ -29,7 +29,6 @@ export const fetchCollectionData = createAsyncThunk(
         userPhotoURL: doc.data().userPhotoURL,
         currentUserEmail: doc.data().currentUserEmail,
         currentUserName: doc.data().currentUserName,
-        like: doc.data().like,
         email: doc.data().email,
         amount: doc.data().amount,
       }));

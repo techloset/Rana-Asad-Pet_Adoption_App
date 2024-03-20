@@ -1,5 +1,6 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackparams} from '../navigation/stack/StackNavigation';
+import {RouteProp} from '@react-navigation/native';
 
 export interface LoginScreenProps {
   navigation: StackNavigationProp<RootStackparams, 'SignUp'>;
@@ -7,6 +8,18 @@ export interface LoginScreenProps {
 
 export type SignUpScreenProps = {
   navigation: StackNavigationProp<RootStackparams, 'SignUp'>;
+};
+
+type DetailsScreenRouteProp = RouteProp<RootStackparams, 'Details'>;
+
+type DetailsScreenNavigationProp = StackNavigationProp<
+  RootStackparams,
+  'Details'
+>;
+
+type Props = {
+  route: DetailsScreenRouteProp;
+  navigation: DetailsScreenNavigationProp;
 };
 
 export interface DonationScreen {
@@ -73,7 +86,6 @@ export interface DonationPetData {
   userPhotoURL: string | '';
   currentUserEmail: string | '';
   currentUserName: string | '';
-  like: boolean;
   email: string;
 }
 

@@ -69,7 +69,7 @@ const Home = () => {
             <ScrollView
               horizontal={true}
               style={{flexDirection: 'row', paddingHorizontal: 20}}>
-              <View
+              {/* <View
                 style={{
                   width: 72,
                   height: 102,
@@ -94,35 +94,8 @@ const Home = () => {
                   }}>
                   Cats
                 </Text>
-              </View>
-              <View
-                style={{
-                  width: 72,
-                  height: 102,
-                  marginLeft: 10,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: '',
-                }}>
-                <Image
-                  style={{
-                    backgroundColor: '#C4C4C4',
-                    width: 72,
-                    height: 72,
-                    borderRadius: 62,
-                  }}
-                  source={{uri: userData?.photoURL}}></Image>
-                <Text
-                  style={{
-                    color: '#101C1D',
-                    marginTop: 7,
-                    fontSize: 14,
-                    fontWeight: '600',
-                  }}>
-                  Cats
-                </Text>
-              </View>
-              <View
+              </View> */}
+              {/* <View
                 style={{
                   width: 72,
                   height: 102,
@@ -230,6 +203,33 @@ const Home = () => {
                   Cats
                 </Text>
               </View>
+              <View
+                style={{
+                  width: 72,
+                  height: 102,
+                  marginLeft: 10,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: '',
+                }}>
+                <Image
+                  style={{
+                    backgroundColor: '#C4C4C4',
+                    width: 72,
+                    height: 72,
+                    borderRadius: 62,
+                  }}
+                  source={{uri: userData?.photoURL}}></Image>
+                <Text
+                  style={{
+                    color: '#101C1D',
+                    marginTop: 7,
+                    fontSize: 14,
+                    fontWeight: '600',
+                  }}>
+                  Cats
+                </Text>
+              </View> */}
             </ScrollView>
           </View>
 
@@ -247,93 +247,6 @@ const Home = () => {
                 marginVertical: 10,
                 height: 235,
               }}>
-              {/* <ImageBackground
-                style={{
-                  width: 321,
-                  height: 161,
-                  marginTop: 20,
-                  borderRadius: 20,
-                }}
-                source={{uri: userData?.photoURL}}>
-                <View
-                  style={{
-                    width: 175,
-                    height: 125,
-                    marginTop: 18,
-                    marginLeft: 18,
-                  }}>
-                  <Text
-                    style={{fontWeight: '800', fontSize: 29, color: 'white'}}>
-                    Cavachon dog
-                  </Text>
-                  <Text
-                    style={{fontWeight: '600', fontSize: 14, color: 'white'}}>
-                    Age 4 Months
-                  </Text>
-                  <Text
-                    style={{fontWeight: '800', fontSize: 25, color: '#101C1D'}}>
-                    $250
-                  </Text>
-                </View>
-              </ImageBackground>
-              <ImageBackground
-                style={{
-                  width: 321,
-                  height: 161,
-                  marginTop: 20,
-                  borderRadius: 20,
-                }}
-                source={{uri: userData?.photoURL}}>
-                <View
-                  style={{
-                    width: 175,
-                    height: 125,
-                    marginTop: 18,
-                    marginLeft: 18,
-                  }}>
-                  <Text
-                    style={{fontWeight: '800', fontSize: 29, color: 'white'}}>
-                    Cavachon dog
-                  </Text>
-                  <Text
-                    style={{fontWeight: '600', fontSize: 14, color: 'white'}}>
-                    Age 4 Months
-                  </Text>
-                  <Text
-                    style={{fontWeight: '800', fontSize: 25, color: '#101C1D'}}>
-                    $250
-                  </Text>
-                </View>
-              </ImageBackground>
-              <ImageBackground
-                style={{
-                  width: 321,
-                  height: 161,
-                  marginTop: 20,
-                  borderRadius: 20,
-                }}
-                source={{uri: userData?.photoURL}}>
-                <View
-                  style={{
-                    width: 175,
-                    height: 125,
-                    marginTop: 18,
-                    marginLeft: 18,
-                  }}>
-                  <Text
-                    style={{fontWeight: '800', fontSize: 29, color: 'white'}}>
-                    Cavachon dog
-                  </Text>
-                  <Text
-                    style={{fontWeight: '600', fontSize: 14, color: 'white'}}>
-                    Age 4 Months
-                  </Text>
-                  <Text
-                    style={{fontWeight: '800', fontSize: 25, color: '#101C1D'}}>
-                    $250
-                  </Text>
-                </View>
-              </ImageBackground> */}
               <HomePageForYouSinglePet />
             </ScrollView>
           </View>

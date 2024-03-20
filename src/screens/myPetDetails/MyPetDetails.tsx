@@ -13,6 +13,9 @@ import {useAppDispatch} from '../../store/Store';
 import {RootStackparams} from '../../navigation/stack/StackNavigation';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
+import {firebase} from '@react-native-firebase/firestore';
+import {removeDonationPet} from '../../store/slice/donationPetsSlice';
+import useMyPetDetails from './useMyPetDetails';
 
 type DetailsScreenRouteProp = RouteProp<RootStackparams, 'MyPetDetails'>;
 
@@ -27,12 +30,11 @@ type Props = {
 };
 
 const MyPetDetails: React.FC<Props> = ({route, navigation}) => {
-  const dispatch = useAppDispatch();
-  const {pet} = route.params || {};
-
-  const handleGoToBack = () => {
-    navigation.goBack();
-  };
+  const {pet}: any = route.params || {};
+  const {handleGoToBack, handleDeleteItem} = useMyPetDetails({
+    route,
+    navigation,
+  });
 
   return (
     <ScrollView style={{flex: 1}}>
@@ -66,7 +68,7 @@ const MyPetDetails: React.FC<Props> = ({route, navigation}) => {
                   </TouchableOpacity>
                 </View>
                 <View>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => handleDeleteItem(pet.uid)}>
                     <Image
                       style={{
                         width: 25,
@@ -74,7 +76,7 @@ const MyPetDetails: React.FC<Props> = ({route, navigation}) => {
                         marginTop: 20,
                         marginRight: 20,
                       }}
-                      source={require('../../assets/adoption/heartWhite.png')}
+                      source={require('../../assets/donate/deleteWhite.png')}
                     />
                   </TouchableOpacity>
                 </View>
