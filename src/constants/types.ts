@@ -89,8 +89,36 @@ export interface DonationPetData {
   email: string;
 }
 
+export interface RequestPetData {
+  uid: string;
+  petType: string;
+  petBreed: string;
+  amount: string;
+  vaccinated: string;
+  gender: string;
+  weight: string;
+  location: string;
+  description: string;
+  image: string;
+  petUserEmail: string;
+  petUserName: string;
+  petUserPhotoURL: string;
+  petUserUID: string;
+  userEmail: string;
+  userName: string;
+  userPhotoURL: string;
+  userUID: string;
+  adoptedDate: string;
+}
+
 export interface DonationPetState {
   data: DonationPetData[];
+  loading: boolean;
+  error: string | null;
+}
+
+export interface RequestPetState {
+  requestData: RequestPetData[];
   loading: boolean;
   error: string | null;
 }

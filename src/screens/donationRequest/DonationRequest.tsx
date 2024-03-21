@@ -7,11 +7,25 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
-import FavoriteSinglePet from '../../components/searchSinglePet/SearchSinglePet';
-import DonationRequestSinglePet from '../../components/donationRequestSinglePet/DonationRequestSinglePet';
+import React, {useEffect, useState} from 'react';
+import {useAppDispatch, useAppSelector} from '../../store/Store';
+import {fetchRequestData} from '../../store/slice/requestSlice';
+import {FlatList} from 'react-native';
 
 const DonationRequest = () => {
+  const dispatch = useAppDispatch();
+
+  const userData = useAppSelector(state => state.user.userData);
+  const requestData = useAppSelector(state => state.requestPets.requestData);
+
+  const filteredDonationData = requestData.filter(
+    item => item.petUserEmail === userData?.email,
+  );
+
+  useEffect(() => {
+    dispatch(fetchRequestData());
+  }, [dispatch]);
+
   return (
     <ScrollView style={styles.container}>
       <View
@@ -25,62 +39,97 @@ const DonationRequest = () => {
           Donation Requests
         </Text>
       </View>
-      {/* <View style={{alignItems: 'center'}}>
-        <View style={styles.smallContainer}>
-          <View style={styles.twoContainer}>
-            <View style={styles.secondContainer}>
-              <View style={styles.one}></View>
-              <View style={styles.two}>
-                <Text
-                  style={{color: '#101C1D', fontSize: 18, fontWeight: '700'}}>
-                  Talha
-                </Text>
-                <View style={{flexDirection: 'row'}}>
-                  <Text
-                    style={{color: '#101C1D', fontSize: 18, fontWeight: '700'}}>
-                    Cavachon .
-                  </Text>
-                  <Text
-                    style={{color: '#101C1D', fontSize: 18, fontWeight: '700'}}>
-                    Dog
-                  </Text>
+      <FlatList
+        data={filteredDonationData}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({item}) => (
+          <ScrollView style={{marginLeft: 15}}>
+            <View style={styles.smallContainer}>
+              <View style={styles.twoContainer}>
+                <View style={styles.secondContainer}>
+                  <View style={styles.one}>
+                    <Image
+                      style={{
+                        backgroundColor: '#C4C4C4',
+                        width: 72,
+                        height: 72,
+                        borderRadius: 36,
+                      }}
+                      source={{uri: item?.userPhotoURL}}
+                    />
+                  </View>
+                  <View style={styles.two}>
+                    <Text
+                      style={{
+                        color: '#101C1D',
+                        fontSize: 18,
+                        fontWeight: '700',
+                      }}>
+                      {item.userName}
+                    </Text>
+                    <View style={{flexDirection: 'row'}}>
+                      <Text
+                        style={{
+                          color: '#101C1D',
+                          fontSize: 18,
+                          fontWeight: '700',
+                        }}>
+                        {item.petBreed.slice(0, 6)} .
+                      </Text>
+                      <Text
+                        style={{
+                          color: '#101C1D',
+                          fontSize: 18,
+                          fontWeight: '700',
+                        }}>
+                        {item.petType.slice(0, 12)}
+                      </Text>
+                    </View>
+                    <Text
+                      style={{
+                        color: '#101C1D',
+                        fontSize: 10,
+                        fontWeight: '500',
+                      }}>
+                      {item.userEmail}
+                    </Text>
+                    <View style={{flexDirection: 'row', gap: 8, marginTop: 3}}>
+                      <Image
+                        style={{
+                          width: 10,
+                          height: 13,
+                        }}
+                        source={require('../../assets/donate/location.png')}
+                      />
+                      <Text
+                        style={{
+                          color: '#101C1D',
+                          fontSize: 10,
+                          fontWeight: '500',
+                        }}>
+                        {item.location}
+                      </Text>
+                    </View>
+                    <Text
+                      style={{
+                        color: '#101C1D',
+                        fontSize: 10,
+                        fontWeight: '500',
+                      }}>
+                      {item.adoptedDate}
+                    </Text>
+                  </View>
                 </View>
-                <Text
-                  style={{color: '#101C1D', fontSize: 10, fontWeight: '500'}}>
-                  info@techloset.com
-                </Text>
-                <View style={{flexDirection: 'row', gap: 8, marginTop: 3}}>
-                  <Image
-                    style={{
-                      width: 10,
-                      height: 13,
-                    }}
-                    source={require('../../assets/donate/location.png')}
-                  />
-                  <Text
-                    style={{color: '#101C1D', fontSize: 10, fontWeight: '500'}}>
-                    Lahore, PK.
-                  </Text>
-                </View>
-                <Text
-                  style={{color: '#101C1D', fontSize: 10, fontWeight: '500'}}>
-                  January 21, 2024
-                </Text>
+              </View>
+              <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <TouchableOpacity style={styles.buttonContainer}>
+                  <Text style={styles.buttonText}>Contact</Text>
+                </TouchableOpacity>
               </View>
             </View>
-          </View>
-          <View style={{justifyContent: 'center', alignItems: 'center'}}>
-            <TouchableOpacity style={styles.buttonContainer}>
-              <Text style={styles.buttonText}>Contact</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View> */}
-
-      <DonationRequestSinglePet />
-      <DonationRequestSinglePet />
-      <DonationRequestSinglePet />
-      <DonationRequestSinglePet />
+          </ScrollView>
+        )}
+      />
     </ScrollView>
   );
 };
@@ -116,7 +165,6 @@ const styles = StyleSheet.create({
     width: 75,
     height: 75,
     borderRadius: 100,
-    backgroundColor: '#C4C4C4',
     zIndex: 20,
   },
   two: {

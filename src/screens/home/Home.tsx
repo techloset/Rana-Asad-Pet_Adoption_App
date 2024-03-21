@@ -3,9 +3,10 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {Image} from 'react-native';
 import SearchBar from '../../components/searchBar/SearchBar';
 import {useAppDispatch, useAppSelector} from '../../store/Store';
@@ -18,9 +19,11 @@ import HomePageForYouSinglePet from '../../components/homePageForYou/HomePageFor
 import {TouchableOpacity} from 'react-native';
 import {fetchCollectionData} from '../../store/slice/donationPetsSlice';
 import {FlatList} from 'react-native';
+import {DrawerActions} from '@react-navigation/native';
 
 const Home = ({navigation}: LoginScreenProps) => {
   const dispatch = useAppDispatch();
+  const [searchTest, setSearchTest] = useState('');
   const userData = useAppSelector(state => state.user.userData);
   const donationData = useAppSelector(state => state.donationPets.data);
 
@@ -28,9 +31,20 @@ const Home = ({navigation}: LoginScreenProps) => {
     navigation.navigate('Details', {pet});
   };
 
+  const memoizedData = useMemo(() => {
+    if (!searchTest) return donationData;
+    return donationData.filter(item =>
+      item.petType.toLowerCase().includes(searchTest.toLowerCase()),
+    );
+  }, [donationData, searchTest]);
+
   useEffect(() => {
     dispatch(fetchCollectionData());
   }, [dispatch]);
+
+  const openDrawer = () => {
+    navigation.dispatch(DrawerActions.openDrawer());
+  };
 
   return (
     <View>
@@ -43,13 +57,15 @@ const Home = ({navigation}: LoginScreenProps) => {
               paddingTop: 50,
               justifyContent: 'space-between',
             }}>
-            <Image
-              style={{
-                width: 33,
-                height: 13,
-              }}
-              source={require('../../assets/adoption/drawerLogo.png')}
-            />
+            <TouchableOpacity onPress={openDrawer}>
+              <Image
+                style={{
+                  width: 33,
+                  height: 13,
+                }}
+                source={require('../../assets/adoption/drawerLogo.png')}
+              />
+            </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.6}
               onPress={() => {
@@ -85,12 +101,57 @@ const Home = ({navigation}: LoginScreenProps) => {
           </View>
 
           <View>
-            <SearchBar />
+            <View style={{alignItems: 'center', marginVertical: 10}}>
+              <View
+                style={{
+                  width: 329,
+                  height: 62,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  position: 'relative',
+                }}>
+                <View style={{width: 278, height: 48}}>
+                  <TextInput
+                    placeholder="Search for a pet"
+                    placeholderTextColor={'#101C1D'}
+                    onChangeText={val => setSearchTest(val)}
+                    style={{
+                      backgroundColor: '#F2F3FA',
+                      color: '#101C1D',
+                      paddingHorizontal: 15,
+                      borderRadius: 20,
+                      opacity: 0.5,
+                    }}
+                  />
+                </View>
+                <View
+                  style={{
+                    width: 82,
+                    height: 62,
+                    backgroundColor: '#101C1D',
+                    borderRadius: 25,
+                    marginRight: 40,
+                    marginLeft: 245,
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                    alignItems: 'center',
+                    position: 'absolute',
+                  }}>
+                  <Image
+                    style={{
+                      width: 19,
+                      height: 27,
+                    }}
+                    source={require('../../assets/components/search.png')}
+                  />
+                </View>
+              </View>
+            </View>
           </View>
 
           <View style={{paddingHorizontal: 20}}>
             <FlatList
-              data={donationData}
+              data={memoizedData}
               horizontal
               showsHorizontalScrollIndicator={false}
               keyExtractor={(item, index) => index.toString()}
@@ -135,17 +196,15 @@ const Home = ({navigation}: LoginScreenProps) => {
             </Text>
           </View>
 
-          <View>
-            <ScrollView
-              showsVerticalScrollIndicator={false}
-              style={{
-                paddingHorizontal: 20,
-                marginVertical: 10,
-                height: 180,
-              }}>
-              <HomePageForYouSinglePet />
-            </ScrollView>
-          </View>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={{
+              paddingHorizontal: 20,
+              marginVertical: 10,
+              height: 180,
+            }}>
+            <HomePageForYouSinglePet />
+          </ScrollView>
         </View>
       </View>
     </View>

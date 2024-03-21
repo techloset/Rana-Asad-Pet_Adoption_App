@@ -19,6 +19,7 @@ import auth from '@react-native-firebase/auth';
 import {fetchUserDataSuccess} from '../../store/slice/userSlice';
 import {UserData} from '../../constants/types';
 import DonateScreen from '../../screens/donateScreen/DonateScreen';
+import DrawerNavigation from '../drawer/DrawerNavigation';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,7 @@ export type RootStackparams = {
   Details: {pet: DonationPetData};
   SearchSinglePet: undefined;
   MyPetDetails: undefined;
+  DrawerNavigation: undefined;
 };
 
 const StackNavigation: React.FC = () => {
@@ -86,6 +88,7 @@ const StackNavigation: React.FC = () => {
         initialRouteName="TabNavigation"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="TabNavigation" component={TabNavigation} />
+        <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
         <Stack.Screen name="PetSearch" component={PetSearch} />
         <Stack.Screen name="Favorite" component={Favorites} />
         <Stack.Screen name="Profile" component={Profile} />

@@ -6,6 +6,7 @@ import {Provider} from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import {store} from './src/store/Store';
 import {listenForAuthStateChanges} from './src/store/slice/userSlice';
+import DrawerNavigation from './src/navigation/drawer/DrawerNavigation';
 
 export default function App() {
   useEffect(() => {

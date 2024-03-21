@@ -39,70 +39,79 @@ const Favorites = ({navigation}: LoginScreenProps) => {
         </TouchableOpacity>
       </View>
 
-      {cart.map((item, i) => {
-        return (
-          <View style={styles.smallContainer}>
-            <Image style={styles.one} source={{uri: item.image}}></Image>
-            <View style={styles.two}>
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontWeight: '700',
-                  color: '#101C1D',
-                }}>
-                {item.petType.slice(0, 8)}
-              </Text>
-              <Text
-                style={{
-                  marginTop: 5,
-                  fontSize: 10,
-                  fontWeight: '500',
-                  color: '#101C1D',
-                }}>
-                Age 4 Months
-              </Text>
-              <View style={{flexDirection: 'row', marginTop: 5}}>
-                <Text
-                  style={{
-                    fontSize: 10,
-                    fontWeight: '500',
-                    color: '#101C1D',
-                  }}>
-                  FSD
-                </Text>
-                <Image
-                  style={{
-                    width: 9,
-                    height: 13,
-                    marginLeft: 10,
-                  }}
-                  source={require('../../assets/donate/location.png')}
-                />
+      {cart.length > 0 ? (
+        <>
+          {cart.map((item, i) => {
+            return (
+              <View style={styles.smallContainer}>
+                <Image style={styles.one} source={{uri: item.image}}></Image>
+                <View style={styles.two}>
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: '700',
+                      color: '#101C1D',
+                    }}>
+                    {item.petType.slice(0, 8)}
+                  </Text>
+                  <Text
+                    style={{
+                      marginTop: 5,
+                      fontSize: 10,
+                      fontWeight: '500',
+                      color: '#101C1D',
+                    }}>
+                    Age 4 Months
+                  </Text>
+                  <View style={{flexDirection: 'row', marginTop: 5}}>
+                    <Text
+                      style={{
+                        fontSize: 10,
+                        fontWeight: '500',
+                        color: '#101C1D',
+                      }}>
+                      FSD
+                    </Text>
+                    <Image
+                      style={{
+                        width: 9,
+                        height: 13,
+                        marginLeft: 10,
+                      }}
+                      source={require('../../assets/donate/location.png')}
+                    />
+                  </View>
+                  <Text
+                    style={{
+                      marginTop: 7,
+                      fontSize: 10,
+                      fontWeight: '500',
+                      color: '#101C1D',
+                    }}>
+                    Male
+                  </Text>
+                  <TouchableOpacity onPress={() => handleDeleteItem(item.uid)}>
+                    <Image
+                      style={{
+                        width: 16,
+                        height: 15,
+                        marginLeft: 60,
+                      }}
+                      source={require('../../assets/adoption/heartRed.png')}
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
-              <Text
-                style={{
-                  marginTop: 7,
-                  fontSize: 10,
-                  fontWeight: '500',
-                  color: '#101C1D',
-                }}>
-                Male
-              </Text>
-              <TouchableOpacity onPress={() => handleDeleteItem(item.uid)}>
-                <Image
-                  style={{
-                    width: 16,
-                    height: 15,
-                    marginLeft: 60,
-                  }}
-                  source={require('../../assets/adoption/heartRed.png')}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-        );
-      })}
-      {/* <FavoritePets /> */}
+            );
+          })}
+        </>
+      ) : (
+        <View style={{marginTop: 20}}>
+          <Text style={{fontWeight: '900', fontSize: 15, textAlign: 'center'}}>
+            Your Favorite List Is Empty 😐
+          </Text>
+        </View>
+      )}
     </ScrollView>
   );
 };

@@ -8,6 +8,9 @@ import {Image, StyleSheet, View} from 'react-native';
 import DonateScreen from '../../screens/donateScreen/DonateScreen';
 import FavoritePets from '../../components/favoritePets/FavoritePets';
 import MyDonations from '../../screens/myDonations/MyDonations';
+import DonationRequest from '../../screens/donationRequest/DonationRequest';
+import DrawerNavigation from '../drawer/DrawerNavigation';
+import DrawerHome from '../drawer/DrawerHome';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,8 +24,8 @@ const TabNavigation = () => {
           tabBarStyle: navs.navigation,
         }}>
         <Tab.Screen
-          name="Home"
-          component={Home}
+          name="DrawerHome"
+          component={DrawerHome}
           options={{
             tabBarIcon: ({focused}) => (
               <View

@@ -32,19 +32,6 @@ const Profile = ({navigation}: LoginScreenProps) => {
     navigation.navigate('UpdataPassword');
   };
 
-  const logoutUser = createAsyncThunk(
-    'user/logoutUser',
-    async (_, {dispatch}) => {
-      try {
-        await auth().signOut();
-        dispatch(clearUserData());
-      } catch (error) {
-        console.error('Error logging out:', error);
-        throw error;
-      }
-    },
-  );
-
   const updateProfile = async () => {
     try {
       const updateImageURL = selectedImage || userData?.photoURL || '';
@@ -83,10 +70,6 @@ const Profile = ({navigation}: LoginScreenProps) => {
     } catch (error) {
       console.log('Error selecting image:', error);
     }
-  };
-
-  const handleLogout = () => {
-    dispatch(logoutUser());
   };
 
   return (
@@ -143,13 +126,8 @@ const Profile = ({navigation}: LoginScreenProps) => {
             Update Password
           </Text>
         </View>
-        <View>
-          <Text style={styles.label2} onPress={handleLogout}>
-            Logout
-          </Text>
-        </View>
 
-        <View style={{top: 90}}>
+        <View style={{top: 130}}>
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={updateProfile}>

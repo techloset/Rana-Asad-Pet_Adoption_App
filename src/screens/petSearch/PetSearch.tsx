@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   searchResultsContainer: {
-    marginVertical: 30,
+    marginVertical: 20,
     paddingHorizontal: 15,
   },
 });
