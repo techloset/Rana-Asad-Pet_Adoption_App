@@ -6,71 +6,21 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Alert,
   Image,
 } from 'react-native';
 import {LoginScreenProps} from '../../constants/types';
-import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
-import ImagePicker from 'react-native-image-crop-picker';
-import {store, useAppDispatch, useAppSelector} from '../../store/Store';
-import {createAsyncThunk} from '@reduxjs/toolkit';
-import {
-  clearUserData,
-  listenForAuthStateChanges,
-} from '../../store/slice/userSlice';
+import useProfile from './useProfile';
 
 const Profile = ({navigation}: LoginScreenProps) => {
-  const dispatch = useAppDispatch();
-  const [newUserName, setNewUserName] = useState('');
-  const [newEmail, setNewEmail] = useState('');
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  const userData = useAppSelector(state => state.user.userData);
-
-  const handleGoToUpdataPassword = () => {
-    navigation.navigate('UpdataPassword');
-  };
-
-  const updateProfile = async () => {
-    try {
-      const updateImageURL = selectedImage || userData?.photoURL || '';
-      const updatedUserName = newUserName || userData?.userName || '';
-      const updatedEmail = newEmail || userData?.email || '';
-
-      await firestore().collection('Users').doc(userData?.uid).update({
-        userName: updatedUserName,
-        email: updatedEmail,
-        photoURL: updateImageURL,
-      });
-
-      dispatch(listenForAuthStateChanges());
-
-      setNewUserName('');
-      setNewEmail('');
-      setSelectedImage(null);
-      navigation.navigate('Home');
-      console.log('Success', 'Profile updated successfully');
-    } catch (error: any) {
-      console.log('Error', 'Failed to update profile:', error.message);
-    }
-  };
-
-  const handleImagePicker = async () => {
-    try {
-      const image = await ImagePicker.openPicker({
-        width: 300,
-        height: 300,
-        cropping: true,
-        includeBase64: false,
-        cropperCircleOverlay: true,
-      });
-
-      setSelectedImage(image.path);
-    } catch (error) {
-      console.log('Error selecting image:', error);
-    }
-  };
+  const {
+    setNewUserName,
+    setNewEmail,
+    selectedImage,
+    handleImagePicker,
+    updateProfile,
+    userData,
+    handleGoToUpdataPassword,
+  } = useProfile({navigation});
 
   return (
     <ScrollView style={styles.container}>
@@ -87,21 +37,21 @@ const Profile = ({navigation}: LoginScreenProps) => {
           </Text>
         </View>
         <View style={{alignItems: 'center'}}>
-          <TouchableOpacity activeOpacity={0.8} onPress={handleImagePicker}>
-            <Image
-              style={{
-                width: 125,
-                height: 125,
-                marginVertical: 30,
-                borderWidth: 1,
-                borderRadius: 70,
-              }}
-              source={{uri: selectedImage || userData?.photoURL}}
-            />
+          <Image
+            style={{
+              width: 125,
+              height: 125,
+              marginVertical: 30,
+              borderWidth: 1,
+              borderRadius: 70,
+            }}
+            source={{uri: selectedImage || userData?.photoURL}}
+          />
+          <TouchableOpacity onPress={handleImagePicker}>
+            <View style={{alignItems: 'flex-end', top: -50, left: 35}}>
+              <Image source={require('../../assets/login/border.png')} />
+            </View>
           </TouchableOpacity>
-          <View style={{alignItems: 'flex-end', top: -50, left: 35}}>
-            <Image source={require('../../assets/login/border.png')} />
-          </View>
         </View>
         <View>
           <Text style={styles.label}>Username</Text>

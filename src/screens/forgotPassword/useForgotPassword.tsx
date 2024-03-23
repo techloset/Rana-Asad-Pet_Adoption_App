@@ -25,7 +25,7 @@ const useForgotPassword = ({navigation}: LoginScreenProps) => {
     navigation.goBack();
   };
 
-  return {forgotEmail, setForgotEmail, handleRecoverPassword, handleGoBack};
+  return {setForgotEmail, handleRecoverPassword, handleGoBack};
 };
 
 export default useForgotPassword;

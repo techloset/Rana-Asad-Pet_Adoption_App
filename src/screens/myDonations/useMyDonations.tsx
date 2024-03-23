@@ -1,6 +1,5 @@
 import {useEffect} from 'react';
 import {firebase} from '@react-native-firebase/firestore';
-import {useDispatch} from 'react-redux';
 import {
   fetchCollectionData,
   removeDonationPet,

@@ -1,5 +1,4 @@
 import {
-  Alert,
   Image,
   ScrollView,
   StyleSheet,
@@ -8,17 +7,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useId, useState} from 'react';
+import React from 'react';
 import {Dropdown} from 'react-native-element-dropdown';
-import ImagePicker from 'react-native-image-crop-picker';
-import {useAppSelector} from '../../store/Store';
-import firestore from '@react-native-firebase/firestore';
-import storage from '@react-native-firebase/storage';
-import {
-  DonationScreen,
-  LoginScreenProps,
-  UserData,
-} from '../../constants/types';
+import {LoginScreenProps} from '../../constants/types';
 import useDonateScreen from './useDonateScreen';
 
 const DonateScreen = ({navigation}: LoginScreenProps) => {

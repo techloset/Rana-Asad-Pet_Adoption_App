@@ -22,6 +22,18 @@ export type Props = {
   navigation: DetailsScreenNavigationProp;
 };
 
+type MyPetDetailsRouteProp = RouteProp<RootStackparams, 'MyPetDetails'>;
+
+type MyPetDetailsNavigationProp = StackNavigationProp<
+  RootStackparams,
+  'MyPetDetails'
+>;
+
+export type MyPetDetailsProps = {
+  route: MyPetDetailsRouteProp;
+  navigation: MyPetDetailsNavigationProp;
+};
+
 export interface DonationScreen {
   petType: string;
   vaccinated: string;

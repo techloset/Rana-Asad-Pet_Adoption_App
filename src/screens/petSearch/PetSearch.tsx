@@ -5,15 +5,16 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import SearchSinglePet from '../../components/searchSinglePet/SearchSinglePet';
 import {LoginScreenProps} from '../../constants/types';
-import {useAppSelector} from '../../store/Store';
+import usePetSearch from './usePetSearch';
 
 const PetSearch = ({navigation}: LoginScreenProps) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const userData = useAppSelector(state => state.user.userData);
+  const {searchTerm, selectedCategory, handleCategorySearch, setSearchTerm} =
+    usePetSearch();
 
   return (
     <View style={styles.container}>
@@ -35,26 +36,70 @@ const PetSearch = ({navigation}: LoginScreenProps) => {
       </View>
 
       <View>
-        <View style={styles.categoryContainer}>
-          <CategoryButton label="Dogs" />
-          <CategoryButton label="Cats" />
-          <CategoryButton label="Bunnies" />
-          <CategoryButton label="Birds" />
-          <CategoryButton label="Turtle" />
-          <CategoryButton label="Monkey" />
-        </View>
+        <ScrollView style={styles.categoryContainer} horizontal>
+          <CategoryButton
+            label="Dog"
+            onPress={() => handleCategorySearch('Dog')}
+            isSelected={selectedCategory === 'Dog'}
+          />
+          <CategoryButton
+            label="Cat"
+            onPress={() => handleCategorySearch('Cat')}
+            isSelected={selectedCategory === 'Cat'}
+          />
+          <CategoryButton
+            label="Bunnies"
+            onPress={() => handleCategorySearch('Bunnies')}
+            isSelected={selectedCategory === 'Bunnies'}
+          />
+          <CategoryButton
+            label="Birds"
+            onPress={() => handleCategorySearch('Birds')}
+            isSelected={selectedCategory === 'Birds'}
+          />
+          <CategoryButton
+            label="Turtle"
+            onPress={() => handleCategorySearch('Turtle')}
+            isSelected={selectedCategory === 'Turtle'}
+          />
+          <CategoryButton
+            label="Monkey"
+            onPress={() => handleCategorySearch('Monkey')}
+            isSelected={selectedCategory === 'Monkey'}
+          />
+        </ScrollView>
       </View>
-      <ScrollView style={styles.searchResultsContainer}>
+      <View style={styles.searchResultsContainer}>
         <SearchSinglePet navigation={navigation} searchTerm={searchTerm} />
-      </ScrollView>
+      </View>
     </View>
   );
 };
 
-const CategoryButton = ({label}: {label: string}) => (
-  <View style={styles.categoryButtonContainer}>
-    <Text style={styles.categoryButtonText}>{label}</Text>
-  </View>
+const CategoryButton = ({
+  label,
+  onPress,
+  isSelected,
+}: {
+  label: string;
+  onPress: () => void;
+  isSelected: boolean;
+}) => (
+  <TouchableOpacity onPress={onPress}>
+    <View
+      style={[
+        styles.categoryButtonContainer,
+        isSelected && styles.selectedCategoryButtonContainer,
+      ]}>
+      <Text
+        style={[
+          styles.categoryButtonText,
+          isSelected && styles.selectedcategoryButtonText,
+        ]}>
+        {label}
+      </Text>
+    </View>
+  </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
@@ -95,29 +140,36 @@ const styles = StyleSheet.create({
     height: 27,
   },
   categoryContainer: {
-    marginTop: 10,
-    gap: 20,
-    paddingHorizontal: 30,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    marginTop: 20,
+    gap: 40,
+    left: 30,
   },
   categoryButtonContainer: {
     width: 63,
     height: 31,
+    marginHorizontal: 5,
     borderRadius: 13,
-    backgroundColor: '#F6A530',
+    fontWeight: '600',
+    fontSize: 14,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  selectedCategoryButtonContainer: {
+    backgroundColor: '#F6A530',
+  },
   categoryButtonText: {
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  selectedcategoryButtonText: {
     fontSize: 14,
     fontWeight: '600',
     color: 'white',
   },
   searchResultsContainer: {
-    marginVertical: 20,
+    marginVertical: 10,
     paddingHorizontal: 15,
+    marginBottom: 135,
   },
 });
 

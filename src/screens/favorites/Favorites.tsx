@@ -6,10 +6,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {LoginScreenProps} from '../../constants/types';
-import {useAppDispatch, useAppSelector} from '../../store/Store';
-import {deleteItem} from '../../store/slice/addToFavoriteSlice';
 import useFavorites from './useFavorites';
 
 const Favorites = ({navigation}: LoginScreenProps) => {
@@ -43,7 +41,7 @@ const Favorites = ({navigation}: LoginScreenProps) => {
         <>
           {cart.map((item, i) => {
             return (
-              <View style={styles.smallContainer}>
+              <View style={styles.smallContainer} key={item.uid}>
                 <Image style={styles.one} source={{uri: item.image}}></Image>
                 <View style={styles.two}>
                   <Text

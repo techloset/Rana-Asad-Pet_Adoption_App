@@ -13,11 +13,8 @@ import {CheckBox} from 'react-native-elements';
 import {LoginScreenProps} from '../../constants/types';
 import useLogin from './useLogin';
 
-const initialState = {email: '', password: ''};
-
 const Login = ({navigation}: LoginScreenProps) => {
   const {
-    state,
     handleChange,
     handleLogin,
     handleNavigationToForgot,

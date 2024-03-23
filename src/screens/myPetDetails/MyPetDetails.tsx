@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {Image} from 'react-native-elements';
-import {LoginScreenProps} from '../../constants/types';
+import {LoginScreenProps, MyPetDetailsProps} from '../../constants/types';
 import {useAppDispatch} from '../../store/Store';
 import {RootStackparams} from '../../navigation/stack/StackNavigation';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -17,19 +17,7 @@ import {firebase} from '@react-native-firebase/firestore';
 import {removeDonationPet} from '../../store/slice/donationPetsSlice';
 import useMyPetDetails from './useMyPetDetails';
 
-type DetailsScreenRouteProp = RouteProp<RootStackparams, 'MyPetDetails'>;
-
-type DetailsScreenNavigationProp = StackNavigationProp<
-  RootStackparams,
-  'MyPetDetails'
->;
-
-type Props = {
-  route: DetailsScreenRouteProp;
-  navigation: DetailsScreenNavigationProp;
-};
-
-const MyPetDetails: React.FC<Props> = ({route, navigation}) => {
+const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
   const {pet}: any = route.params || {};
   const {handleDeleteItem} = useMyPetDetails({
     route,

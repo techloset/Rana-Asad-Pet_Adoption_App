@@ -37,39 +37,53 @@ const MyDonations = ({navigation}: LoginScreenProps) => {
         </TouchableOpacity>
       </View>
 
-      <FlatList
-        data={filteredDonationData}
-        keyExtractor={(item, index) => item.uid.toString() || index.toString()}
-        renderItem={({item}) => (
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => handlePetPress(item)}>
-            <View style={styles.smallContainer}>
-              <Image style={styles.one} source={{uri: item.image}} />
-              <View style={styles.two}>
-                <Text style={styles.petType}>{item.petType.slice(0, 8)}</Text>
-                <Text style={styles.age}>Age 4 Months</Text>
-                <View style={{flexDirection: 'row', marginTop: 5}}>
-                  <Text style={styles.location}>
-                    {item.location.slice(0, 10)}
-                  </Text>
-                  <Image
-                    style={{width: 9, height: 13, marginLeft: 10}}
-                    source={require('../../assets/donate/location.png')}
-                  />
+      {filteredDonationData.length > 0 ? (
+        <FlatList
+          data={filteredDonationData}
+          keyExtractor={(item, index) =>
+            item.uid.toString() || index.toString()
+          }
+          renderItem={({item}) => (
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => handlePetPress(item)}>
+              <View style={styles.smallContainer}>
+                <Image style={styles.one} source={{uri: item.image}} />
+                <View style={styles.two}>
+                  <Text style={styles.petType}>{item.petType.slice(0, 8)}</Text>
+                  <Text style={styles.age}>Age 4 Months</Text>
+                  <View style={{flexDirection: 'row', marginTop: 5}}>
+                    <Text style={styles.location}>
+                      {item.location.slice(0, 10)}
+                    </Text>
+                    <Image
+                      style={{width: 9, height: 13, marginLeft: 10}}
+                      source={require('../../assets/donate/location.png')}
+                    />
+                  </View>
+                  <Text style={styles.gender}>{item.gender}</Text>
+                  <TouchableOpacity onPress={() => handleDeleteItem(item.uid)}>
+                    <Image
+                      style={styles.likeIcon}
+                      source={require('../../assets/donate/Delete.png')}
+                    />
+                  </TouchableOpacity>
                 </View>
-                <Text style={styles.gender}>{item.gender}</Text>
-                <TouchableOpacity onPress={() => handleDeleteItem(item.uid)}>
-                  <Image
-                    style={styles.likeIcon}
-                    source={require('../../assets/donate/Delete.png')}
-                  />
-                </TouchableOpacity>
               </View>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
+            </TouchableOpacity>
+          )}
+        />
+      ) : (
+        <Text
+          style={{
+            marginTop: 20,
+            textAlign: 'center',
+            fontWeight: '900',
+            fontSize: 15,
+          }}>
+          My Donation list is empty 😐
+        </Text>
+      )}
     </View>
   );
 };

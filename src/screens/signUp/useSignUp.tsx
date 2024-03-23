@@ -20,6 +20,7 @@ interface User {
 }
 
 export const useSignUp = ({navigation}: LoginScreenProps) => {
+  const [isChecked, setIsChecked] = useState(true);
   const [state, setState] = useState<State>({
     userName: '',
     email: '',
@@ -79,5 +80,5 @@ export const useSignUp = ({navigation}: LoginScreenProps) => {
     }
   };
 
-  return {state, handleChange, handleSignUp};
+  return {state, handleChange, handleSignUp, isChecked, setIsChecked};
 };

@@ -154,7 +154,7 @@ const Home = ({navigation}: LoginScreenProps) => {
               data={memoizedData}
               horizontal
               showsHorizontalScrollIndicator={false}
-              keyExtractor={(item, index) => index.toString()}
+              keyExtractor={item => item.uid}
               renderItem={({item}) => (
                 <TouchableOpacity
                   activeOpacity={0.8}
@@ -190,21 +190,20 @@ const Home = ({navigation}: LoginScreenProps) => {
               )}
             />
           </View>
-          <View style={{paddingHorizontal: 30, marginVertical: 10}}>
+          <View style={{paddingHorizontal: 30}}>
             <Text style={{color: '#101C1D', fontWeight: '700', fontSize: 18}}>
               For you
             </Text>
           </View>
 
-          <ScrollView
-            showsVerticalScrollIndicator={false}
+          <View
             style={{
               paddingHorizontal: 20,
               marginVertical: 10,
-              height: 180,
+              height: 200,
             }}>
             <HomePageForYouSinglePet />
-          </ScrollView>
+          </View>
         </View>
       </View>
     </View>

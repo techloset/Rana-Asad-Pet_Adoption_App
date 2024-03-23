@@ -1,6 +1,5 @@
 import {
   ImageBackground,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -8,56 +7,12 @@ import {
 } from 'react-native';
 import React from 'react';
 import {Image} from 'react-native-elements';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RouteProp} from '@react-navigation/native';
-import {RootStackparams} from '../../navigation/stack/StackNavigation';
 import {Props} from '../../constants/types';
-import useAddToFavorite from './useDetails';
-import {firebase} from '@react-native-firebase/firestore';
-import {useAppDispatch, useAppSelector} from '../../store/Store';
+import useDetails from './useDetails';
 
 const Details: React.FC<Props> = ({route, navigation}) => {
-  const dispatch = useAppDispatch();
-  const userData = useAppSelector(state => state.user.userData);
+  const {handleAddToFavorite, handleAdoptNow} = useDetails();
   const {pet} = route.params;
-
-  const handleAddToFavorite = useAddToFavorite();
-
-  const currentDate = new Date().toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  });
-
-  const handleAdoptNow = () => {
-    firebase
-      .firestore()
-      .collection('adoptedPets')
-      .add({
-        petType: pet.petType,
-        vaccinated: pet.vaccinated,
-        gender: pet.gender,
-        petBreed: pet.petBreed,
-        amount: pet.amount,
-        weight: pet.weight,
-        location: pet.location,
-        description: pet.description,
-        image: pet.image,
-        uid: pet.uid,
-        petUserEmail: pet.currentUserEmail,
-        petUserName: pet.currentUserName,
-        petUserPhotoURL: pet.userPhotoURL,
-        petUserUID: pet.userUID,
-        userEmail: userData?.email,
-        userName: userData?.userName,
-        userUID: userData?.uid,
-        userPhotoURL: userData?.photoURL,
-        adoptedDate: currentDate,
-      })
-      .then(() => {
-        console.log('Pet data added to Firestore');
-      });
-  };
 
   return (
     <View style={{}}>
@@ -352,7 +307,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
           }}>
           <TouchableOpacity
             style={styles.buttonContainer}
-            onPress={handleAdoptNow}>
+            onPress={() => handleAdoptNow(pet, navigation)}>
             <Text style={styles.buttonText}>Adopt Now</Text>
           </TouchableOpacity>
         </View>

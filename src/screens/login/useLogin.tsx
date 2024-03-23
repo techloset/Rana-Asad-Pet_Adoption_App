@@ -1,9 +1,10 @@
 import {Alert} from 'react-native';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {LoginScreenProps, UserData} from '../../constants/types';
-import {useAppDispatch} from '../../store/Store';
+import {store, useAppDispatch} from '../../store/Store';
 import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
+import {listenForAuthStateChanges} from '../../store/slice/userSlice';
+import {fetchRequestData} from '../../store/slice/requestSlice';
 
 const initialState = {email: '', password: ''};
 
@@ -39,15 +40,7 @@ export const useLogin = ({navigation}: LoginScreenProps) => {
       );
       const user = userCredential.user;
 
-      // if (user) {
-      //   const userData = await fetchUserData(user.uid);
-      //   if (userData) {
-      //     dispatch(fetchUserDataSuccess(userData));
-      //     //   navigation.navigate('ForgotPassword');
-      //   } else {
-      //     console.log('user fetch not found!');
-      //   }
-      // }
+      store.dispatch(listenForAuthStateChanges());
     } catch (error: any) {
       if (error.code === 'auth/invalid-email') {
         Alert.alert('That email address is invalid!');
@@ -57,25 +50,6 @@ export const useLogin = ({navigation}: LoginScreenProps) => {
       }
     }
   };
-
-  // const fetchUserData = async (uid: string) => {
-  //   try {
-  //     const userRef = firestore().collection('Users').doc(uid);
-  //     const doc = await userRef.get();
-
-  //     if (doc.exists) {
-  //       const userData = doc.data();
-  //       console.log('login userdata', userData);
-  //       return userData as UserData;
-  //     } else {
-  //       console.log('No user data found!');
-  //       return null;
-  //     }
-  //   } catch (error) {
-  //     console.error('Error fetching user data:', error);
-  //     return null;
-  //   }
-  // };
 
   return {
     state,
@@ -87,109 +61,3 @@ export const useLogin = ({navigation}: LoginScreenProps) => {
 };
 
 export default useLogin;
-// -----------------------------------------------------
-// User
-// export const loginUser = createAsyncThunk(
-//   'auth/loginUser',
-//   async ({email, password}: SignIn, {dispatch}) => {
-//     dispatch(setLoading(true));
-//     try {
-//       if (!email || !password) {
-//         throw new Error('Please enter all fields');
-//       }
-//       const userCredential = await auth().signInWithEmailAndPassword(
-//         email,
-//         password,
-//       );
-//       const currentUser = userCredential?.user;
-
-//       if (currentUser) {
-//         dispatch(
-//           setUser({
-//             ...currentUser,
-//             displayName: currentUser?.displayName || '',
-//             email: currentUser?.email || '',
-//           }),
-//         );
-//       }
-//       ToastAndroid.show('User logged in success!', ToastAndroid.SHORT);
-//     } catch (error: any) {
-//       dispatch(setError(error.message));
-//       throw new error();
-//     } finally {
-//       dispatch(setLoading(false));
-//     }
-//   },
-// ); please explain this code line by line
-
-// ------------------------------------------
-
-// import {Alert} from 'react-native';
-// import {useState} from 'react';
-// import {LoginScreenProps, UserData} from '../../constants/types';
-// import {useAppDispatch} from '../../store/Store';
-// import {fetchUserDataSuccess} from '../../store/slice/Slice';
-// import auth from '@react-native-firebase/auth';
-
-// const initialState = {email: '', password: ''};
-
-// export const useLogin = ({navigation}: LoginScreenProps) => {
-//   const dispatch = useAppDispatch();
-//   const [state, setState] = useState(initialState);
-
-//   const handleChange = (name: string, value: string) => {
-//     setState(prevState => ({...prevState, [name]: value}));
-//   };
-
-//   const handleNavigationToLogin = () => {
-//     navigation.navigate('SignUp');
-//   };
-
-//   const handleNavigationToForgot = () => {
-//     navigation.navigate('ForgotPassword');
-//   };
-
-//   const handleLogin = async () => {
-//     const {email, password} = state;
-
-//     if (!email || !password) {
-//       return Alert.alert('Please enter both email and password');
-//     }
-
-//     try {
-//       const userCredential = await auth().signInWithEmailAndPassword(
-//         email,
-//         password,
-//       );
-//       const currentUser = userCredential?.user;
-//       console.log('currect User Data', currentUser);
-
-//       if (currentUser) {
-//         dispatch(
-//           fetchUserDataSuccess({
-//             uid: currentUser.uid,
-//             email: currentUser.email || '',
-//             userName: currentUser.displayName || '',
-//             password: currentUser.passwor || '',
-//             photoURL: currentUser.displayName || '',
-//           }),
-//         );
-//         navigation.navigate('ForgotPassword');
-//       } else {
-//         throw new Error('Failed to sign in');
-//       }
-//     } catch (error: any) {
-//       Alert.alert('Error', error.message || 'An error occurred during sign-in');
-//     }
-//   };
-
-//   return {
-//     state,
-//     handleChange,
-//     handleLogin,
-//     handleNavigationToForgot,
-//     handleNavigationToLogin,
-//   };
-// };
-
-// export default useLogin;

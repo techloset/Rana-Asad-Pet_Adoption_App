@@ -11,7 +11,7 @@ import {LoginScreenProps} from '../../constants/types';
 import useForgotPassword from './useForgotPassword';
 
 const ForgotPassword = ({navigation}: LoginScreenProps) => {
-  const {forgotEmail, setForgotEmail, handleRecoverPassword, handleGoBack} =
+  const {setForgotEmail, handleRecoverPassword, handleGoBack} =
     useForgotPassword({navigation});
 
   return (

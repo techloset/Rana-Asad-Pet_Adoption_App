@@ -43,113 +43,115 @@ const SideBar = ({navigation}: SideBarProps) => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <TouchableOpacity onPress={closeDrawer}>
-          <Image
-            style={{
-              width: 19,
-              height: 19,
-              marginLeft: 30,
-            }}
-            source={require('../../assets/components/close.png')}
-          />
-        </TouchableOpacity>
-      </View>
-      <View>
-        <View style={{alignItems: 'center', marginVertical: 30}}>
-          <View
-            style={{
-              width: 246,
-              height: 62,
-              flexDirection: 'row',
-              alignItems: 'center',
-              position: 'relative',
-            }}>
-            <View style={{width: 203, height: 48}}>
-              <TextInput
-                placeholder="Search for a pet"
-                placeholderTextColor={'#101C1D'}
-                style={{
-                  backgroundColor: '#F2F3FA',
-                  color: '#101C1D',
-                  paddingHorizontal: 15,
-                  borderRadius: 20,
-                  opacity: 0.5,
-                }}
-              />
-            </View>
+      <View style={{zIndex: 1000}}>
+        <View>
+          <TouchableOpacity onPress={closeDrawer}>
+            <Image
+              style={{
+                width: 19,
+                height: 19,
+                marginLeft: 30,
+              }}
+              source={require('../../assets/components/close.png')}
+            />
+          </TouchableOpacity>
+        </View>
+        <View>
+          <View style={{alignItems: 'center', marginVertical: 30}}>
             <View
               style={{
-                width: 72,
-                height: 54,
-                backgroundColor: '#101C1D',
-                borderRadius: 25,
-                marginRight: 40,
-                marginLeft: 170,
-                justifyContent: 'center',
-                alignContent: 'center',
+                width: 246,
+                height: 62,
+                flexDirection: 'row',
                 alignItems: 'center',
-                position: 'absolute',
+                position: 'relative',
               }}>
-              <Image
+              <View style={{width: 203, height: 48}}>
+                <TextInput
+                  placeholder="Search for a pet"
+                  placeholderTextColor={'#101C1D'}
+                  style={{
+                    backgroundColor: '#F2F3FA',
+                    color: '#101C1D',
+                    paddingHorizontal: 15,
+                    borderRadius: 20,
+                    opacity: 0.5,
+                  }}
+                />
+              </View>
+              <View
                 style={{
-                  width: 19,
-                  height: 27,
-                }}
-                source={require('../../assets/components/search.png')}
-              />
+                  width: 72,
+                  height: 54,
+                  backgroundColor: '#101C1D',
+                  borderRadius: 25,
+                  marginRight: 40,
+                  marginLeft: 170,
+                  justifyContent: 'center',
+                  alignContent: 'center',
+                  alignItems: 'center',
+                  position: 'absolute',
+                }}>
+                <Image
+                  style={{
+                    width: 19,
+                    height: 27,
+                  }}
+                  source={require('../../assets/components/search.png')}
+                />
+              </View>
             </View>
           </View>
         </View>
-      </View>
 
-      <TouchableOpacity
-        style={{marginTop: 20}}
-        onPress={() => handleNavigation('Home')}>
-        <Text
-          style={[
-            styles.item,
-            selectedItem === 'Home' && {backgroundColor: 'lightgray'},
-          ]}>
-          Home
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => handleNavigation('DonateScreen')}>
-        <Text
-          style={[
-            styles.item,
-            selectedItem === 'DonateScreen' && {backgroundColor: 'lightgray'},
-          ]}>
-          Add_Pet
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => handleNavigation('MyDonations')}>
-        <Text
-          style={[
-            styles.item,
-            selectedItem === 'MyDonations' && {backgroundColor: 'lightgray'},
-          ]}>
-          My Donation
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => handleNavigation('DonationRequest')}>
-        <Text
-          style={[
-            styles.item,
-            selectedItem === 'DonationRequest' && {
-              backgroundColor: 'lightgray',
-            },
-          ]}>
-          Request
-        </Text>
-      </TouchableOpacity>
-
-      <View style={{left: 35, top: 180}}>
-        <TouchableOpacity onPress={handleLogout}>
-          <Text style={{color: '#FB5D48', fontSize: 18, fontWeight: '600'}}>
-            Log Out
+        <TouchableOpacity
+          style={{marginTop: 20}}
+          onPress={() => handleNavigation('Home')}>
+          <Text
+            style={[
+              styles.item,
+              selectedItem === 'Home' && {backgroundColor: 'lightgray'},
+            ]}>
+            Home
           </Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleNavigation('DonateScreen')}>
+          <Text
+            style={[
+              styles.item,
+              selectedItem === 'DonateScreen' && {backgroundColor: 'lightgray'},
+            ]}>
+            Add_Pet
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleNavigation('MyDonations')}>
+          <Text
+            style={[
+              styles.item,
+              selectedItem === 'MyDonations' && {backgroundColor: 'lightgray'},
+            ]}>
+            My Donation
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleNavigation('DonationRequest')}>
+          <Text
+            style={[
+              styles.item,
+              selectedItem === 'DonationRequest' && {
+                backgroundColor: 'lightgray',
+              },
+            ]}>
+            Request
+          </Text>
+        </TouchableOpacity>
+
+        <View style={{left: 35, top: 180}}>
+          <TouchableOpacity onPress={handleLogout}>
+            <Text style={{color: '#FB5D48', fontSize: 18, fontWeight: '600'}}>
+              Log Out
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -162,6 +164,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     marginTop: 15,
     paddingHorizontal: 10,
+    zIndex: 100,
   },
   item: {
     fontSize: 18,

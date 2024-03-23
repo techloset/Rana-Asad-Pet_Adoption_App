@@ -14,9 +14,8 @@ import {SignUpScreenProps} from '../../constants/types';
 import {useSignUp} from './useSignUp';
 
 const SignUp: React.FC<SignUpScreenProps> = ({navigation}) => {
-  const {state, handleChange, handleSignUp} = useSignUp({navigation});
-
-  const [isChecked, setIsChecked] = useState(true);
+  const {state, handleChange, handleSignUp, isChecked, setIsChecked} =
+    useSignUp({navigation});
 
   return (
     <ScrollView style={styles.container}>

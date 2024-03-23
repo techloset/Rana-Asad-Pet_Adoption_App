@@ -16,109 +16,109 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
   return (
-    <>
-      <Tab.Navigator
-        screenOptions={{
-          tabBarShowLabel: false,
-          headerShown: false,
-          tabBarStyle: navs.navigation,
-        }}>
-        <Tab.Screen
-          name="DrawerHome"
-          component={DrawerHome}
-          options={{
-            tabBarIcon: ({focused}) => (
-              <View
-                style={[
-                  navs.tabIconContainer,
-                  focused ? navs.tabIconFocused : navs.tabIconUnfocused,
-                ]}>
-                {focused ? (
-                  <Image
-                    source={require('../../assets/tabIcons/activeHome.png')}
-                  />
-                ) : (
-                  <Image
-                    source={require('../../assets/tabIcons/inactiveHome.png')}
-                  />
-                )}
-              </View>
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="PetSearch"
-          component={PetSearch}
-          options={{
-            tabBarIcon: ({focused}) => (
-              <View
-                style={[
-                  navs.tabIconContainer,
-                  focused ? navs.tabIconFocused : navs.tabIconUnfocused,
-                ]}>
-                {focused ? (
-                  <Image
-                    source={require('../../assets/tabIcons/activeSearch.png')}
-                  />
-                ) : (
-                  <Image
-                    source={require('../../assets/tabIcons/inactiveSearch.png')}
-                  />
-                )}
-              </View>
-            ),
-          }}
-        />
+    <Tab.Navigator
+      screenOptions={{
+        tabBarShowLabel: false,
+        headerShown: false,
+        tabBarStyle: {
+          ...navs.navigation,
+        },
+      }}>
+      <Tab.Screen
+        name="DrawerHome"
+        component={DrawerHome}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View
+              style={[
+                navs.tabIconContainer,
+                focused ? navs.tabIconFocused : navs.tabIconUnfocused,
+              ]}>
+              {focused ? (
+                <Image
+                  source={require('../../assets/tabIcons/activeHome.png')}
+                />
+              ) : (
+                <Image
+                  source={require('../../assets/tabIcons/inactiveHome.png')}
+                />
+              )}
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="PetSearch"
+        component={PetSearch}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View
+              style={[
+                navs.tabIconContainer,
+                focused ? navs.tabIconFocused : navs.tabIconUnfocused,
+              ]}>
+              {focused ? (
+                <Image
+                  source={require('../../assets/tabIcons/activeSearch.png')}
+                />
+              ) : (
+                <Image
+                  source={require('../../assets/tabIcons/inactiveSearch.png')}
+                />
+              )}
+            </View>
+          ),
+        }}
+      />
 
-        <Tab.Screen
-          name="Favorites"
-          component={Favorites}
-          options={{
-            tabBarIcon: ({focused}) => (
-              <View
-                style={[
-                  navs.tabIconContainer,
-                  focused ? navs.tabIconFocused : navs.tabIconUnfocused,
-                ]}>
-                {focused ? (
-                  <Image
-                    source={require('../../assets/tabIcons/activeFavorite.png')}
-                  />
-                ) : (
-                  <Image
-                    source={require('../../assets/tabIcons/inactiveFavorite.png')}
-                  />
-                )}
-              </View>
-            ),
-          }}
-        />
+      <Tab.Screen
+        name="Favorites"
+        component={Favorites}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View
+              style={[
+                navs.tabIconContainer,
+                focused ? navs.tabIconFocused : navs.tabIconUnfocused,
+              ]}>
+              {focused ? (
+                <Image
+                  source={require('../../assets/tabIcons/activeFavorite.png')}
+                />
+              ) : (
+                <Image
+                  source={require('../../assets/tabIcons/inactiveFavorite.png')}
+                />
+              )}
+            </View>
+          ),
+        }}
+      />
 
-        <Tab.Screen
-          name="Profile"
-          component={Profile}
-          options={{
-            tabBarIcon: ({focused}) => (
-              <View
-                style={[
-                  navs.tabIconContainer,
-                  focused ? navs.tabIconFocused : navs.tabIconUnfocused,
-                ]}>
-                {focused ? (
-                  <Image
-                    source={require('../../assets/tabIcons/activeProfile.png')}
-                  />
-                ) : (
-                  <Image
-                    source={require('../../assets/tabIcons/inactiveProfile.png')}
-                  />
-                )}
-              </View>
-            ),
-          }}
-        />
-      </Tab.Navigator>
-    </>
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View
+              style={[
+                navs.tabIconContainer,
+                focused ? navs.tabIconFocused : navs.tabIconUnfocused,
+              ]}>
+              {focused ? (
+                <Image
+                  source={require('../../assets/tabIcons/activeProfile.png')}
+                />
+              ) : (
+                <Image
+                  source={require('../../assets/tabIcons/inactiveProfile.png')}
+                />
+              )}
+            </View>
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 
@@ -129,6 +129,7 @@ const navs = StyleSheet.create({
     backgroundColor: 'white',
     height: 70,
     width: 'auto',
+    zIndex: 1,
   },
 
   tabIconContainer: {
