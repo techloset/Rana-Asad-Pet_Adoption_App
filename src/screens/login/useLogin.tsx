@@ -46,8 +46,10 @@ export const useLogin = ({navigation}: LoginScreenProps) => {
       store.dispatch(listenForAuthStateChanges());
     } catch (error: any) {
       if (error.code === 'auth/invalid-email') {
+        // ToastAndroid.show('invalid email', SHORT);
         // showToast('Error in invalid email', 'error');
         // ToastAndroid.show()
+        console.log('invalid email');
       } else {
         // showToast('Error in Login', 'error');
       }

@@ -21,7 +21,7 @@ import favoritePetsSlice, {
 
 const SearchSinglePet = ({navigation, searchTerm}: any) => {
   const dispatch = useAppDispatch();
-  const [likedPets, setLikedPets] = useState<Record<string, boolean>>({});
+  // const [likedPets, setLikedPets] = useState<Record<string, boolean>>({});
   const userData = useAppSelector(state => state.user.userData);
   const donationData = useAppSelector(state => state.donationPets.data);
 
@@ -37,7 +37,9 @@ const SearchSinglePet = ({navigation, searchTerm}: any) => {
   }, [donationData, searchTerm]);
 
   const handleAddToCart = async (item: DonationPetData) => {
-    let cartProduct = {
+    if (!userData) return; // Ensure user data is available
+
+    const cartProduct = {
       petType: item.petType,
       vaccinated: item.vaccinated,
       gender: item.gender,
@@ -49,36 +51,32 @@ const SearchSinglePet = ({navigation, searchTerm}: any) => {
       image: item.image,
       uid: item.uid,
       like: false,
-      currentUserEmail: userData?.email,
-      currentUserName: userData?.userName,
-      currentUserUID: userData?.uid,
-      currentUserPhotoURL: userData?.photoURL,
+      currentUserEmail: userData.email,
+      currentUserName: userData.userName,
+      currentUserUID: userData.uid,
+      currentUserPhotoURL: userData.photoURL,
     };
-
-    useEffect(() => {
-      dispatch(fetchFavoriteData());
-    }, [dispatch]);
 
     const cartProductRef = firestore().collection('favoritePets');
     const querySnapshot = await cartProductRef
       .where('uid', '==', item.uid)
-      .where('currentUserUID', '==', userData?.uid)
+      .where('currentUserUID', '==', userData.uid)
       .limit(1)
       .get();
 
-    // If the data doesn't exist, add it to Firestore
     if (querySnapshot.empty) {
       await cartProductRef.add(cartProduct);
       console.log('Cart product added to Firestore successfully.');
+      dispatch(fetchFavoriteData());
     } else {
       console.log('Cart product already exists in Firestore.');
     }
-
-    setLikedPets(prevState => ({
-      ...prevState,
-      [item.uid]: !prevState[item.uid],
-    }));
   };
+
+  // setLikedPets(prevState => ({
+  //   ...prevState,
+  //   [item.uid]: !prevState[item.uid],
+  // }));
 
   const handlePetPress = (pet: DonationPetData) => {
     navigation.navigate('Details', {pet});
@@ -109,9 +107,9 @@ const SearchSinglePet = ({navigation, searchTerm}: any) => {
                 <Image
                   style={styles.likeIcon}
                   source={
-                    likedPets[item.uid]
-                      ? require('../../assets/adoption/heartRed.png')
-                      : require('../../assets/adoption/heartWhite.png')
+                    // likedPets[item.uid]
+                    // ? require('../../assets/adoption/heartRed.png')
+                    require('../../assets/adoption/heartWhite.png')
                   }
                 />
               </TouchableOpacity>
