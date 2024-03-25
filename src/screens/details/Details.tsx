@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   ImageBackground,
   StyleSheet,
   Text,
@@ -11,7 +12,7 @@ import {Props} from '../../constants/types';
 import useDetails from './useDetails';
 
 const Details: React.FC<Props> = ({route, navigation}) => {
-  const {handleAddToFavorite, handleAdoptNow} = useDetails();
+  const {handleAddToFavorite, handleAdoptNow, isLoading} = useDetails();
   const {pet} = route.params;
 
   return (
@@ -308,7 +309,11 @@ const Details: React.FC<Props> = ({route, navigation}) => {
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={() => handleAdoptNow(pet, navigation)}>
-            <Text style={styles.buttonText}>Adopt Now</Text>
+            {isLoading ? (
+              <ActivityIndicator color="white" size={'large'} />
+            ) : (
+              <Text style={styles.buttonText}>Adopt Now</Text>
+            )}
           </TouchableOpacity>
         </View>
       </View>

@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     flex: 1,
-    backgroundColor: '#F2F3FA',
+    backgroundColor: '#e9ecef',
     color: '#101C1D',
     paddingHorizontal: 15,
     borderRadius: 20,
@@ -160,6 +160,7 @@ const styles = StyleSheet.create({
   categoryButtonText: {
     fontSize: 14,
     fontWeight: '600',
+    color: 'black',
   },
   selectedcategoryButtonText: {
     fontSize: 14,
@@ -169,7 +170,7 @@ const styles = StyleSheet.create({
   searchResultsContainer: {
     marginVertical: 10,
     paddingHorizontal: 15,
-    marginBottom: 135,
+    marginBottom: 144,
   },
 });
 

@@ -19,7 +19,7 @@ import HomePageForYouSinglePet from '../../components/homePageForYou/HomePageFor
 import {TouchableOpacity} from 'react-native';
 import {fetchCollectionData} from '../../store/slice/donationPetsSlice';
 import {FlatList} from 'react-native';
-import {DrawerActions} from '@react-navigation/native';
+import {DrawerActions, useFocusEffect} from '@react-navigation/native';
 
 const Home = ({navigation}: LoginScreenProps) => {
   const dispatch = useAppDispatch();
@@ -116,7 +116,7 @@ const Home = ({navigation}: LoginScreenProps) => {
                     placeholderTextColor={'#101C1D'}
                     onChangeText={val => setSearchTest(val)}
                     style={{
-                      backgroundColor: '#F2F3FA',
+                      backgroundColor: '#e9ecef',
                       color: '#101C1D',
                       paddingHorizontal: 15,
                       borderRadius: 20,
@@ -202,7 +202,7 @@ const Home = ({navigation}: LoginScreenProps) => {
               marginVertical: 10,
               height: 200,
             }}>
-            <HomePageForYouSinglePet />
+            <HomePageForYouSinglePet navigation={navigation} />
           </View>
         </View>
       </View>

@@ -1,4 +1,4 @@
-import {Alert} from 'react-native';
+import {Alert, ToastAndroid} from 'react-native';
 import {useEffect, useState} from 'react';
 import {LoginScreenProps, UserData} from '../../constants/types';
 import {store, useAppDispatch} from '../../store/Store';
@@ -11,6 +11,7 @@ const initialState = {email: '', password: ''};
 export const useLogin = ({navigation}: LoginScreenProps) => {
   const dispatch = useAppDispatch();
   const [state, setState] = useState(initialState);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (name: string, value: string) => {
     setState(s => ({...s, [name]: value}));
@@ -33,6 +34,8 @@ export const useLogin = ({navigation}: LoginScreenProps) => {
       return Alert.alert('please enter password correctly');
     }
 
+    setIsLoading(true);
+
     try {
       const userCredential = await auth().signInWithEmailAndPassword(
         email,
@@ -43,11 +46,13 @@ export const useLogin = ({navigation}: LoginScreenProps) => {
       store.dispatch(listenForAuthStateChanges());
     } catch (error: any) {
       if (error.code === 'auth/invalid-email') {
-        Alert.alert('That email address is invalid!');
-        console.log('That email address is invalid!');
+        // showToast('Error in invalid email', 'error');
+        // ToastAndroid.show()
       } else {
-        console.error('Error signing in:', error);
+        // showToast('Error in Login', 'error');
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -57,6 +62,7 @@ export const useLogin = ({navigation}: LoginScreenProps) => {
     handleLogin,
     handleNavigationToForgot,
     handleNavigationToLogin,
+    isLoading,
   };
 };
 

@@ -21,6 +21,8 @@ interface User {
 
 export const useSignUp = ({navigation}: LoginScreenProps) => {
   const [isChecked, setIsChecked] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [state, setState] = useState<State>({
     userName: '',
     email: '',
@@ -44,13 +46,14 @@ export const useSignUp = ({navigation}: LoginScreenProps) => {
       return Alert.alert('Please Enter Your Password');
     }
 
+    setIsLoading(true);
+
     try {
       const userCredential = await auth().createUserWithEmailAndPassword(
         email,
         password,
       );
       const user = userCredential.user;
-      console.log('user', user);
       await createUserProfile(user);
       navigation.navigate('Login');
       console.log('User account signed up!');
@@ -60,6 +63,8 @@ export const useSignUp = ({navigation}: LoginScreenProps) => {
       }
       Alert.alert('Error signing up. Please try again.');
       console.error('Error signing up:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -80,5 +85,12 @@ export const useSignUp = ({navigation}: LoginScreenProps) => {
     }
   };
 
-  return {state, handleChange, handleSignUp, isChecked, setIsChecked};
+  return {
+    state,
+    handleChange,
+    handleSignUp,
+    isChecked,
+    setIsChecked,
+    isLoading,
+  };
 };

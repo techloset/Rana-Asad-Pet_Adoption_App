@@ -120,6 +120,7 @@ const DonationRequest = () => {
             textAlign: 'center',
             fontWeight: '900',
             fontSize: 15,
+            color: 'grey',
           }}>
           Your donation request list is empty 😐
         </Text>

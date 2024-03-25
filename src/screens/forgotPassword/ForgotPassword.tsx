@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Image,
   StyleSheet,
   Text,
@@ -11,7 +12,7 @@ import {LoginScreenProps} from '../../constants/types';
 import useForgotPassword from './useForgotPassword';
 
 const ForgotPassword = ({navigation}: LoginScreenProps) => {
-  const {setForgotEmail, handleRecoverPassword, handleGoBack} =
+  const {setForgotEmail, handleRecoverPassword, handleGoBack, isLoading} =
     useForgotPassword({navigation});
 
   return (
@@ -60,7 +61,11 @@ const ForgotPassword = ({navigation}: LoginScreenProps) => {
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={handleRecoverPassword}>
-            <Text style={styles.buttonText}>Recover</Text>
+            {isLoading ? (
+              <ActivityIndicator color="white" size={'large'} />
+            ) : (
+              <Text style={styles.buttonText}>Recover</Text>
+            )}
           </TouchableOpacity>
         </View>
       </View>

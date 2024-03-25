@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Alert,
   Image,
   ScrollView,
@@ -14,8 +15,14 @@ import {SignUpScreenProps} from '../../constants/types';
 import {useSignUp} from './useSignUp';
 
 const SignUp: React.FC<SignUpScreenProps> = ({navigation}) => {
-  const {state, handleChange, handleSignUp, isChecked, setIsChecked} =
-    useSignUp({navigation});
+  const {
+    state,
+    handleChange,
+    handleSignUp,
+    isChecked,
+    setIsChecked,
+    isLoading,
+  } = useSignUp({navigation});
 
   return (
     <ScrollView style={styles.container}>
@@ -93,7 +100,11 @@ const SignUp: React.FC<SignUpScreenProps> = ({navigation}) => {
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={handleSignUp}>
-            <Text style={styles.buttonText}>Sign Up</Text>
+            {isLoading ? (
+              <ActivityIndicator color="white" size={'large'} />
+            ) : (
+              <Text style={styles.buttonText}>Sign Up</Text>
+            )}
           </TouchableOpacity>
         </View>
         <View

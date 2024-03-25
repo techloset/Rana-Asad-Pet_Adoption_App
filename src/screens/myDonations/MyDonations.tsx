@@ -80,6 +80,7 @@ const MyDonations = ({navigation}: LoginScreenProps) => {
             textAlign: 'center',
             fontWeight: '900',
             fontSize: 15,
+            color: 'grey',
           }}>
           My Donation list is empty 😐
         </Text>

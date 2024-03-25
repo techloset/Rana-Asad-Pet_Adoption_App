@@ -1,21 +1,33 @@
 import {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../store/Store';
-import {deleteItem} from '../../store/slice/addToFavoriteSlice';
 import {LoginScreenProps} from '../../constants/types';
+import {
+  fetchFavoriteData,
+  removeFavoritePet,
+} from '../../store/slice/favoritePetsSlice';
 
 const useFavorites = ({navigation}: LoginScreenProps) => {
   const dispatch = useAppDispatch();
-  const cart = useAppSelector(state => state.addToFavorite.cart);
+  const userData = useAppSelector(state => state.user.userData);
+  const favoriteData = useAppSelector(state => state.favoritePets.favoriteData);
+
+  useEffect(() => {
+    dispatch(fetchFavoriteData());
+  }, [dispatch]);
 
   const handleGoToPetSearch = () => {
     navigation.navigate('PetSearch');
   };
 
   const handleDeleteItem = (itemUid: string) => {
-    dispatch(deleteItem(itemUid));
+    dispatch(removeFavoritePet(itemUid));
   };
 
-  return {cart, handleGoToPetSearch, handleDeleteItem};
+  const filteredData =
+    favoriteData &&
+    favoriteData.filter(item => item.currentUserEmail === userData?.email);
+
+  return {filteredData, handleGoToPetSearch, handleDeleteItem};
 };
 
 export default useFavorites;

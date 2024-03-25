@@ -1,13 +1,14 @@
 // useDetails.ts
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {addToFavorite} from '../../store/slice/addToFavoriteSlice';
+// import {addToFavorite} from '../../store/slice/favoritePetsSlice';
 import {firebase} from '@react-native-firebase/firestore';
 import {useAppSelector} from '../../store/Store';
 
 const useDetails = () => {
   const dispatch = useDispatch();
   const userData = useAppSelector(state => state.user.userData);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleAddToFavorite = (pet: any) => {
     let cartProduct = {
@@ -22,8 +23,12 @@ const useDetails = () => {
       image: pet.image,
       uid: pet.uid,
       like: false,
+      currentUserEmail: userData?.email,
+      currentUserName: userData?.userName,
+      currentUserUID: userData?.uid,
+      currentUserPhotoURL: userData?.photoURL,
     };
-    dispatch(addToFavorite(cartProduct));
+    // dispatch(addToFavorite(cartProduct));
   };
 
   const currentDate = new Date().toLocaleDateString('en-US', {
@@ -33,6 +38,7 @@ const useDetails = () => {
   });
 
   const handleAdoptNow = (pet: any, navigation: any) => {
+    setIsLoading(true);
     firebase
       .firestore()
       .collection('adoptedPets')
@@ -69,16 +75,19 @@ const useDetails = () => {
             })
             .then(() => {
               console.log('Adoption Request Sent Successfully');
-              navigation.navigate('PetSearch');
+              navigation.navigate('Home');
             });
         }
       })
       .catch(error => {
         console.error('Error checking pet data:', error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
-  return {handleAddToFavorite, handleAdoptNow};
+  return {handleAddToFavorite, handleAdoptNow, isLoading};
 };
 
 export default useDetails;

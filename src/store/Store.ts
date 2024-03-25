@@ -4,13 +4,14 @@ import donationPetsReducer from './slice/donationPetsSlice';
 import requestPetsReducer from './slice/requestSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import type {TypedUseSelectorHook} from 'react-redux';
-import addToFavoriteSlice from './slice/addToFavoriteSlice';
+import addToFavoriteSlice from './slice/favoritePetsSlice';
+import favoritePetsSlice from './slice/favoritePetsSlice';
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     donationPets: donationPetsReducer,
-    addToFavorite: addToFavoriteSlice,
+    favoritePets: favoritePetsSlice,
     requestPets: requestPetsReducer,
   },
 });

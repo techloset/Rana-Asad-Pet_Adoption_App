@@ -25,6 +25,7 @@ const genderList = [
 const useDonateScreen = ({navigation}: LoginScreenProps) => {
   const dispatch = useAppDispatch();
   const userData = useAppSelector(state => state.user.userData);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (name: keyof DonationScreen, value: string) => {
     setState(prevState => ({...prevState, [name]: value}));
@@ -49,6 +50,7 @@ const useDonateScreen = ({navigation}: LoginScreenProps) => {
   });
 
   const handleDonation = async () => {
+    setIsLoading(true);
     try {
       const uploadUri = selectedImage!;
       const imageName = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
@@ -91,6 +93,8 @@ const useDonateScreen = ({navigation}: LoginScreenProps) => {
       console.log('Donation added successfully');
     } catch (error) {
       console.log('Error adding donation:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -123,6 +127,7 @@ const useDonateScreen = ({navigation}: LoginScreenProps) => {
     vaccinatedData,
     genderList,
     state,
+    isLoading,
   };
 };
 

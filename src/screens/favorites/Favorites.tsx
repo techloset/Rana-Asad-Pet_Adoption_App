@@ -6,14 +6,20 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {LoginScreenProps} from '../../constants/types';
 import useFavorites from './useFavorites';
+import {useAppDispatch} from '../../store/Store';
+import {fetchFavoriteData} from '../../store/slice/favoritePetsSlice';
 
 const Favorites = ({navigation}: LoginScreenProps) => {
-  const {cart, handleGoToPetSearch, handleDeleteItem} = useFavorites({
+  const dispatch = useAppDispatch();
+  const {filteredData, handleGoToPetSearch, handleDeleteItem} = useFavorites({
     navigation,
   });
+  useEffect(() => {
+    dispatch(fetchFavoriteData());
+  }, [dispatch]);
   return (
     <ScrollView style={styles.container}>
       <View
@@ -37,9 +43,9 @@ const Favorites = ({navigation}: LoginScreenProps) => {
         </TouchableOpacity>
       </View>
 
-      {cart.length > 0 ? (
+      {filteredData?.length > 0 ? (
         <>
-          {cart.map((item, i) => {
+          {filteredData.map((item, i) => {
             return (
               <View style={styles.smallContainer} key={item.uid}>
                 <Image style={styles.one} source={{uri: item.image}}></Image>
@@ -105,7 +111,13 @@ const Favorites = ({navigation}: LoginScreenProps) => {
         </>
       ) : (
         <View style={{marginTop: 20}}>
-          <Text style={{fontWeight: '900', fontSize: 15, textAlign: 'center'}}>
+          <Text
+            style={{
+              fontWeight: '900',
+              color: 'grey',
+              fontSize: 15,
+              textAlign: 'center',
+            }}>
             Your Favorite List Is Empty 😐
           </Text>
         </View>

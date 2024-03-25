@@ -5,8 +5,10 @@ import {LoginScreenProps} from '../../constants/types';
 
 const useForgotPassword = ({navigation}: LoginScreenProps) => {
   const [forgotEmail, setForgotEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleRecoverPassword = async () => {
+    setIsLoading(true);
     try {
       if (forgotEmail.trim() === '') {
         Alert.alert('Error', 'Please enter your email');
@@ -18,6 +20,8 @@ const useForgotPassword = ({navigation}: LoginScreenProps) => {
     } catch (error) {
       console.error('Password recovery failed:', error);
       Alert.alert('Error', 'Failed to recover password. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -25,7 +29,7 @@ const useForgotPassword = ({navigation}: LoginScreenProps) => {
     navigation.goBack();
   };
 
-  return {setForgotEmail, handleRecoverPassword, handleGoBack};
+  return {setForgotEmail, handleRecoverPassword, handleGoBack, isLoading};
 };
 
 export default useForgotPassword;

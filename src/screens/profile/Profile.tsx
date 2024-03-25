@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import {LoginScreenProps} from '../../constants/types';
 import useProfile from './useProfile';
@@ -20,6 +21,7 @@ const Profile = ({navigation}: LoginScreenProps) => {
     updateProfile,
     userData,
     handleGoToUpdataPassword,
+    isLoading,
   } = useProfile({navigation});
 
   return (
@@ -81,7 +83,11 @@ const Profile = ({navigation}: LoginScreenProps) => {
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={updateProfile}>
-            <Text style={styles.buttonText}>Update Profile</Text>
+            {isLoading ? (
+              <ActivityIndicator color="white" size={'large'} />
+            ) : (
+              <Text style={styles.buttonText}>Update Profile</Text>
+            )}
           </TouchableOpacity>
         </View>
       </View>

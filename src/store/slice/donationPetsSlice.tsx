@@ -9,7 +9,7 @@ const initialState: DonationPetState = {
 };
 
 export const fetchCollectionData = createAsyncThunk(
-  'data/fetchCollectionData',
+  'data/fetchFavoriteData',
   async () => {
     try {
       const snapshot = await firestore().collection('donationPets').get();

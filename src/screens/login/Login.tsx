@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Alert,
   Image,
   ScrollView,
@@ -19,6 +20,7 @@ const Login = ({navigation}: LoginScreenProps) => {
     handleLogin,
     handleNavigationToForgot,
     handleNavigationToLogin,
+    isLoading,
   } = useLogin({navigation});
 
   const [isChecked, setIsChecked] = useState(false);
@@ -94,7 +96,11 @@ const Login = ({navigation}: LoginScreenProps) => {
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={handleLogin}>
-            <Text style={styles.buttonText}>Login</Text>
+            {isLoading ? (
+              <ActivityIndicator color="white" size={'large'} />
+            ) : (
+              <Text style={styles.buttonText}>Login</Text>
+            )}
           </TouchableOpacity>
         </View>
         <View

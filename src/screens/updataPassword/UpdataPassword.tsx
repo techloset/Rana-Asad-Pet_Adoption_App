@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+  ActivityIndicator,
   ScrollView,
   StyleSheet,
   Text,
@@ -19,6 +20,7 @@ const UpdatePassword = ({navigation}: LoginScreenProps) => {
     confirmPassword,
     setConfirmPassword,
     handleUpdatePassword,
+    isLoading,
   } = useUpdatePassword({navigation});
 
   return (
@@ -54,7 +56,11 @@ const UpdatePassword = ({navigation}: LoginScreenProps) => {
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={handleUpdatePassword}>
-          <Text style={styles.buttonText}>Update Password</Text>
+          {isLoading ? (
+            <ActivityIndicator color="white" size={'large'} />
+          ) : (
+            <Text style={styles.buttonText}>Update Password</Text>
+          )}
         </TouchableOpacity>
       </View>
     </ScrollView>

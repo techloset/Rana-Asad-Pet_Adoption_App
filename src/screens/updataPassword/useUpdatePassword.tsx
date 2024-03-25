@@ -10,6 +10,7 @@ const useUpdatePassword = ({navigation}: LoginScreenProps) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleUpdatePassword = async () => {
     if (!currentPassword || !newPassword || !confirmPassword) {
@@ -21,6 +22,8 @@ const useUpdatePassword = ({navigation}: LoginScreenProps) => {
       Alert.alert('Error', 'New password and confirm password do not match.');
       return;
     }
+
+    setIsLoading(true);
 
     try {
       const user = auth().currentUser;
@@ -39,6 +42,8 @@ const useUpdatePassword = ({navigation}: LoginScreenProps) => {
       }
     } catch (error: any) {
       Alert.alert('Error', error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -50,6 +55,7 @@ const useUpdatePassword = ({navigation}: LoginScreenProps) => {
     confirmPassword,
     setConfirmPassword,
     handleUpdatePassword,
+    isLoading,
   };
 };
 

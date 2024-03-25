@@ -14,11 +14,15 @@ import {
   DonationPetData,
   DonationScreen,
 } from '../../constants/types';
-import {addToFavorite} from '../../store/slice/addToFavoriteSlice';
+import firestore from '@react-native-firebase/firestore';
+import favoritePetsSlice, {
+  fetchFavoriteData,
+} from '../../store/slice/favoritePetsSlice';
 
 const SearchSinglePet = ({navigation, searchTerm}: any) => {
   const dispatch = useAppDispatch();
   const [likedPets, setLikedPets] = useState<Record<string, boolean>>({});
+  const userData = useAppSelector(state => state.user.userData);
   const donationData = useAppSelector(state => state.donationPets.data);
 
   useEffect(() => {
@@ -32,7 +36,7 @@ const SearchSinglePet = ({navigation, searchTerm}: any) => {
     );
   }, [donationData, searchTerm]);
 
-  const handleAddToCart = (item: AddToFavoriteTypes) => {
+  const handleAddToCart = async (item: DonationPetData) => {
     let cartProduct = {
       petType: item.petType,
       vaccinated: item.vaccinated,
@@ -45,8 +49,31 @@ const SearchSinglePet = ({navigation, searchTerm}: any) => {
       image: item.image,
       uid: item.uid,
       like: false,
+      currentUserEmail: userData?.email,
+      currentUserName: userData?.userName,
+      currentUserUID: userData?.uid,
+      currentUserPhotoURL: userData?.photoURL,
     };
-    dispatch(addToFavorite(cartProduct));
+
+    useEffect(() => {
+      dispatch(fetchFavoriteData());
+    }, [dispatch]);
+
+    const cartProductRef = firestore().collection('favoritePets');
+    const querySnapshot = await cartProductRef
+      .where('uid', '==', item.uid)
+      .where('currentUserUID', '==', userData?.uid)
+      .limit(1)
+      .get();
+
+    // If the data doesn't exist, add it to Firestore
+    if (querySnapshot.empty) {
+      await cartProductRef.add(cartProduct);
+      console.log('Cart product added to Firestore successfully.');
+    } else {
+      console.log('Cart product already exists in Firestore.');
+    }
+
     setLikedPets(prevState => ({
       ...prevState,
       [item.uid]: !prevState[item.uid],
@@ -92,6 +119,7 @@ const SearchSinglePet = ({navigation, searchTerm}: any) => {
           </View>
         </TouchableOpacity>
       )}
+      showsVerticalScrollIndicator={false}
     />
   );
 };

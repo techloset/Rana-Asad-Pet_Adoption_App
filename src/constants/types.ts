@@ -53,19 +53,26 @@ export interface DonationScreen {
 
 export interface AddToFavoriteTypes {
   petType: string;
-  vaccinated: string;
-  gender: string;
-  petBreed: string;
-  amount: string;
   uid: string;
-  weight: string;
+  petBreed: string;
+  vaccinated: boolean;
+  gender: string;
+  weight: number;
   location: string;
   description: string;
   image: string;
+  createAt: Date;
+  currentUserUID: string | undefined;
+  currentUserPhotoURL?: string | undefined;
+  currentUserEmail: string | undefined;
+  currentUserName: string | undefined;
+  amount: number;
 }
 
 export interface AddToFavorite {
-  cart: AddToFavoriteTypes[];
+  favoriteData: AddToFavoriteTypes[];
+  loading: boolean;
+  error: string | null;
 }
 
 export interface UserData {

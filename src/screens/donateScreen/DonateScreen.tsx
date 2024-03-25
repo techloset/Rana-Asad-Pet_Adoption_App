@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Image,
   ScrollView,
   StyleSheet,
@@ -23,6 +24,7 @@ const DonateScreen = ({navigation}: LoginScreenProps) => {
     vaccinatedData,
     genderList,
     state,
+    isLoading,
   } = useDonateScreen({navigation});
 
   return (
@@ -163,7 +165,11 @@ const DonateScreen = ({navigation}: LoginScreenProps) => {
             <TouchableOpacity
               style={styles.buttonContainer}
               onPress={handleDonation}>
-              <Text style={styles.buttonText}>Donate</Text>
+              {isLoading ? (
+                <ActivityIndicator color="white" size={'large'} />
+              ) : (
+                <Text style={styles.buttonText}>Donate</Text>
+              )}
             </TouchableOpacity>
           </View>
         </View>
