@@ -20,7 +20,13 @@ const MyDonations = ({navigation}: LoginScreenProps) => {
           alignItems: 'center',
           paddingHorizontal: 30,
         }}>
-        <Text style={{fontSize: 24, fontWeight: '700', color: '#101C1D'}}>
+        <Text
+          style={{
+            fontSize: 24,
+            fontFamily: 'Montserrat-Regular',
+            fontWeight: '700',
+            color: '#101C1D',
+          }}>
           My Donations
         </Text>
         <TouchableOpacity
@@ -81,6 +87,7 @@ const MyDonations = ({navigation}: LoginScreenProps) => {
             fontWeight: '900',
             fontSize: 15,
             color: 'grey',
+            fontFamily: 'Montserrat-Regular',
           }}>
           My Donation list is empty 😐
         </Text>
@@ -120,29 +127,34 @@ const styles = StyleSheet.create({
     paddingLeft: 45,
     paddingTop: 10,
     borderRadius: 20,
+    fontFamily: 'Montserrat-Regular',
     backgroundColor: '#FFFFFF',
   },
   petType: {
     fontSize: 18,
     fontWeight: '700',
     color: '#101C1D',
+    fontFamily: 'Montserrat-Regular',
   },
   age: {
     marginTop: 5,
     fontSize: 10,
     fontWeight: '500',
     color: '#101C1D',
+    fontFamily: 'Montserrat-Regular',
   },
   location: {
     fontSize: 10,
     fontWeight: '500',
     color: '#101C1D',
+    fontFamily: 'Montserrat-Regular',
   },
   gender: {
     marginTop: 7,
     fontSize: 10,
     fontWeight: '500',
     color: '#101C1D',
+    fontFamily: 'Montserrat-Regular',
   },
   likeIcon: {
     width: 16,

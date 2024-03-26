@@ -6,7 +6,7 @@ import {
 } from '../../store/slice/donationPetsSlice';
 import {useAppDispatch, useAppSelector} from '../../store/Store';
 
-const useMyDonations = ({navigation}: any) => {
+const useMyDonations = () => {
   const dispatch = useAppDispatch();
   const donationData = useAppSelector(state => state.donationPets.data);
   const userData = useAppSelector(state => state.user.userData);

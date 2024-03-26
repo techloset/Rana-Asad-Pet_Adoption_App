@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
     color: '#101C1D',
     paddingHorizontal: 15,
     borderRadius: 20,
+    fontFamily: 'Montserrat-Regular',
     opacity: 0.5,
   },
   searchIconContainer: {
@@ -143,6 +144,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     gap: 40,
     left: 30,
+    marginRight: 30,
   },
   categoryButtonContainer: {
     width: 63,
@@ -160,12 +162,14 @@ const styles = StyleSheet.create({
   categoryButtonText: {
     fontSize: 14,
     fontWeight: '600',
+    fontFamily: 'Montserrat-Regular',
     color: 'black',
   },
   selectedcategoryButtonText: {
     fontSize: 14,
     fontWeight: '600',
     color: 'white',
+    fontFamily: 'Montserrat-Regular',
   },
   searchResultsContainer: {
     marginVertical: 10,

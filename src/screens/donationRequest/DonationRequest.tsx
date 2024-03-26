@@ -1,10 +1,51 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import {
+  Alert,
+  BackHandler,
+  Image,
+  Linking,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {useEffect} from 'react';
 import {FlatList} from 'react-native';
 import useDonationRequest from './useDonationRequest';
+import {
+  MailComposerOptions,
+  MailComposerStatus,
+} from 'react-native-mail-composer';
+import {useNavigation} from '@react-navigation/native';
 
 const DonationRequest = () => {
+  const navigation = useNavigation();
   const requestData = useDonationRequest();
+
+  useEffect(() => {
+    const handleBackPress = () => {
+      navigation.goBack();
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      handleBackPress,
+    );
+
+    return () => backHandler.remove();
+  }, [navigation]);
+
+  const handleSendEmailMessage = (email: string) => {
+    const mailtoLink = `mailto:${email}`;
+    Linking.openURL(mailtoLink)
+      .then(() => console.log('Gmail opened successfully'))
+      .catch(error => {
+        console.error('Failed to open Gmail:', error);
+        Alert.alert(
+          'Failed to open Gmail. Please make sure you have Gmail installed.',
+        );
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -63,6 +104,7 @@ const DonationRequest = () => {
                             color: '#101C1D',
                             fontSize: 18,
                             fontWeight: '700',
+                            fontFamily: 'Montserrat',
                           }}>
                           {item.petType.slice(0, 12)}
                         </Text>
@@ -72,6 +114,7 @@ const DonationRequest = () => {
                           color: '#101C1D',
                           fontSize: 10,
                           fontWeight: '500',
+                          fontFamily: 'Montserrat',
                         }}>
                         {item.userEmail}
                       </Text>
@@ -89,6 +132,7 @@ const DonationRequest = () => {
                             color: '#101C1D',
                             fontSize: 10,
                             fontWeight: '500',
+                            fontFamily: 'Montserrat',
                           }}>
                           {item.location}
                         </Text>
@@ -98,6 +142,7 @@ const DonationRequest = () => {
                           color: '#101C1D',
                           fontSize: 10,
                           fontWeight: '500',
+                          fontFamily: 'Montserrat',
                         }}>
                         {item.adoptedDate}
                       </Text>
@@ -105,7 +150,9 @@ const DonationRequest = () => {
                   </View>
                 </View>
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                  <TouchableOpacity style={styles.buttonContainer}>
+                  <TouchableOpacity
+                    style={styles.buttonContainer}
+                    onPress={() => handleSendEmailMessage(item.userEmail)}>
                     <Text style={styles.buttonText}>Contact</Text>
                   </TouchableOpacity>
                 </View>
@@ -179,6 +226,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 16,
+    fontFamily: 'Montserrat-SemiBold',
     fontWeight: '700',
   },
 });

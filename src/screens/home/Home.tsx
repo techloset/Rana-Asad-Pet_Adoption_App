@@ -94,7 +94,12 @@ const Home = ({navigation}: LoginScreenProps) => {
                 height: 139,
                 marginHorizontal: 30,
               }}>
-              <Text style={{fontWeight: '800', fontSize: 36, color: '#101C1D'}}>
+              <Text
+                style={{
+                  fontWeight: '800',
+                  fontSize: 36,
+                  color: '#101C1D',
+                }}>
                 Find an Awesome Pets for You
               </Text>
             </View>
@@ -118,6 +123,7 @@ const Home = ({navigation}: LoginScreenProps) => {
                     style={{
                       backgroundColor: '#e9ecef',
                       color: '#101C1D',
+                      fontFamily: 'Montserrat-Regular',
                       paddingHorizontal: 15,
                       borderRadius: 20,
                       opacity: 0.5,
@@ -178,10 +184,12 @@ const Home = ({navigation}: LoginScreenProps) => {
                     />
                     <Text
                       style={{
+                        lineHeight: 17,
                         color: '#101C1D',
-                        marginTop: 7,
+                        marginTop: 11,
                         fontSize: 14,
                         fontWeight: '600',
+                        fontFamily: 'Montserrat-SemiBold',
                       }}>
                       {item.petType.slice(0, 8)}
                     </Text>
@@ -191,7 +199,13 @@ const Home = ({navigation}: LoginScreenProps) => {
             />
           </View>
           <View style={{paddingHorizontal: 30}}>
-            <Text style={{color: '#101C1D', fontWeight: '700', fontSize: 18}}>
+            <Text
+              style={{
+                color: '#101C1D',
+                fontFamily: 'Montserrat-Regular',
+                fontWeight: '700',
+                fontSize: 18,
+              }}>
               For you
             </Text>
           </View>

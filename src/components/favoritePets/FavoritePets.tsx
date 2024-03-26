@@ -23,7 +23,7 @@ const FavoritePets = () => {
 
   const memoizedData = useMemo(() => {
     // Filter donationData to include only items where item.like is true
-    return donationData.filter((item: DonationPetData) => item.like);
+    // return donationData.filter((item: DonationPetData) => item.like);
   }, [donationData]);
 
   const renderPetItem = ({item}: {item: DonationPetData}) => (
@@ -35,6 +35,7 @@ const FavoritePets = () => {
             fontSize: 18,
             fontWeight: '700',
             color: '#101C1D',
+            fontFamily: 'Montserrat-Regular',
           }}>
           {item.petType.slice(0, 8)}
         </Text>
@@ -44,6 +45,7 @@ const FavoritePets = () => {
             fontSize: 10,
             fontWeight: '500',
             color: '#101C1D',
+            fontFamily: 'Montserrat-Regular',
           }}>
           Age 4 Months
         </Text>
@@ -53,6 +55,7 @@ const FavoritePets = () => {
               fontSize: 10,
               fontWeight: '500',
               color: '#101C1D',
+              fontFamily: 'Montserrat-Regular',
             }}>
             {item.location}
           </Text>
@@ -71,38 +74,40 @@ const FavoritePets = () => {
             fontSize: 10,
             fontWeight: '500',
             color: '#101C1D',
+            fontFamily: 'Montserrat-Regular',
           }}>
           {item.gender}
         </Text>
-        {item.like ? (
-          <Image
-            style={{
-              width: 16,
-              height: 15,
-              marginLeft: 60,
-            }}
-            source={require('../../assets/adoption/heartRed.png')}
-          />
-        ) : (
-          <Image
+        {/* {item.like ? ( */}
+        <Image
+          style={{
+            width: 16,
+            height: 15,
+            marginLeft: 60,
+          }}
+          source={require('../../assets/adoption/heartRed.png')}
+        />
+        {/* ) : ( */}
+        {/* <Image
             style={{
               width: 16,
               height: 15,
               marginLeft: 60,
             }}
             source={require('../../assets/adoption/heartWhite.png')}
-          />
-        )}
+          /> */}
+        {/* )} */}
       </View>
     </View>
   );
 
   return (
-    <FlatList
-      data={memoizedData}
-      keyExtractor={(item, index) => index.toString()}
-      renderItem={renderPetItem}
-    />
+    // <FlatList
+    //   data={memoizedData}
+    //   keyExtractor={(item, index) => index.toString()}
+    //   renderItem={renderPetItem}
+    // />
+    <></>
   );
 };
 
@@ -132,6 +137,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
     paddingLeft: 45,
     paddingTop: 10,
+    fontFamily: 'Montserrat-Regular',
     borderRadius: 20,
     backgroundColor: '#FFFFFF',
   },

@@ -199,6 +199,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     color: '#101C1D',
+    fontFamily: 'Montserrat-SemiBold',
   },
   labelDescription: {
     marginTop: 15,
@@ -206,12 +207,14 @@ const styles = StyleSheet.create({
     // height: 154,
     fontWeight: '600',
     color: '#101C1D',
+    fontFamily: 'Montserrat-SemiBold',
   },
   putHeading: {
     marginTop: 7,
     fontSize: 14,
     fontWeight: '600',
     color: '#101C1D',
+    fontFamily: 'Montserrat-SemiBold',
   },
   forgetPassword: {
     marginTop: 10,
@@ -219,6 +222,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     fontWeight: '600',
     color: '#101C1D',
+    fontFamily: 'Montserrat-SemiBold',
   },
   input: {
     borderBottomWidth: 2,
@@ -226,6 +230,7 @@ const styles = StyleSheet.create({
     height: 40,
     color: '#101C1D',
     borderColor: '#101C1D',
+    fontFamily: 'Montserrat-SemiBold',
     fontSize: 16,
   },
 
@@ -238,11 +243,13 @@ const styles = StyleSheet.create({
     marginTop: 30,
     alignItems: 'center',
     justifyContent: 'center',
+    fontFamily: 'Montserrat-SemiBold',
   },
   buttonText: {
     color: 'white',
     fontSize: 20,
     fontWeight: '700',
+    fontFamily: 'Montserrat-SemiBold',
   },
 
   textArea: {
@@ -253,6 +260,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 154,
     fontWeight: '600',
+    fontFamily: 'Montserrat-SemiBold',
     color: '#101C1D',
   },
 
@@ -265,6 +273,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 8,
     paddingHorizontal: 8,
+    fontFamily: 'Montserrat-SemiBold',
   },
   icon: {
     marginRight: 5,
@@ -278,6 +287,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E2E2E2',
     borderRadius: 20,
     borderColor: '#000000',
+    fontFamily: 'Montserrat-SemiBold',
     borderWidth: 1,
     borderStyle: 'dashed',
     justifyContent: 'center',
@@ -292,6 +302,7 @@ const styles = StyleSheet.create({
   uploadPlaceholder: {
     justifyContent: 'center',
     alignItems: 'center',
+    fontFamily: 'Montserrat-SemiBold',
   },
   uploadIcon: {
     width: 48,
@@ -302,5 +313,6 @@ const styles = StyleSheet.create({
   uploadText: {
     fontSize: 14,
     fontWeight: '600',
+    fontFamily: 'Montserrat-SemiBold',
   },
 });

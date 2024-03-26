@@ -6,16 +6,15 @@ import {useAppDispatch} from '../../store/Store';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {clearUserData} from '../../store/slice/userSlice';
 import auth from '@react-native-firebase/auth';
+import {LoginScreenProps} from '../../constants/types';
 
-type SideBarProps = {
-  navigation: any;
-};
+type ScreenName = 'Home' | 'DonateScreen' | 'MyDonations' | 'DonationRequest';
 
-const SideBar = ({navigation}: SideBarProps) => {
+const SideBar = ({navigation}: LoginScreenProps) => {
   const dispatch = useAppDispatch();
-  const [selectedItem, setSelectedItem] = useState<string>('');
+  const [selectedItem, setSelectedItem] = useState<ScreenName>('Home');
 
-  const handleNavigation = (screenName: string) => {
+  const handleNavigation = (screenName: ScreenName) => {
     navigation.navigate(screenName);
     setSelectedItem(screenName);
   };

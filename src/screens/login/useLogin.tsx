@@ -41,7 +41,7 @@ export const useLogin = ({navigation}: LoginScreenProps) => {
         email,
         password,
       );
-      const user = userCredential.user;
+      // const user = userCredential.user;
 
       store.dispatch(listenForAuthStateChanges());
     } catch (error: any) {

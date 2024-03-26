@@ -18,10 +18,15 @@ import firestore from '@react-native-firebase/firestore';
 import favoritePetsSlice, {
   fetchFavoriteData,
 } from '../../store/slice/favoritePetsSlice';
+import {StackNavigationProp} from '@react-navigation/stack';
 
-const SearchSinglePet = ({navigation, searchTerm}: any) => {
+interface Props {
+  navigation: StackNavigationProp<any>;
+  searchTerm: string;
+}
+
+const SearchSinglePet: React.FC<Props> = ({navigation, searchTerm}) => {
   const dispatch = useAppDispatch();
-  // const [likedPets, setLikedPets] = useState<Record<string, boolean>>({});
   const userData = useAppSelector(state => state.user.userData);
   const donationData = useAppSelector(state => state.donationPets.data);
 
@@ -154,23 +159,27 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '700',
     color: '#101C1D',
+    fontFamily: 'Montserrat-Regular',
   },
   age: {
     marginTop: 5,
     fontSize: 10,
     fontWeight: '500',
     color: '#101C1D',
+    fontFamily: 'Montserrat-Regular',
   },
   location: {
     fontSize: 10,
     fontWeight: '500',
     color: '#101C1D',
+    fontFamily: 'Montserrat-Regular',
   },
   gender: {
     marginTop: 7,
     fontSize: 10,
     fontWeight: '500',
     color: '#101C1D',
+    fontFamily: 'Montserrat-Regular',
   },
   likeIcon: {
     width: 16,

@@ -102,6 +102,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                   fontSize: 24,
                   fontWeight: '700',
                   color: '#101C1D',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 {pet.petType}
               </Text>
@@ -110,6 +111,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                   fontSize: 14,
                   fontWeight: '700',
                   color: '#101C1D',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 {pet.petBreed}
               </Text>
@@ -121,6 +123,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                   marginTop: 10,
                   fontWeight: '700',
                   color: '#F6A530',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 ${pet.amount}
               </Text>
@@ -141,6 +144,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                   fontSize: 11,
                   fontWeight: '500',
                   color: '#F6A530',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 Age
               </Text>
@@ -150,6 +154,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                   marginTop: 3,
                   fontWeight: '600',
                   color: '#101C1D',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 4
               </Text>
@@ -168,6 +173,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                   fontSize: 11,
                   fontWeight: '500',
                   color: '#F6A530',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 Gender
               </Text>
@@ -176,6 +182,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                   fontSize: 16,
                   fontWeight: '600',
                   color: '#101C1D',
+                  fontFamily: 'Montserrat-Regular',
                   marginTop: 3,
                 }}>
                 {pet.gender}
@@ -195,6 +202,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                   fontSize: 11,
                   fontWeight: '500',
                   color: '#F6A530',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 Weight
               </Text>
@@ -204,6 +212,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                   fontWeight: '600',
                   color: '#101C1D',
                   marginTop: 3,
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 2.1
               </Text>
@@ -222,6 +231,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                   fontSize: 11,
                   fontWeight: '500',
                   color: '#F6A530',
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 Vaccine
               </Text>
@@ -231,6 +241,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                   fontWeight: '600',
                   color: '#101C1D',
                   marginTop: 3,
+                  fontFamily: 'Montserrat-Regular',
                 }}>
                 {pet.vaccinated}
               </Text>
@@ -265,6 +276,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                     fontSize: 15,
                     fontWeight: '600',
                     color: '#101C1D',
+                    fontFamily: 'Montserrat-Regular',
                   }}>
                   {pet.currentUserName}
                 </Text>
@@ -273,6 +285,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                     fontSize: 11,
                     fontWeight: '500',
                     opacity: 10,
+                    fontFamily: 'Montserrat-Regular',
                   }}>
                   Owner
                 </Text>
@@ -305,6 +318,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                 fontSize: 13,
                 fontWeight: '400',
                 lineHeight: 15,
+                fontFamily: 'Montserrat-Regular',
                 letterSpacing: 1,
               }}>
               {pet.description.slice(0, 125)}
@@ -343,6 +357,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     fontWeight: '700',
+    fontFamily: 'Montserrat-Regular',
   },
   backgroundImage: {
     width: '100%',

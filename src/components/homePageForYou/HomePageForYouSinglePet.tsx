@@ -51,14 +51,31 @@ const HomePageForYouSinglePet = ({navigation}: LoginScreenProps) => {
                   marginTop: 18,
                   marginLeft: 18,
                 }}>
-                <Text style={{fontWeight: '800', fontSize: 29, color: 'white'}}>
+                <Text
+                  style={{
+                    fontWeight: '800',
+                    fontFamily: 'Montserrat-Regular',
+                    fontSize: 29,
+                    color: 'white',
+                  }}>
                   {item.petType}
                 </Text>
-                <Text style={{fontWeight: '600', fontSize: 14, color: 'white'}}>
+                <Text
+                  style={{
+                    fontWeight: '600',
+                    fontFamily: 'Montserrat-Regular',
+                    fontSize: 14,
+                    color: 'white',
+                  }}>
                   Age 4 Months
                 </Text>
                 <Text
-                  style={{fontWeight: '800', fontSize: 25, color: '#101C1D'}}>
+                  style={{
+                    fontWeight: '800',
+                    fontFamily: 'Montserrat-Regular',
+                    fontSize: 25,
+                    color: '#101C1D',
+                  }}>
                   ${item.amount}
                 </Text>
               </View>

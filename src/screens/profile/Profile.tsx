@@ -34,6 +34,7 @@ const Profile = ({navigation}: LoginScreenProps) => {
               textAlign: 'center',
               fontSize: 24,
               color: '#101C1D',
+              fontFamily: 'Montserrat-SemiBold',
             }}>
             Profile Settings
           </Text>
@@ -111,18 +112,21 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 18,
     fontWeight: '600',
+    fontFamily: 'Montserrat-Bold',
     color: '#101C1D',
   },
   label2: {
     marginTop: 20,
     fontSize: 18,
     fontWeight: '600',
+    fontFamily: 'Montserrat-SemiBold',
     color: '#101C1D',
   },
   input: {
     borderBottomWidth: 2,
     width: 302,
     height: 40,
+    fontFamily: 'Montserrat-SemiBold',
     color: '#101C1D',
     borderColor: '#101C1D',
     fontSize: 16,
@@ -139,6 +143,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
+    fontFamily: 'Montserrat-SemiBold',
     fontSize: 20,
     fontWeight: '700',
   },

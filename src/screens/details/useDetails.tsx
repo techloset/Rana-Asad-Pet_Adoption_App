@@ -5,7 +5,7 @@ import {useDispatch} from 'react-redux';
 import {firebase} from '@react-native-firebase/firestore';
 import {useAppDispatch, useAppSelector} from '../../store/Store';
 import {fetchFavoriteData} from '../../store/slice/favoritePetsSlice';
-import {DonationPetData} from '../../constants/types';
+import {DonationPetData, LoginScreenProps} from '../../constants/types';
 import firestore from '@react-native-firebase/firestore';
 
 const useDetails = () => {
@@ -13,29 +13,8 @@ const useDetails = () => {
   const userData = useAppSelector(state => state.user.userData);
   const [isLoading, setIsLoading] = useState(false);
 
-  // const handleAddToFavorite = (pet: any) => {
-  //   let cartProduct = {
-  //     petType: pet.petType,
-  //     vaccinated: pet.vaccinated,
-  //     gender: pet.gender,
-  //     petBreed: pet.petBreed,
-  //     amount: pet.amount,
-  //     weight: pet.weight,
-  //     location: pet.location,
-  //     description: pet.description,
-  //     image: pet.image,
-  //     uid: pet.uid,
-  //     like: false,
-  //     currentUserEmail: userData?.email,
-  //     currentUserName: userData?.userName,
-  //     currentUserUID: userData?.uid,
-  //     currentUserPhotoURL: userData?.photoURL,
-  //   };
-  //   // dispatch(addToFavorite(cartProduct));
-  // };
-
   const handleAddToFavorite = async (item: DonationPetData) => {
-    if (!userData) return; // Ensure user data is available
+    if (!userData) return;
 
     const cartProduct = {
       petType: item.petType,
@@ -77,7 +56,10 @@ const useDetails = () => {
     year: 'numeric',
   });
 
-  const handleAdoptNow = (pet: any, navigation: any) => {
+  const handleAdoptNow = (
+    pet: DonationPetData,
+    navigation: LoginScreenProps['navigation'],
+  ) => {
     setIsLoading(true);
     firebase
       .firestore()

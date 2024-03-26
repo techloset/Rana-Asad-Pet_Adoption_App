@@ -29,7 +29,13 @@ const Favorites = ({navigation}: LoginScreenProps) => {
           alignItems: 'center',
           paddingHorizontal: 30,
         }}>
-        <Text style={{fontSize: 24, fontWeight: '700', color: '#101C1D'}}>
+        <Text
+          style={{
+            fontSize: 24,
+            fontFamily: 'Montserrat-Regular',
+            fontWeight: '700',
+            color: '#101C1D',
+          }}>
           Favorites
         </Text>
         <TouchableOpacity onPress={handleGoToPetSearch}>
@@ -55,6 +61,7 @@ const Favorites = ({navigation}: LoginScreenProps) => {
                       fontSize: 18,
                       fontWeight: '700',
                       color: '#101C1D',
+                      fontFamily: 'Montserrat-Regular',
                     }}>
                     {item.petType.slice(0, 8)}
                   </Text>
@@ -63,6 +70,7 @@ const Favorites = ({navigation}: LoginScreenProps) => {
                       marginTop: 5,
                       fontSize: 10,
                       fontWeight: '500',
+                      fontFamily: 'Montserrat-Regular',
                       color: '#101C1D',
                     }}>
                     Age 4 Months
@@ -73,6 +81,7 @@ const Favorites = ({navigation}: LoginScreenProps) => {
                         fontSize: 10,
                         fontWeight: '500',
                         color: '#101C1D',
+                        fontFamily: 'Montserrat-Regular',
                       }}>
                       FSD
                     </Text>
@@ -91,6 +100,7 @@ const Favorites = ({navigation}: LoginScreenProps) => {
                       fontSize: 10,
                       fontWeight: '500',
                       color: '#101C1D',
+                      fontFamily: 'Montserrat-Regular',
                     }}>
                     Male
                   </Text>
