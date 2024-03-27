@@ -21,7 +21,7 @@ const TabNavigation = () => {
         tabBarShowLabel: false,
         headerShown: false,
         tabBarStyle: {
-          ...navs.navigation,
+          ...navbars.navigation,
         },
       }}>
       <Tab.Screen
@@ -31,8 +31,8 @@ const TabNavigation = () => {
           tabBarIcon: ({focused}) => (
             <View
               style={[
-                navs.tabIconContainer,
-                focused ? navs.tabIconFocused : navs.tabIconUnfocused,
+                navbars.navbarContainer,
+                focused ? navbars.iconFocused : navbars.iconUnfocused,
               ]}>
               {focused ? (
                 <Image
@@ -54,8 +54,8 @@ const TabNavigation = () => {
           tabBarIcon: ({focused}) => (
             <View
               style={[
-                navs.tabIconContainer,
-                focused ? navs.tabIconFocused : navs.tabIconUnfocused,
+                navbars.navbarContainer,
+                focused ? navbars.iconFocused : navbars.iconUnfocused,
               ]}>
               {focused ? (
                 <Image
@@ -78,8 +78,8 @@ const TabNavigation = () => {
           tabBarIcon: ({focused}) => (
             <View
               style={[
-                navs.tabIconContainer,
-                focused ? navs.tabIconFocused : navs.tabIconUnfocused,
+                navbars.navbarContainer,
+                focused ? navbars.iconFocused : navbars.iconUnfocused,
               ]}>
               {focused ? (
                 <Image
@@ -102,8 +102,8 @@ const TabNavigation = () => {
           tabBarIcon: ({focused}) => (
             <View
               style={[
-                navs.tabIconContainer,
-                focused ? navs.tabIconFocused : navs.tabIconUnfocused,
+                navbars.navbarContainer,
+                focused ? navbars.iconFocused : navbars.iconUnfocused,
               ]}>
               {focused ? (
                 <Image
@@ -124,7 +124,7 @@ const TabNavigation = () => {
 
 export default TabNavigation;
 
-const navs = StyleSheet.create({
+const navbars = StyleSheet.create({
   navigation: {
     backgroundColor: 'white',
     height: 70,
@@ -132,17 +132,17 @@ const navs = StyleSheet.create({
     zIndex: 1,
   },
 
-  tabIconContainer: {
+  navbarContainer: {
     width: 68,
     height: 48,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
   },
-  tabIconFocused: {
+  iconFocused: {
     backgroundColor: 'black',
   },
-  tabIconUnfocused: {
+  iconUnfocused: {
     backgroundColor: 'transparent',
   },
 });

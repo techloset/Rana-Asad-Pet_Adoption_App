@@ -3,10 +3,11 @@ import {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 // import {addToFavorite} from '../../store/slice/favoritePetsSlice';
 import {firebase} from '@react-native-firebase/firestore';
-import {useAppDispatch, useAppSelector} from '../../store/Store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
 import {fetchFavoriteData} from '../../store/slice/favoritePetsSlice';
 import {DonationPetData, LoginScreenProps} from '../../constants/types';
 import firestore from '@react-native-firebase/firestore';
+import {showToast} from '../../components/toast/Toast';
 
 const useDetails = () => {
   const dispatch = useAppDispatch();
@@ -43,10 +44,14 @@ const useDetails = () => {
 
     if (querySnapshot.empty) {
       await cartProductRef.add(cartProduct);
-      console.log('Cart product added to Firestore successfully.');
+      showToast(
+        'success',
+        'Success',
+        'Your pet successfully added in favorite list',
+      );
       dispatch(fetchFavoriteData());
     } else {
-      console.log('Cart product already exists in Firestore.');
+      showToast('error', 'Error', 'Your pet already exists in favorite list');
     }
   };
 

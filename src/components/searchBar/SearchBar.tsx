@@ -1,5 +1,6 @@
 import {Image, StyleSheet, Text, TextInput, View} from 'react-native';
 import React, {useState} from 'react';
+import {Colors} from '../../constants/color';
 
 const SearchBar = () => {
   const [searchTest, setSearchTest] = useState('');
@@ -16,11 +17,11 @@ const SearchBar = () => {
         <View style={{width: 278, height: 48}}>
           <TextInput
             placeholder="Search for a pet"
-            placeholderTextColor={'#101C1D'}
+            placeholderTextColor={Colors.primary}
             onChangeText={val => setSearchTest(val)}
             style={{
               backgroundColor: '#F2F3FA',
-              color: '#101C1D',
+              color: Colors.primary,
               paddingHorizontal: 15,
               borderRadius: 20,
               opacity: 0.5,
@@ -31,7 +32,7 @@ const SearchBar = () => {
           style={{
             width: 82,
             height: 62,
-            backgroundColor: '#101C1D',
+            backgroundColor: Colors.primary,
             borderRadius: 25,
             marginRight: 40,
             marginLeft: 245,

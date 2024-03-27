@@ -13,6 +13,7 @@ import React, {useState} from 'react';
 import {CheckBox} from 'react-native-elements';
 import {SignUpScreenProps} from '../../constants/types';
 import {useSignUp} from './useSignUp';
+import {Colors} from '../../constants/color';
 
 const SignUp: React.FC<SignUpScreenProps> = ({navigation}) => {
   const {
@@ -28,7 +29,12 @@ const SignUp: React.FC<SignUpScreenProps> = ({navigation}) => {
     <ScrollView style={styles.container}>
       <View style={styles.smallContainer}>
         <View>
-          <Text style={{fontWeight: '800', fontSize: 36, color: '#101C1D'}}>
+          <Text
+            style={{
+              fontWeight: '800',
+              fontSize: 36,
+              color: Colors.primary,
+            }}>
             Sign Up
           </Text>
         </View>
@@ -141,27 +147,23 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 18,
     fontWeight: '600',
-    color: '#101C1D',
+    fontFamily: 'Montserrat-SemiBold',
+    color: Colors.primary,
   },
   label2: {
     marginTop: 20,
     fontSize: 18,
     fontWeight: '600',
-    color: '#101C1D',
-  },
-  forgetPassword: {
-    marginTop: 10,
-    fontSize: 18,
-    textAlign: 'right',
-    fontWeight: '600',
-    color: '#101C1D',
+    fontFamily: 'Montserrat-SemiBold',
+    color: Colors.primary,
   },
   input: {
     borderBottomWidth: 2,
     width: 302,
     height: 40,
-    color: '#101C1D',
-    borderColor: '#101C1D',
+    color: Colors.primary,
+    fontFamily: 'Montserrat-Regular',
+    borderColor: Colors.primary,
     fontSize: 16,
   },
 
@@ -173,12 +175,13 @@ const styles = StyleSheet.create({
 
   underlineText: {
     textDecorationLine: 'underline',
+    fontFamily: 'Montserrat-SemiBold',
     fontWeight: 'bold',
   },
   buttonContainer: {
     width: 185,
     height: 79,
-    backgroundColor: '#101C1D',
+    backgroundColor: Colors.primary,
     borderRadius: 37,
     color: 'white',
     marginTop: 20,
@@ -188,10 +191,12 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 20,
+    fontFamily: 'Montserrat-SemiBold',
     fontWeight: '700',
   },
   buttonTextSignUp: {
-    color: '#101C1D',
+    fontFamily: 'Montserrat-SemiBold',
+    color: Colors.primary,
     fontSize: 20,
     fontWeight: '700',
   },
@@ -201,10 +206,12 @@ const styles = StyleSheet.create({
     paddingRight: 60,
     marginLeft: -9,
     marginTop: 20,
+    fontFamily: 'Montserrat-SemiBold',
   },
   checkBoxLabel: {
     fontSize: 14,
+    fontFamily: 'Montserrat-SemiBold',
     fontWeight: '600',
-    color: '#101C1D',
+    color: Colors.primary,
   },
 });

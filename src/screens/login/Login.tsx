@@ -13,6 +13,7 @@ import React, {useState} from 'react';
 import {CheckBox} from 'react-native-elements';
 import {LoginScreenProps} from '../../constants/types';
 import useLogin from './useLogin';
+import {Colors} from '../../constants/color';
 
 const Login = ({navigation}: LoginScreenProps) => {
   const {
@@ -29,7 +30,12 @@ const Login = ({navigation}: LoginScreenProps) => {
     <ScrollView style={styles.container}>
       <View style={styles.smallContainer}>
         <View>
-          <Text style={{fontWeight: '800', fontSize: 36, color: '#101C1D'}}>
+          <Text
+            style={{
+              fontWeight: '800',
+              fontSize: 36,
+              color: Colors.primary,
+            }}>
             Login
           </Text>
         </View>
@@ -135,27 +141,31 @@ const styles = StyleSheet.create({
     marginTop: 40,
     fontSize: 18,
     fontWeight: '600',
-    color: '#101C1D',
+    color: Colors.primary,
+    fontFamily: 'Montserrat-SemiBold',
   },
   label2: {
     marginTop: 20,
     fontSize: 18,
     fontWeight: '600',
-    color: '#101C1D',
+    color: Colors.primary,
+    fontFamily: 'Montserrat-SemiBold',
   },
   forgetPassword: {
     marginTop: 10,
-    fontSize: 18,
+    fontSize: 14,
     textAlign: 'right',
+    fontFamily: 'Montserrat-SemiBold',
     fontWeight: '600',
-    color: '#101C1D',
+    color: Colors.primary,
   },
   input: {
     borderBottomWidth: 2,
     width: 302,
     height: 40,
-    color: '#101C1D',
-    borderColor: '#101C1D',
+    color: Colors.primary,
+    fontFamily: 'Montserrat-Regular',
+    borderColor: Colors.primary,
     fontSize: 16,
   },
 
@@ -168,11 +178,13 @@ const styles = StyleSheet.create({
   underlineText: {
     textDecorationLine: 'underline',
     fontWeight: 'bold',
+    fontFamily: 'Montserrat-SemiBold',
   },
   buttonContainer: {
     width: 185,
+    fontFamily: 'Montserrat-SemiBold',
     height: 79,
-    backgroundColor: '#101C1D',
+    backgroundColor: Colors.primary,
     borderRadius: 37,
     color: 'white',
     marginTop: 20,
@@ -183,9 +195,11 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     fontWeight: '700',
+    fontFamily: 'Montserrat-SemiBold',
   },
   buttonTextSignUp: {
-    color: '#101C1D',
+    color: Colors.primary,
+    fontFamily: 'Montserrat-SemiBold',
     fontSize: 20,
     fontWeight: '700',
   },
@@ -198,6 +212,7 @@ const styles = StyleSheet.create({
   checkBoxLabel: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#101C1D',
+    color: Colors.primary,
+    fontFamily: 'Montserrat-SemiBold',
   },
 });

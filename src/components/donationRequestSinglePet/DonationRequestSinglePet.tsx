@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import FavoriteSinglePet from '../searchSinglePet/SearchSinglePet';
+import {Colors} from '../../constants/color';
 
 const DonationRequestSinglePet = () => {
   return (
@@ -20,21 +21,37 @@ const DonationRequestSinglePet = () => {
               <View style={styles.one}></View>
               <View style={styles.two}>
                 <Text
-                  style={{color: '#101C1D', fontSize: 18, fontWeight: '700'}}>
+                  style={{
+                    color: Colors.primary,
+                    fontSize: 18,
+                    fontWeight: '700',
+                  }}>
                   Talha
                 </Text>
                 <View style={{flexDirection: 'row'}}>
                   <Text
-                    style={{color: '#101C1D', fontSize: 18, fontWeight: '700'}}>
+                    style={{
+                      color: Colors.primary,
+                      fontSize: 18,
+                      fontWeight: '700',
+                    }}>
                     Cavachon .
                   </Text>
                   <Text
-                    style={{color: '#101C1D', fontSize: 18, fontWeight: '700'}}>
+                    style={{
+                      color: Colors.primary,
+                      fontSize: 18,
+                      fontWeight: '700',
+                    }}>
                     Dog
                   </Text>
                 </View>
                 <Text
-                  style={{color: '#101C1D', fontSize: 10, fontWeight: '500'}}>
+                  style={{
+                    color: Colors.primary,
+                    fontSize: 10,
+                    fontWeight: '500',
+                  }}>
                   info@techloset.com
                 </Text>
                 <View style={{flexDirection: 'row', gap: 8, marginTop: 3}}>
@@ -46,12 +63,20 @@ const DonationRequestSinglePet = () => {
                     source={require('../../assets/donate/location.png')}
                   />
                   <Text
-                    style={{color: '#101C1D', fontSize: 10, fontWeight: '500'}}>
+                    style={{
+                      color: Colors.primary,
+                      fontSize: 10,
+                      fontWeight: '500',
+                    }}>
                     Lahore, PK.
                   </Text>
                 </View>
                 <Text
-                  style={{color: '#101C1D', fontSize: 10, fontWeight: '500'}}>
+                  style={{
+                    color: Colors.primary,
+                    fontSize: 10,
+                    fontWeight: '500',
+                  }}>
                   January 21, 2024
                 </Text>
               </View>
@@ -108,7 +133,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: 255,
     height: 36,
-    backgroundColor: '#101C1D',
+    backgroundColor: Colors.primary,
     borderRadius: 34,
     color: 'white',
     marginTop: 20,

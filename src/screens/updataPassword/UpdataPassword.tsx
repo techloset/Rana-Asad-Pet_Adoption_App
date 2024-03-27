@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {LoginScreenProps} from '../../constants/types';
 import useUpdatePassword from './useUpdatePassword';
+import {Colors} from '../../constants/color';
 
 const UpdatePassword = ({navigation}: LoginScreenProps) => {
   const {
@@ -30,7 +31,7 @@ const UpdatePassword = ({navigation}: LoginScreenProps) => {
         <TextInput
           style={styles.input}
           secureTextEntry
-          placeholderTextColor="#101C1D"
+          placeholderTextColor="Colors.primary"
           value={currentPassword}
           onChangeText={setCurrentPassword}
         />
@@ -39,7 +40,7 @@ const UpdatePassword = ({navigation}: LoginScreenProps) => {
         <TextInput
           style={styles.input}
           secureTextEntry
-          placeholderTextColor="#101C1D"
+          placeholderTextColor="Colors.primary"
           value={newPassword}
           onChangeText={setNewPassword}
         />
@@ -48,7 +49,7 @@ const UpdatePassword = ({navigation}: LoginScreenProps) => {
         <TextInput
           style={styles.input}
           secureTextEntry
-          placeholderTextColor="#101C1D"
+          placeholderTextColor="Colors.primary"
           value={confirmPassword}
           onChangeText={setConfirmPassword}
         />
@@ -83,23 +84,23 @@ const styles = StyleSheet.create({
     marginTop: 40,
     fontSize: 18,
     fontWeight: '600',
-    color: '#101C1D',
+    color: Colors.primary,
   },
   input: {
     borderBottomWidth: 2,
     width: 302,
     height: 40,
-    color: '#101C1D',
-    borderColor: '#101C1D',
+    color: Colors.primary,
+    borderColor: Colors.primary,
     fontSize: 16,
   },
   buttonContainer: {
     width: '100%',
     height: 74,
-    backgroundColor: '#101C1D',
+    backgroundColor: Colors.primary,
     borderRadius: 37,
     color: 'white',
-    marginTop: 140,
+    marginTop: 320,
     alignItems: 'center',
     justifyContent: 'center',
   },

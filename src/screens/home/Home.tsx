@@ -6,45 +6,28 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Image} from 'react-native';
-import SearchBar from '../../components/searchBar/SearchBar';
-import {useAppDispatch, useAppSelector} from '../../store/Store';
-import {
-  DonationPetData,
-  LoginScreenProps,
-  UserData,
-} from '../../constants/types';
+import {useAppDispatch} from '../../store/store';
+import {LoginScreenProps} from '../../constants/types';
 import HomePageForYouSinglePet from '../../components/homePageForYou/HomePageForYouSinglePet';
 import {TouchableOpacity} from 'react-native';
 import {fetchCollectionData} from '../../store/slice/donationPetsSlice';
 import {FlatList} from 'react-native';
-import {DrawerActions, useFocusEffect} from '@react-navigation/native';
+import useHome from './useHome';
+import {Colors} from '../../constants/color';
+import {showToast} from '../../components/toast/Toast';
 
 const Home = ({navigation}: LoginScreenProps) => {
   const dispatch = useAppDispatch();
-  const [searchTest, setSearchTest] = useState('');
-  const userData = useAppSelector(state => state.user.userData);
-  const donationData = useAppSelector(state => state.donationPets.data);
-
-  const handlePetPress = (pet: DonationPetData) => {
-    navigation.navigate('Details', {pet});
-  };
-
-  const memoizedData = useMemo(() => {
-    if (!searchTest) return donationData;
-    return donationData.filter(item =>
-      item.petType.toLowerCase().includes(searchTest.toLowerCase()),
-    );
-  }, [donationData, searchTest]);
+  const {setSearchTest, memoizedData, userData, openDrawer, handlePetPress} =
+    useHome({
+      navigation,
+    });
 
   useEffect(() => {
     dispatch(fetchCollectionData());
   }, [dispatch]);
-
-  const openDrawer = () => {
-    navigation.dispatch(DrawerActions.openDrawer());
-  };
 
   return (
     <View>
@@ -98,13 +81,12 @@ const Home = ({navigation}: LoginScreenProps) => {
                 style={{
                   fontWeight: '800',
                   fontSize: 36,
-                  color: '#101C1D',
+                  color: Colors.primary,
                 }}>
                 Find an Awesome Pets for You
               </Text>
             </View>
           </View>
-
           <View>
             <View style={{alignItems: 'center', marginVertical: 10}}>
               <View
@@ -118,11 +100,11 @@ const Home = ({navigation}: LoginScreenProps) => {
                 <View style={{width: 278, height: 48}}>
                   <TextInput
                     placeholder="Search for a pet"
-                    placeholderTextColor={'#101C1D'}
+                    placeholderTextColor={Colors.primary}
                     onChangeText={val => setSearchTest(val)}
                     style={{
                       backgroundColor: '#e9ecef',
-                      color: '#101C1D',
+                      color: Colors.primary,
                       fontFamily: 'Montserrat-Regular',
                       paddingHorizontal: 15,
                       borderRadius: 20,
@@ -134,7 +116,7 @@ const Home = ({navigation}: LoginScreenProps) => {
                   style={{
                     width: 82,
                     height: 62,
-                    backgroundColor: '#101C1D',
+                    backgroundColor: Colors.primary,
                     borderRadius: 25,
                     marginRight: 40,
                     marginLeft: 245,
@@ -185,7 +167,7 @@ const Home = ({navigation}: LoginScreenProps) => {
                     <Text
                       style={{
                         lineHeight: 17,
-                        color: '#101C1D',
+                        color: Colors.primary,
                         marginTop: 11,
                         fontSize: 14,
                         fontWeight: '600',
@@ -201,7 +183,7 @@ const Home = ({navigation}: LoginScreenProps) => {
           <View style={{paddingHorizontal: 30}}>
             <Text
               style={{
-                color: '#101C1D',
+                color: Colors.primary,
                 fontFamily: 'Montserrat-Regular',
                 fontWeight: '700',
                 fontSize: 18,

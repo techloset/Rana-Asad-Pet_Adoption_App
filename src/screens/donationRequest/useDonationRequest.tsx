@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {useAppSelector} from '../../store/Store';
+import {useAppSelector} from '../../store/store';
 import {RequestPetData} from '../../constants/types';
 import firestore from '@react-native-firebase/firestore';
 

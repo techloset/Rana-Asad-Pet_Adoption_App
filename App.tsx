@@ -4,8 +4,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import StackNavigation from './src/navigation/stack/StackNavigation';
 import {Provider} from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
-import {store} from './src/store/Store';
+import {store} from './src/store/store';
 import {listenForAuthStateChanges} from './src/store/slice/userSlice';
+import Toast from 'react-native-toast-message';
 
 export default function App() {
   useEffect(() => {
@@ -18,8 +19,9 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <StatusBar backgroundColor={'#eaeaea'} barStyle={'dark-content'} />
+        <StatusBar backgroundColor={'#f2f2f2'} barStyle={'dark-content'} />
         <StackNavigation />
+        <Toast />
       </NavigationContainer>
     </Provider>
   );

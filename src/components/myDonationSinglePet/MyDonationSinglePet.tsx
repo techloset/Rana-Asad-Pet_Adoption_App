@@ -17,7 +17,7 @@ const MyDonationSinglePet = () => {
           style={{
             fontSize: 18,
             fontWeight: '700',
-            color: '#101C1D',
+            color: Colors.primary,
           }}>
           Cavachon
         </Text>
@@ -26,7 +26,7 @@ const MyDonationSinglePet = () => {
             marginTop: 5,
             fontSize: 10,
             fontWeight: '500',
-            color: '#101C1D',
+            color: Colors.primary,
           }}>
           Age 4 Months
         </Text>
@@ -35,7 +35,7 @@ const MyDonationSinglePet = () => {
             style={{
               fontSize: 10,
               fontWeight: '500',
-              color: '#101C1D',
+              color: Colors.primary,
             }}>
             FSD
           </Text>
@@ -53,7 +53,7 @@ const MyDonationSinglePet = () => {
             marginTop: 7,
             fontSize: 10,
             fontWeight: '500',
-            color: '#101C1D',
+            color: Colors.primary,
           }}>
           Male
         </Text>

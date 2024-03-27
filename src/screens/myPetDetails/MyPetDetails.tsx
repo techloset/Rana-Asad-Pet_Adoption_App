@@ -9,13 +9,14 @@ import {
 import React, {useState} from 'react';
 import {Image} from 'react-native-elements';
 import {LoginScreenProps, MyPetDetailsProps} from '../../constants/types';
-import {useAppDispatch} from '../../store/Store';
+import {useAppDispatch} from '../../store/store';
 import {RootStackparams} from '../../navigation/stack/StackNavigation';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 import {firebase} from '@react-native-firebase/firestore';
 import {removeDonationPet} from '../../store/slice/donationPetsSlice';
 import useMyPetDetails from './useMyPetDetails';
+import {Colors} from '../../constants/color';
 
 const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
   const {pet}: any = route.params || {};
@@ -101,7 +102,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                 style={{
                   fontSize: 24,
                   fontWeight: '700',
-                  color: '#101C1D',
+                  color: Colors.primary,
                   fontFamily: 'Montserrat-Regular',
                 }}>
                 {pet.petType}
@@ -110,7 +111,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                 style={{
                   fontSize: 14,
                   fontWeight: '700',
-                  color: '#101C1D',
+                  color: Colors.primary,
                   fontFamily: 'Montserrat-Regular',
                 }}>
                 {pet.petBreed}
@@ -153,7 +154,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                   fontSize: 16,
                   marginTop: 3,
                   fontWeight: '600',
-                  color: '#101C1D',
+                  color: Colors.primary,
                   fontFamily: 'Montserrat-Regular',
                 }}>
                 4
@@ -181,7 +182,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                 style={{
                   fontSize: 16,
                   fontWeight: '600',
-                  color: '#101C1D',
+                  color: Colors.primary,
                   fontFamily: 'Montserrat-Regular',
                   marginTop: 3,
                 }}>
@@ -210,7 +211,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                 style={{
                   fontSize: 16,
                   fontWeight: '600',
-                  color: '#101C1D',
+                  color: Colors.primary,
                   marginTop: 3,
                   fontFamily: 'Montserrat-Regular',
                 }}>
@@ -239,7 +240,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                 style={{
                   fontSize: 16,
                   fontWeight: '600',
-                  color: '#101C1D',
+                  color: Colors.primary,
                   marginTop: 3,
                   fontFamily: 'Montserrat-Regular',
                 }}>
@@ -275,7 +276,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                   style={{
                     fontSize: 15,
                     fontWeight: '600',
-                    color: '#101C1D',
+                    color: Colors.primary,
                     fontFamily: 'Montserrat-Regular',
                   }}>
                   {pet.currentUserName}
@@ -314,7 +315,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
           <View style={{height: 50}}>
             <Text
               style={{
-                color: '#101C1D',
+                color: Colors.primary,
                 fontSize: 13,
                 fontWeight: '400',
                 lineHeight: 15,
@@ -347,7 +348,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: 321,
     height: 74,
-    backgroundColor: '#101C1D',
+    backgroundColor: Colors.primary,
     borderRadius: 34,
     color: 'white',
     alignItems: 'center',

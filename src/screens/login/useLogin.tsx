@@ -1,10 +1,10 @@
 import {Alert, ToastAndroid} from 'react-native';
 import {useEffect, useState} from 'react';
 import {LoginScreenProps, UserData} from '../../constants/types';
-import {store, useAppDispatch} from '../../store/Store';
+import {store, useAppDispatch} from '../../store/store';
 import auth from '@react-native-firebase/auth';
 import {listenForAuthStateChanges} from '../../store/slice/userSlice';
-import {fetchRequestData} from '../../store/slice/requestSlice';
+import {showToast} from '../../components/toast/Toast';
 
 const initialState = {email: '', password: ''};
 
@@ -28,10 +28,10 @@ export const useLogin = ({navigation}: LoginScreenProps) => {
     let {email, password} = state;
 
     if (!email) {
-      return Alert.alert('please enter email correctly');
+      return showToast('error', 'Error', 'Please enter your email');
     }
     if (password.length < 6) {
-      return Alert.alert('please enter password correctly');
+      return showToast('error', 'Error', 'Please enter your password');
     }
 
     setIsLoading(true);
@@ -42,16 +42,13 @@ export const useLogin = ({navigation}: LoginScreenProps) => {
         password,
       );
       // const user = userCredential.user;
-
+      showToast('success', 'Success', 'User login successful');
       store.dispatch(listenForAuthStateChanges());
     } catch (error: any) {
       if (error.code === 'auth/invalid-email') {
-        // ToastAndroid.show('invalid email', SHORT);
-        // showToast('Error in invalid email', 'error');
-        // ToastAndroid.show()
-        console.log('invalid email');
+        showToast('error', 'Error', 'Invalid email');
       } else {
-        // showToast('Error in Login', 'error');
+        showToast('error', 'Error', 'error in login function');
       }
     } finally {
       setIsLoading(false);

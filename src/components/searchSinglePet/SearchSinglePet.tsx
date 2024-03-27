@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useAppDispatch, useAppSelector} from '../../store/Store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
 import {fetchCollectionData} from '../../store/slice/donationPetsSlice';
 import {
   AddToFavoriteTypes,
@@ -19,6 +19,8 @@ import favoritePetsSlice, {
   fetchFavoriteData,
 } from '../../store/slice/favoritePetsSlice';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {Colors} from '../../constants/color';
+import {showToast} from '../toast/Toast';
 
 interface Props {
   navigation: StackNavigationProp<any>;
@@ -42,7 +44,7 @@ const SearchSinglePet: React.FC<Props> = ({navigation, searchTerm}) => {
   }, [donationData, searchTerm]);
 
   const handleAddToCart = async (item: DonationPetData) => {
-    if (!userData) return; // Ensure user data is available
+    if (!userData) return;
 
     const cartProduct = {
       petType: item.petType,
@@ -71,10 +73,15 @@ const SearchSinglePet: React.FC<Props> = ({navigation, searchTerm}) => {
 
     if (querySnapshot.empty) {
       await cartProductRef.add(cartProduct);
-      console.log('Cart product added to Firestore successfully.');
+      showToast(
+        'success',
+        'Success',
+        'Your pet successfully added in favorite list',
+      );
+
       dispatch(fetchFavoriteData());
     } else {
-      console.log('Cart product already exists in Firestore.');
+      showToast('error', 'Error', 'Your pet already exists in favorite list.');
     }
   };
 
@@ -158,27 +165,27 @@ const styles = StyleSheet.create({
   petType: {
     fontSize: 18,
     fontWeight: '700',
-    color: '#101C1D',
+    color: Colors.primary,
     fontFamily: 'Montserrat-Regular',
   },
   age: {
     marginTop: 5,
     fontSize: 10,
     fontWeight: '500',
-    color: '#101C1D',
+    color: Colors.primary,
     fontFamily: 'Montserrat-Regular',
   },
   location: {
     fontSize: 10,
     fontWeight: '500',
-    color: '#101C1D',
+    color: Colors.primary,
     fontFamily: 'Montserrat-Regular',
   },
   gender: {
     marginTop: 7,
     fontSize: 10,
     fontWeight: '500',
-    color: '#101C1D',
+    color: Colors.primary,
     fontFamily: 'Montserrat-Regular',
   },
   likeIcon: {

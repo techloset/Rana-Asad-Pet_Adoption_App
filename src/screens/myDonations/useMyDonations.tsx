@@ -4,11 +4,13 @@ import {
   fetchCollectionData,
   removeDonationPet,
 } from '../../store/slice/donationPetsSlice';
-import {useAppDispatch, useAppSelector} from '../../store/Store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {showToast} from '../../components/toast/Toast';
 
 const useMyDonations = () => {
   const dispatch = useAppDispatch();
   const donationData = useAppSelector(state => state.donationPets.data);
+  const loading = useAppSelector(state => state.donationPets.loading);
   const userData = useAppSelector(state => state.user.userData);
 
   useEffect(() => {
@@ -26,17 +28,18 @@ const useMyDonations = () => {
       .doc(uid)
       .delete()
       .then(() => {
-        console.log('Document successfully deleted!');
+        showToast('error', 'Error', 'Your pet successfully deleted');
         dispatch(removeDonationPet(uid));
       })
       .catch((error: string) => {
-        console.error('Error removing document: ', error);
+        showToast('error', 'Error', 'Error in pet deleting');
       });
   };
 
   return {
     filteredDonationData,
     handleDeleteItem,
+    loading,
   };
 };
 

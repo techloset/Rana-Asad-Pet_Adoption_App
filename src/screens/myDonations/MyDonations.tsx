@@ -1,15 +1,24 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {DonationPetData, LoginScreenProps} from '../../constants/types';
 import {FlatList} from 'react-native';
 import useMyDonations from './useMyDonations';
+import {Colors} from '../../constants/color';
 
 const MyDonations = ({navigation}: LoginScreenProps) => {
   const handlePetPress = (pet: DonationPetData) => {
     navigation.navigate('MyPetDetails', {pet});
   };
 
-  const {filteredDonationData, handleDeleteItem} = useMyDonations(navigation);
+  const {filteredDonationData, handleDeleteItem, loading} =
+    useMyDonations(navigation);
 
   return (
     <View style={styles.container}>
@@ -25,7 +34,7 @@ const MyDonations = ({navigation}: LoginScreenProps) => {
             fontSize: 24,
             fontFamily: 'Montserrat-Regular',
             fontWeight: '700',
-            color: '#101C1D',
+            color: Colors.primary,
           }}>
           My Donations
         </Text>
@@ -43,54 +52,67 @@ const MyDonations = ({navigation}: LoginScreenProps) => {
         </TouchableOpacity>
       </View>
 
-      {filteredDonationData.length > 0 ? (
-        <FlatList
-          data={filteredDonationData}
-          keyExtractor={(item, index) =>
-            item.uid.toString() || index.toString()
-          }
-          renderItem={({item}) => (
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => handlePetPress(item)}>
-              <View style={styles.smallContainer}>
-                <Image style={styles.one} source={{uri: item.image}} />
-                <View style={styles.two}>
-                  <Text style={styles.petType}>{item.petType.slice(0, 8)}</Text>
-                  <Text style={styles.age}>Age 4 Months</Text>
-                  <View style={{flexDirection: 'row', marginTop: 5}}>
-                    <Text style={styles.location}>
-                      {item.location.slice(0, 10)}
-                    </Text>
-                    <Image
-                      style={{width: 9, height: 13, marginLeft: 10}}
-                      source={require('../../assets/donate/location.png')}
-                    />
-                  </View>
-                  <Text style={styles.gender}>{item.gender}</Text>
-                  <TouchableOpacity onPress={() => handleDeleteItem(item.uid)}>
-                    <Image
-                      style={styles.likeIcon}
-                      source={require('../../assets/donate/Delete.png')}
-                    />
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </TouchableOpacity>
-          )}
+      {loading ? (
+        <ActivityIndicator
+          style={{marginTop: 20}}
+          size={'large'}
+          color="#000"
         />
       ) : (
-        <Text
-          style={{
-            marginTop: 20,
-            textAlign: 'center',
-            fontWeight: '900',
-            fontSize: 15,
-            color: 'grey',
-            fontFamily: 'Montserrat-Regular',
-          }}>
-          My Donation list is empty 😐
-        </Text>
+        <>
+          {filteredDonationData.length > 0 ? (
+            <FlatList
+              data={filteredDonationData}
+              keyExtractor={(item, index) =>
+                item.uid.toString() || index.toString()
+              }
+              renderItem={({item}) => (
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() => handlePetPress(item)}>
+                  <View style={styles.smallContainer}>
+                    <Image style={styles.one} source={{uri: item.image}} />
+                    <View style={styles.two}>
+                      <Text style={styles.petType}>
+                        {item.petType.slice(0, 8)}
+                      </Text>
+                      <Text style={styles.age}>Age 4 Months</Text>
+                      <View style={{flexDirection: 'row', marginTop: 5}}>
+                        <Text style={styles.location}>
+                          {item.location.slice(0, 10)}
+                        </Text>
+                        <Image
+                          style={{width: 9, height: 13, marginLeft: 10}}
+                          source={require('../../assets/donate/location.png')}
+                        />
+                      </View>
+                      <Text style={styles.gender}>{item.gender}</Text>
+                      <TouchableOpacity
+                        onPress={() => handleDeleteItem(item.uid)}>
+                        <Image
+                          style={styles.likeIcon}
+                          source={require('../../assets/donate/Delete.png')}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              )}
+            />
+          ) : (
+            <Text
+              style={{
+                marginTop: 20,
+                textAlign: 'center',
+                fontWeight: '900',
+                fontSize: 15,
+                color: 'grey',
+                fontFamily: 'Montserrat-Regular',
+              }}>
+              My Donation list is empty 😐
+            </Text>
+          )}
+        </>
       )}
     </View>
   );
@@ -133,27 +155,27 @@ const styles = StyleSheet.create({
   petType: {
     fontSize: 18,
     fontWeight: '700',
-    color: '#101C1D',
+    color: Colors.primary,
     fontFamily: 'Montserrat-Regular',
   },
   age: {
     marginTop: 5,
     fontSize: 10,
     fontWeight: '500',
-    color: '#101C1D',
+    color: Colors.primary,
     fontFamily: 'Montserrat-Regular',
   },
   location: {
     fontSize: 10,
     fontWeight: '500',
-    color: '#101C1D',
+    color: Colors.primary,
     fontFamily: 'Montserrat-Regular',
   },
   gender: {
     marginTop: 7,
     fontSize: 10,
     fontWeight: '500',
-    color: '#101C1D',
+    color: Colors.primary,
     fontFamily: 'Montserrat-Regular',
   },
   likeIcon: {

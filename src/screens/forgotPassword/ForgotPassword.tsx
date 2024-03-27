@@ -10,6 +10,7 @@ import {
 import React from 'react';
 import {LoginScreenProps} from '../../constants/types';
 import useForgotPassword from './useForgotPassword';
+import {Colors} from '../../constants/color';
 
 const ForgotPassword = ({navigation}: LoginScreenProps) => {
   const {setForgotEmail, handleRecoverPassword, handleGoBack, isLoading} =
@@ -37,7 +38,7 @@ const ForgotPassword = ({navigation}: LoginScreenProps) => {
               fontWeight: '800',
               lineHeight: 43,
               fontSize: 36,
-              color: '#101C1D',
+              color: Colors.primary,
             }}>
             Recover Password
           </Text>
@@ -90,34 +91,30 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 18,
     fontWeight: '600',
-    color: '#101C1D',
+    color: Colors.primary,
+    fontFamily: 'Montserrat-SemiBold',
   },
   putHeading: {
     marginTop: 7,
     fontSize: 14,
     fontWeight: '600',
-    color: '#101C1D',
-  },
-  forgetPassword: {
-    marginTop: 10,
-    fontSize: 18,
-    textAlign: 'right',
-    fontWeight: '600',
-    color: '#101C1D',
+    fontFamily: 'Montserrat-SemiBold',
+    color: Colors.primary,
   },
   input: {
     borderBottomWidth: 2,
     width: 302,
     height: 40,
-    color: '#101C1D',
-    borderColor: '#101C1D',
+    color: Colors.primary,
+    fontFamily: 'Montserrat-Regular',
+    borderColor: Colors.primary,
     fontSize: 16,
   },
 
   buttonContainer: {
     width: 185,
     height: 79,
-    backgroundColor: '#101C1D',
+    backgroundColor: Colors.primary,
     borderRadius: 37,
     color: 'white',
     marginTop: 30,
@@ -127,6 +124,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 20,
+    fontFamily: 'Montserrat-Bold',
     fontWeight: '700',
   },
 });

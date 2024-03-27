@@ -16,6 +16,7 @@ import {
   MailComposerStatus,
 } from 'react-native-mail-composer';
 import {useNavigation} from '@react-navigation/native';
+import {Colors} from '../../constants/color';
 
 const DonationRequest = () => {
   const navigation = useNavigation();
@@ -56,7 +57,7 @@ const DonationRequest = () => {
           alignItems: 'center',
           paddingHorizontal: 30,
         }}>
-        <Text style={{fontSize: 24, fontWeight: '700', color: '#101C1D'}}>
+        <Text style={{fontSize: 24, fontWeight: '700', color: Colors.primary}}>
           Donation Requests
         </Text>
       </View>
@@ -84,7 +85,7 @@ const DonationRequest = () => {
                     <View style={styles.two}>
                       <Text
                         style={{
-                          color: '#101C1D',
+                          color: Colors.primary,
                           fontSize: 18,
                           fontWeight: '700',
                         }}>
@@ -93,7 +94,7 @@ const DonationRequest = () => {
                       <View style={{flexDirection: 'row'}}>
                         <Text
                           style={{
-                            color: '#101C1D',
+                            color: Colors.primary,
                             fontSize: 18,
                             fontWeight: '700',
                           }}>
@@ -101,7 +102,7 @@ const DonationRequest = () => {
                         </Text>
                         <Text
                           style={{
-                            color: '#101C1D',
+                            color: Colors.primary,
                             fontSize: 18,
                             fontWeight: '700',
                             fontFamily: 'Montserrat',
@@ -111,7 +112,7 @@ const DonationRequest = () => {
                       </View>
                       <Text
                         style={{
-                          color: '#101C1D',
+                          color: Colors.primary,
                           fontSize: 10,
                           fontWeight: '500',
                           fontFamily: 'Montserrat',
@@ -129,7 +130,7 @@ const DonationRequest = () => {
                         />
                         <Text
                           style={{
-                            color: '#101C1D',
+                            color: Colors.primary,
                             fontSize: 10,
                             fontWeight: '500',
                             fontFamily: 'Montserrat',
@@ -139,7 +140,7 @@ const DonationRequest = () => {
                       </View>
                       <Text
                         style={{
-                          color: '#101C1D',
+                          color: Colors.primary,
                           fontSize: 10,
                           fontWeight: '500',
                           fontFamily: 'Montserrat',
@@ -216,7 +217,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: 255,
     height: 36,
-    backgroundColor: '#101C1D',
+    backgroundColor: Colors.primary,
     borderRadius: 34,
     color: 'white',
     marginTop: 20,

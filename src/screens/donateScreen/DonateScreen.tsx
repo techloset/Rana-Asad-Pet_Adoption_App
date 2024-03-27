@@ -12,6 +12,7 @@ import React from 'react';
 import {Dropdown} from 'react-native-element-dropdown';
 import {LoginScreenProps} from '../../constants/types';
 import useDonateScreen from './useDonateScreen';
+import {Colors} from '../../constants/color';
 
 const DonateScreen = ({navigation}: LoginScreenProps) => {
   const {
@@ -198,7 +199,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     fontSize: 18,
     fontWeight: '600',
-    color: '#101C1D',
+    color: Colors.primary,
     fontFamily: 'Montserrat-SemiBold',
   },
   labelDescription: {
@@ -206,14 +207,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     // height: 154,
     fontWeight: '600',
-    color: '#101C1D',
+    color: Colors.primary,
     fontFamily: 'Montserrat-SemiBold',
   },
   putHeading: {
     marginTop: 7,
     fontSize: 14,
     fontWeight: '600',
-    color: '#101C1D',
+    color: Colors.primary,
     fontFamily: 'Montserrat-SemiBold',
   },
   forgetPassword: {
@@ -221,15 +222,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'right',
     fontWeight: '600',
-    color: '#101C1D',
+    color: Colors.primary,
     fontFamily: 'Montserrat-SemiBold',
   },
   input: {
     borderBottomWidth: 2,
     width: 302,
     height: 40,
-    color: '#101C1D',
-    borderColor: '#101C1D',
+    color: Colors.primary,
+    borderColor: Colors.primary,
     fontFamily: 'Montserrat-SemiBold',
     fontSize: 16,
   },
@@ -237,7 +238,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: '100%',
     height: 79,
-    backgroundColor: '#101C1D',
+    backgroundColor: Colors.primary,
     borderRadius: 37,
     color: 'white',
     marginTop: 30,
@@ -261,7 +262,7 @@ const styles = StyleSheet.create({
     height: 154,
     fontWeight: '600',
     fontFamily: 'Montserrat-SemiBold',
-    color: '#101C1D',
+    color: Colors.primary,
   },
 
   containerDropDown: {

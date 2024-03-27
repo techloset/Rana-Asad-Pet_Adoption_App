@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {RootState} from '../Store';
+import {RootState} from '../store';
 import {UserData, UserState} from '../../constants/types';
 import {AppDispatch} from '../store';
 import auth from '@react-native-firebase/auth';
@@ -14,31 +14,22 @@ const initialState: UserState = {
 export const listenForAuthStateChanges =
   () => async (dispatch: AppDispatch) => {
     auth().onAuthStateChanged(async user => {
-      if (user) {
-        dispatch(fetchUserDataStart());
-        try {
-          const userData = await fetchDataFromFirestore(user.uid);
+      dispatch(fetchUserDataStart());
+      try {
+        if (user) {
+          const uid = user.uid;
+          const userRef = firestore().collection('Users').doc(uid);
+          const doc = await userRef.get();
+          const userData = doc.exists ? (doc.data() as UserData) : null;
           dispatch(fetchUserDataSuccess(userData));
-        } catch (error: any) {
-          dispatch(fetchUserDataFailure(error.message));
+        } else {
+          dispatch(fetchUserDataSuccess(null));
         }
-      } else {
-        dispatch(fetchUserDataSuccess(null));
+      } catch (error: any) {
+        dispatch(fetchUserDataFailure(error.message));
       }
     });
   };
-
-const fetchDataFromFirestore = async (
-  uid: string,
-): Promise<UserData | null> => {
-  const userRef = firestore().collection('Users').doc(uid);
-  const doc = await userRef.get();
-  if (doc.exists) {
-    return doc.data() as UserData;
-  } else {
-    return null;
-  }
-};
 
 const userSlice = createSlice({
   name: 'user',
@@ -64,17 +55,13 @@ const userSlice = createSlice({
     },
   },
 });
-
+123;
 export const {
   fetchUserDataStart,
   fetchUserDataSuccess,
   fetchUserDataFailure,
   clearUserData,
 } = userSlice.actions;
-
-export const selectUserData = (state: RootState) => state.user.userData;
-export const selectIsLoading = (state: RootState) => state.user.isLoading;
-export const selectError = (state: RootState) => state.user.error;
 
 const userReducer = userSlice.reducer;
 export default userReducer;

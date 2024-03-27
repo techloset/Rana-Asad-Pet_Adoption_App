@@ -4,6 +4,7 @@ import firestore from '@react-native-firebase/firestore';
 import {Alert} from 'react-native';
 import {LoginScreenProps} from '../../constants/types';
 import {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import {showToast} from '../../components/toast/Toast';
 
 interface State {
   userName: string;
@@ -37,13 +38,13 @@ export const useSignUp = ({navigation}: LoginScreenProps) => {
     const {email, password, userName} = state;
 
     if (!userName) {
-      return Alert.alert('Please Enter Your User-Name');
+      return showToast('error', 'Error', 'Please enter your name');
     }
     if (!email) {
-      return Alert.alert('Please Enter Your Email');
+      return showToast('error', 'Error', 'Please enter your email');
     }
     if (!password) {
-      return Alert.alert('Please Enter Your Password');
+      return showToast('error', 'Error', 'Please enter your password');
     }
 
     setIsLoading(true);
@@ -56,13 +57,12 @@ export const useSignUp = ({navigation}: LoginScreenProps) => {
       const user = userCredential.user;
       await createUserProfile(user);
       navigation.navigate('Login');
-      console.log('User account signed up!');
+      showToast('success', 'Success', 'User account signed up');
     } catch (error: any) {
       if (error.code === 'auth/invalid-email') {
-        console.log('That email address is invalid!');
+        showToast('error', 'Error', 'That email address is invalid!');
       }
-      Alert.alert('Error signing up. Please try again.');
-      console.error('Error signing up:', error);
+      showToast('error', 'Error', 'Error signing up. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -79,9 +79,8 @@ export const useSignUp = ({navigation}: LoginScreenProps) => {
 
     try {
       await firestore().collection('Users').doc(user.uid).set(userData);
-      console.log('User added!');
     } catch (error) {
-      console.error('Firestore error:', error);
+      showToast('error', 'Error', 'Firestore error');
     }
   };
 

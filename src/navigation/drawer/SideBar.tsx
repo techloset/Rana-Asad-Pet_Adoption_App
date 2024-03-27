@@ -2,11 +2,13 @@ import {DrawerActions} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {Image, TextInput} from 'react-native';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {useAppDispatch} from '../../store/Store';
+import {useAppDispatch} from '../../store/store';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {clearUserData} from '../../store/slice/userSlice';
 import auth from '@react-native-firebase/auth';
 import {LoginScreenProps} from '../../constants/types';
+import {Colors} from '../../constants/color';
+import {showToast} from '../../components/toast/Toast';
 
 type ScreenName = 'Home' | 'DonateScreen' | 'MyDonations' | 'DonationRequest';
 
@@ -29,8 +31,9 @@ const SideBar = ({navigation}: LoginScreenProps) => {
       try {
         await auth().signOut();
         dispatch(clearUserData());
+        showToast('success', 'Success', 'user successfully logout');
       } catch (error) {
-        console.error('Error logging out:', error);
+        showToast('error', 'Error', 'Error in logout function');
         throw error;
       }
     },
@@ -68,10 +71,10 @@ const SideBar = ({navigation}: LoginScreenProps) => {
               <View style={{width: 203, height: 48}}>
                 <TextInput
                   placeholder="Search for a pet"
-                  placeholderTextColor={'#101C1D'}
+                  placeholderTextColor={Colors.primary}
                   style={{
                     backgroundColor: '#F2F3FA',
-                    color: '#101C1D',
+                    color: Colors.primary,
                     paddingHorizontal: 15,
                     borderRadius: 20,
                     opacity: 0.5,
@@ -82,7 +85,7 @@ const SideBar = ({navigation}: LoginScreenProps) => {
                 style={{
                   width: 72,
                   height: 54,
-                  backgroundColor: '#101C1D',
+                  backgroundColor: Colors.primary,
                   borderRadius: 25,
                   marginRight: 40,
                   marginLeft: 170,
@@ -171,7 +174,7 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingVertical: 14,
     paddingLeft: 35,
-    color: '#101C1D',
+    color: Colors.primary,
     fontWeight: '600',
   },
 });

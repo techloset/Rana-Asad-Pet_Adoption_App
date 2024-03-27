@@ -7,10 +7,11 @@ import {
   View,
 } from 'react-native';
 import React, {useEffect, useMemo} from 'react';
-import {useAppDispatch, useAppSelector} from '../../store/Store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
 import {fetchCollectionData} from '../../store/slice/donationPetsSlice';
 import {DonationPetData} from '../../constants/types';
 import {FlatList} from 'react-native';
+import {Colors} from '../../constants/color';
 
 const FavoritePets = () => {
   const dispatch = useAppDispatch();
@@ -34,7 +35,7 @@ const FavoritePets = () => {
           style={{
             fontSize: 18,
             fontWeight: '700',
-            color: '#101C1D',
+            color: Colors.primary,
             fontFamily: 'Montserrat-Regular',
           }}>
           {item.petType.slice(0, 8)}
@@ -44,7 +45,7 @@ const FavoritePets = () => {
             marginTop: 5,
             fontSize: 10,
             fontWeight: '500',
-            color: '#101C1D',
+            color: Colors.primary,
             fontFamily: 'Montserrat-Regular',
           }}>
           Age 4 Months
@@ -54,7 +55,7 @@ const FavoritePets = () => {
             style={{
               fontSize: 10,
               fontWeight: '500',
-              color: '#101C1D',
+              color: Colors.primary,
               fontFamily: 'Montserrat-Regular',
             }}>
             {item.location}
@@ -73,7 +74,7 @@ const FavoritePets = () => {
             marginTop: 7,
             fontSize: 10,
             fontWeight: '500',
-            color: '#101C1D',
+            color: Colors.primary,
             fontFamily: 'Montserrat-Regular',
           }}>
           {item.gender}

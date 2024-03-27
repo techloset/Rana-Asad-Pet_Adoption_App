@@ -10,6 +10,7 @@ import React from 'react';
 import {Image} from 'react-native-elements';
 import {Props} from '../../constants/types';
 import useDetails from './useDetails';
+import {Colors} from '../../constants/color';
 
 const Details: React.FC<Props> = ({route, navigation}) => {
   const {handleAddToFavorite, handleAdoptNow, isLoading} = useDetails();
@@ -89,7 +90,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
                 style={{
                   fontSize: 24,
                   fontWeight: '700',
-                  color: '#101C1D',
+                  color: Colors.primary,
                 }}>
                 {pet.petType}
               </Text>
@@ -97,7 +98,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
                 style={{
                   fontSize: 14,
                   fontWeight: '700',
-                  color: '#101C1D',
+                  color: Colors.primary,
                 }}>
                 {pet.petBreed}
               </Text>
@@ -137,7 +138,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
                   fontSize: 16,
                   marginTop: 3,
                   fontWeight: '600',
-                  color: '#101C1D',
+                  color: Colors.primary,
                 }}>
                 4
               </Text>
@@ -163,7 +164,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
                 style={{
                   fontSize: 16,
                   fontWeight: '600',
-                  color: '#101C1D',
+                  color: Colors.primary,
                   marginTop: 3,
                 }}>
                 {pet.gender}
@@ -190,7 +191,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
                 style={{
                   fontSize: 16,
                   fontWeight: '600',
-                  color: '#101C1D',
+                  color: Colors.primary,
                   marginTop: 3,
                 }}>
                 2.1
@@ -217,7 +218,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
                 style={{
                   fontSize: 16,
                   fontWeight: '600',
-                  color: '#101C1D',
+                  color: Colors.primary,
                   marginTop: 3,
                 }}>
                 {pet.vaccinated}
@@ -252,7 +253,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
                   style={{
                     fontSize: 15,
                     fontWeight: '600',
-                    color: '#101C1D',
+                    color: Colors.primary,
                   }}>
                   {pet.currentUserName}
                 </Text>
@@ -289,7 +290,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
           <View style={{height: 50}}>
             <Text
               style={{
-                color: '#101C1D',
+                color: Colors.primary,
                 fontSize: 13,
                 fontWeight: '400',
                 lineHeight: 15,
@@ -327,7 +328,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: 321,
     height: 74,
-    backgroundColor: '#101C1D',
+    backgroundColor: Colors.primary,
     borderRadius: 34,
     color: 'white',
     alignItems: 'center',

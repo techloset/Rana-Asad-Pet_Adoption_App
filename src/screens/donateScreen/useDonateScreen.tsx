@@ -2,9 +2,10 @@ import {useState} from 'react';
 import ImagePicker from 'react-native-image-crop-picker';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-import {useAppDispatch, useAppSelector} from '../../store/Store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
 import {DonationScreen, LoginScreenProps} from '../../constants/types';
 import {fetchCollectionData} from '../../store/slice/donationPetsSlice';
+import {showToast} from '../../components/toast/Toast';
 
 const petType = [
   {label: 'Dog', value: 'Dog'},
@@ -51,6 +52,23 @@ const useDonateScreen = ({navigation}: LoginScreenProps) => {
 
   const handleDonation = async () => {
     setIsLoading(true);
+
+    if (
+      !state.petType ||
+      !state.vaccinated ||
+      !state.gender ||
+      !state.petBreed ||
+      !state.amount ||
+      !state.weight ||
+      !state.location ||
+      !state.description ||
+      !selectedImage
+    ) {
+      showToast('error', 'Error', 'Please fill in all required fields');
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const uploadUri = selectedImage!;
       const imageName = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
@@ -90,9 +108,9 @@ const useDonateScreen = ({navigation}: LoginScreenProps) => {
       setSelectedImage(null);
 
       navigation.navigate('Home');
-      console.log('Donation added successfully');
+      showToast('success', 'Success', 'Your pet upload successful');
     } catch (error) {
-      console.log('Error adding donation:', error);
+      showToast('error', 'Error', 'Error in your upload pets');
     } finally {
       setIsLoading(false);
     }

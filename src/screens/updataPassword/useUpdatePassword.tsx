@@ -2,8 +2,9 @@ import {useState} from 'react';
 import {Alert} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {LoginScreenProps} from '../../constants/types';
-import {useAppSelector} from '../../store/Store';
+import {useAppSelector} from '../../store/store';
 import firestore from '@react-native-firebase/firestore';
+import {showToast} from '../../components/toast/Toast';
 
 const useUpdatePassword = ({navigation}: LoginScreenProps) => {
   const userData = useAppSelector(state => state.user.userData);
@@ -13,17 +14,23 @@ const useUpdatePassword = ({navigation}: LoginScreenProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleUpdatePassword = async () => {
+    setIsLoading(true);
     if (!currentPassword || !newPassword || !confirmPassword) {
-      Alert.alert('Error', 'All fields are required.');
+      showToast('error', 'Error', 'All fields are required.');
+      setIsLoading(false);
+
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      Alert.alert('Error', 'New password and confirm password do not match.');
+      showToast(
+        'error',
+        'Error',
+        'New password and confirm password do not match',
+      );
+      setIsLoading(false);
       return;
     }
-
-    setIsLoading(true);
 
     try {
       const user = auth().currentUser;
@@ -37,11 +44,14 @@ const useUpdatePassword = ({navigation}: LoginScreenProps) => {
         await firestore().collection('Users').doc(userData?.uid).update({
           password: newPassword,
         });
-        Alert.alert('Success', 'Password updated successfully.');
-        navigation.navigate('Home');
+        showToast('success', 'Success', 'Password updated successfully');
       }
     } catch (error: any) {
-      Alert.alert('Error', error.message);
+      showToast(
+        'error',
+        'Error',
+        'Failed to update password please enter your data correctly',
+      );
     } finally {
       setIsLoading(false);
     }

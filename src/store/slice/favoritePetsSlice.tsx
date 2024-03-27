@@ -37,7 +37,7 @@ import {
   DonationPetState,
 } from '../../constants/types';
 import firestore from '@react-native-firebase/firestore';
-import {useAppSelector} from '../Store';
+import {useAppSelector} from '../store';
 
 const initialState: AddToFavorite = {
   favoriteData: [],

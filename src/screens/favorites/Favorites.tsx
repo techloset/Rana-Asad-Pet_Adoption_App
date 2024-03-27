@@ -5,21 +5,26 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useEffect} from 'react';
 import {LoginScreenProps} from '../../constants/types';
 import useFavorites from './useFavorites';
-import {useAppDispatch} from '../../store/Store';
+import {useAppDispatch} from '../../store/store';
 import {fetchFavoriteData} from '../../store/slice/favoritePetsSlice';
+import {Colors} from '../../constants/color';
 
 const Favorites = ({navigation}: LoginScreenProps) => {
   const dispatch = useAppDispatch();
-  const {filteredData, handleGoToPetSearch, handleDeleteItem} = useFavorites({
-    navigation,
-  });
+  const {filteredData, handleGoToPetSearch, loading, handleDeleteItem} =
+    useFavorites({
+      navigation,
+    });
+
   useEffect(() => {
     dispatch(fetchFavoriteData());
   }, [dispatch]);
+
   return (
     <ScrollView style={styles.container}>
       <View
@@ -34,7 +39,7 @@ const Favorites = ({navigation}: LoginScreenProps) => {
             fontSize: 24,
             fontFamily: 'Montserrat-Regular',
             fontWeight: '700',
-            color: '#101C1D',
+            color: Colors.primary,
           }}>
           Favorites
         </Text>
@@ -49,88 +54,46 @@ const Favorites = ({navigation}: LoginScreenProps) => {
         </TouchableOpacity>
       </View>
 
-      {filteredData?.length > 0 ? (
+      {loading ? (
+        <ActivityIndicator
+          style={{marginTop: 20}}
+          size={'large'}
+          color="#000"
+        />
+      ) : (
         <>
-          {filteredData.map((item, i) => {
-            return (
+          {filteredData?.length > 0 ? (
+            filteredData.map((item, i) => (
               <View style={styles.smallContainer} key={item.uid}>
                 <Image style={styles.one} source={{uri: item.image}}></Image>
                 <View style={styles.two}>
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      fontWeight: '700',
-                      color: '#101C1D',
-                      fontFamily: 'Montserrat-Regular',
-                    }}>
-                    {item.petType.slice(0, 8)}
-                  </Text>
-                  <Text
-                    style={{
-                      marginTop: 5,
-                      fontSize: 10,
-                      fontWeight: '500',
-                      fontFamily: 'Montserrat-Regular',
-                      color: '#101C1D',
-                    }}>
-                    Age 4 Months
-                  </Text>
-                  <View style={{flexDirection: 'row', marginTop: 5}}>
-                    <Text
-                      style={{
-                        fontSize: 10,
-                        fontWeight: '500',
-                        color: '#101C1D',
-                        fontFamily: 'Montserrat-Regular',
-                      }}>
-                      FSD
-                    </Text>
+                  <Text style={styles.petType}>{item.petType.slice(0, 8)}</Text>
+                  <Text style={styles.age}>Age 4 Months</Text>
+                  <View style={styles.locationContainer}>
+                    <Text style={styles.location}>FSD</Text>
                     <Image
-                      style={{
-                        width: 9,
-                        height: 13,
-                        marginLeft: 10,
-                      }}
+                      style={styles.locationIcon}
                       source={require('../../assets/donate/location.png')}
                     />
                   </View>
-                  <Text
-                    style={{
-                      marginTop: 7,
-                      fontSize: 10,
-                      fontWeight: '500',
-                      color: '#101C1D',
-                      fontFamily: 'Montserrat-Regular',
-                    }}>
-                    Male
-                  </Text>
+                  <Text style={styles.gender}>Male</Text>
                   <TouchableOpacity onPress={() => handleDeleteItem(item.uid)}>
                     <Image
-                      style={{
-                        width: 16,
-                        height: 15,
-                        marginLeft: 60,
-                      }}
+                      style={styles.likeIcon}
                       source={require('../../assets/adoption/heartRed.png')}
                     />
                   </TouchableOpacity>
                 </View>
               </View>
-            );
-          })}
+            ))
+          ) : (
+            <View style={{marginTop: 20}}>
+              <Text style={styles.emptyText}>
+                Your Favorite List Is Empty 😐
+              </Text>
+            </View>
+          )}
         </>
-      ) : (
-        <View style={{marginTop: 20}}>
-          <Text
-            style={{
-              fontWeight: '900',
-              color: 'grey',
-              fontSize: 15,
-              textAlign: 'center',
-            }}>
-            Your Favorite List Is Empty 😐
-          </Text>
-        </View>
       )}
     </ScrollView>
   );
@@ -169,5 +132,51 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     borderRadius: 20,
     backgroundColor: '#FFFFFF',
+  },
+  petType: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: Colors.primary,
+    fontFamily: 'Montserrat-Regular',
+  },
+  age: {
+    marginTop: 5,
+    fontSize: 10,
+    fontWeight: '500',
+    fontFamily: 'Montserrat-Regular',
+    color: Colors.primary,
+  },
+  locationContainer: {
+    flexDirection: 'row',
+    marginTop: 5,
+  },
+  location: {
+    fontSize: 10,
+    fontWeight: '500',
+    color: Colors.primary,
+    fontFamily: 'Montserrat-Regular',
+  },
+  locationIcon: {
+    width: 9,
+    height: 13,
+    marginLeft: 10,
+  },
+  gender: {
+    marginTop: 7,
+    fontSize: 10,
+    fontWeight: '500',
+    color: Colors.primary,
+    fontFamily: 'Montserrat-Regular',
+  },
+  likeIcon: {
+    width: 16,
+    height: 15,
+    marginLeft: 60,
+  },
+  emptyText: {
+    fontWeight: '900',
+    color: 'grey',
+    fontSize: 15,
+    textAlign: 'center',
   },
 });

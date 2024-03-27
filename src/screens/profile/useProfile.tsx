@@ -2,9 +2,10 @@ import React, {useState} from 'react';
 import {LoginScreenProps} from '../../constants/types';
 import firestore from '@react-native-firebase/firestore';
 import ImagePicker from 'react-native-image-crop-picker';
-import {useAppDispatch, useAppSelector} from '../../store/Store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
 import {listenForAuthStateChanges} from '../../store/slice/userSlice';
 import storage from '@react-native-firebase/storage';
+import {showToast} from '../../components/toast/Toast';
 
 const useProfile = ({navigation}: LoginScreenProps) => {
   const dispatch = useAppDispatch();
@@ -47,10 +48,9 @@ const useProfile = ({navigation}: LoginScreenProps) => {
       setNewUserName('');
       setNewEmail('');
       setSelectedImage(null);
-      navigation.navigate('Home');
-      console.log('Success', 'Profile updated successfully');
+      showToast('success', 'Success', 'Profile updated successfully');
     } catch (error: any) {
-      console.log('Error', 'Failed to update profile:', error.message);
+      showToast('error', 'Error', 'Failed to update profile');
     } finally {
       setIsLoading(false);
     }
@@ -67,9 +67,7 @@ const useProfile = ({navigation}: LoginScreenProps) => {
       });
 
       setSelectedImage(image.path);
-    } catch (error) {
-      console.log('Error selecting image:', error);
-    }
+    } catch (error) {}
   };
 
   return {

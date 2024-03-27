@@ -6,11 +6,12 @@ import {
   View,
 } from 'react-native';
 import React, {useEffect, useMemo} from 'react';
-import {useAppDispatch, useAppSelector} from '../../store/Store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
 import {fetchCollectionData} from '../../store/slice/donationPetsSlice';
 import {FlatList} from 'react-native';
 import {DonationPetData, LoginScreenProps} from '../../constants/types';
 import {ScrollView} from 'react-native-gesture-handler';
+import {Colors} from '../../constants/color';
 
 const HomePageForYouSinglePet = ({navigation}: LoginScreenProps) => {
   const dispatch = useAppDispatch();
@@ -74,7 +75,7 @@ const HomePageForYouSinglePet = ({navigation}: LoginScreenProps) => {
                     fontWeight: '800',
                     fontFamily: 'Montserrat-Regular',
                     fontSize: 25,
-                    color: '#101C1D',
+                    color: Colors.primary,
                   }}>
                   ${item.amount}
                 </Text>

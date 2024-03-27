@@ -9,7 +9,7 @@ import DonationRequest from '../../screens/donationRequest/DonationRequest';
 import UpdataPassword from '../../screens/updataPassword/UpdataPassword';
 import Details from '../../screens/details/Details';
 import MyPetDetails from '../../screens/myPetDetails/MyPetDetails';
-import {useAppDispatch, useAppSelector} from '../../store/Store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
 import {DonationPetData} from '../../constants/types';
 import SearchSinglePet from '../../components/searchSinglePet/SearchSinglePet';
 import Login from '../../screens/login/Login';
@@ -20,6 +20,7 @@ import {fetchUserDataSuccess} from '../../store/slice/userSlice';
 import {UserData} from '../../constants/types';
 import DonateScreen from '../../screens/donateScreen/DonateScreen';
 import DrawerNavigation from '../drawer/DrawerNavigation';
+import {Colors} from '../../constants/color';
 
 const Stack = createNativeStackNavigator();
 

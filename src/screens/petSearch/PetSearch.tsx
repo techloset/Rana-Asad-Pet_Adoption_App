@@ -11,6 +11,7 @@ import {
 import SearchSinglePet from '../../components/searchSinglePet/SearchSinglePet';
 import {LoginScreenProps} from '../../constants/types';
 import usePetSearch from './usePetSearch';
+import {Colors} from '../../constants/color';
 
 const PetSearch = ({navigation}: LoginScreenProps) => {
   const {searchTerm, selectedCategory, handleCategorySearch, setSearchTerm} =
@@ -22,7 +23,7 @@ const PetSearch = ({navigation}: LoginScreenProps) => {
         <View style={styles.searchInputContainer}>
           <TextInput
             placeholder="Search for a pet"
-            placeholderTextColor={'#101C1D'}
+            placeholderTextColor={Colors.primary}
             onChangeText={text => setSearchTerm(text)}
             style={styles.searchInput}
           />
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     backgroundColor: '#e9ecef',
-    color: '#101C1D',
+    color: Colors.primary,
     paddingHorizontal: 15,
     borderRadius: 20,
     fontFamily: 'Montserrat-Regular',
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
   searchIconContainer: {
     width: 82,
     height: 62,
-    backgroundColor: '#101C1D',
+    backgroundColor: Colors.primary,
     borderRadius: 25,
     marginLeft: 245,
     justifyContent: 'center',
