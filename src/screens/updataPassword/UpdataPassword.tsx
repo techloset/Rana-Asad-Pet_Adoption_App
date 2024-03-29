@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   ActivityIndicator,
   ScrollView,
@@ -31,7 +31,7 @@ const UpdatePassword = ({navigation}: LoginScreenProps) => {
         <TextInput
           style={styles.input}
           secureTextEntry
-          placeholderTextColor="Colors.primary"
+          placeholderTextColor={Colors.primary}
           value={currentPassword}
           onChangeText={setCurrentPassword}
         />
@@ -40,7 +40,7 @@ const UpdatePassword = ({navigation}: LoginScreenProps) => {
         <TextInput
           style={styles.input}
           secureTextEntry
-          placeholderTextColor="Colors.primary"
+          placeholderTextColor={Colors.primary}
           value={newPassword}
           onChangeText={setNewPassword}
         />
@@ -49,7 +49,7 @@ const UpdatePassword = ({navigation}: LoginScreenProps) => {
         <TextInput
           style={styles.input}
           secureTextEntry
-          placeholderTextColor="Colors.primary"
+          placeholderTextColor={Colors.primary}
           value={confirmPassword}
           onChangeText={setConfirmPassword}
         />

@@ -79,7 +79,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
               borderRadius: 16,
             }}></View>
         </View>
-        <View style={{paddingHorizontal: 30, paddingTop: 30}}>
+        <View style={{paddingHorizontal: 30, paddingTop: 25}}>
           <View
             style={{
               flexDirection: 'row',
@@ -115,7 +115,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
               </Text>
             </View>
           </View>
-          <View style={{flexDirection: 'row', gap: 5, marginTop: 20}}>
+          <View style={{flexDirection: 'row', gap: 5, marginTop: 10}}>
             <View
               style={{
                 height: 59,
@@ -274,7 +274,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
                 gap: 7,
                 alignItems: 'center',
               }}>
-              <Text>{pet.location.slice(0, 10)}</Text>
+              <Text>{pet.location.slice(0, 12)}</Text>
               <Image
                 style={{
                   width: 13,
@@ -309,7 +309,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
           }}>
           <TouchableOpacity
             style={styles.buttonContainer}
-            onPress={() => handleAdoptNow(pet, navigation)}>
+            onPress={() => handleAdoptNow(pet)}>
             {isLoading ? (
               <ActivityIndicator color="white" size={'large'} />
             ) : (
@@ -331,6 +331,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
     borderRadius: 34,
     color: 'white',
+    bottom: 5,
     alignItems: 'center',
     justifyContent: 'center',
   },

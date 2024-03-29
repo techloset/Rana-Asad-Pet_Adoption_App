@@ -37,7 +37,7 @@ const HomePageForYouSinglePet = ({navigation}: LoginScreenProps) => {
             activeOpacity={0.8}
             onPress={() => handlePetPress(item)}>
             <ImageBackground
-              resizeMode="stretch"
+              resizeMode="cover"
               style={{
                 width: 321,
                 height: 161,

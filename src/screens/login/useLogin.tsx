@@ -12,6 +12,7 @@ export const useLogin = ({navigation}: LoginScreenProps) => {
   const dispatch = useAppDispatch();
   const [state, setState] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleChange = (name: string, value: string) => {
     setState(s => ({...s, [name]: value}));
@@ -41,9 +42,8 @@ export const useLogin = ({navigation}: LoginScreenProps) => {
         email,
         password,
       );
-      // const user = userCredential.user;
+      dispatch(listenForAuthStateChanges());
       showToast('success', 'Success', 'User login successful');
-      store.dispatch(listenForAuthStateChanges());
     } catch (error: any) {
       if (error.code === 'auth/invalid-email') {
         showToast('error', 'Error', 'Invalid email');
@@ -62,6 +62,8 @@ export const useLogin = ({navigation}: LoginScreenProps) => {
     handleNavigationToForgot,
     handleNavigationToLogin,
     isLoading,
+    isChecked,
+    setIsChecked,
   };
 };
 

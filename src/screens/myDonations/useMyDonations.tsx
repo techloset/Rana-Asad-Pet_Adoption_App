@@ -28,7 +28,7 @@ const useMyDonations = () => {
       .doc(uid)
       .delete()
       .then(() => {
-        showToast('error', 'Error', 'Your pet successfully deleted');
+        showToast('success', 'Success', 'Your pet successfully deleted');
         dispatch(removeDonationPet(uid));
       })
       .catch((error: string) => {

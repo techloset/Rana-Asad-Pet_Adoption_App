@@ -1,6 +1,5 @@
 import {
   ActivityIndicator,
-  Alert,
   Image,
   ScrollView,
   StyleSheet,
@@ -9,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import {CheckBox} from 'react-native-elements';
 import {SignUpScreenProps} from '../../constants/types';
 import {useSignUp} from './useSignUp';
@@ -84,15 +83,25 @@ const SignUp: React.FC<SignUpScreenProps> = ({navigation}) => {
               />
             }
             uncheckedIcon={
-              <Image
+              <View
                 style={{
                   width: 17,
                   height: 17,
                   backgroundColor: 'black',
                   borderWidth: 1,
-                }}
-                source={require('../../assets/login/Vector.png')}
-              />
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image
+                  style={{
+                    width: 10,
+                    height: 9,
+                    backgroundColor: 'black',
+                    borderWidth: 1,
+                  }}
+                  source={require('../../assets/login/Vector.png')}
+                />
+              </View>
             }
           />
           <Text style={styles.checkBoxLabel}>
@@ -166,12 +175,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.primary,
     fontSize: 16,
   },
-
-  //   checkboxContainer: {
-  //     flexDirection: 'row',
-  //     marginBottom: 20,
-  //     marginTop: 10,
-  //   },
 
   underlineText: {
     textDecorationLine: 'underline',

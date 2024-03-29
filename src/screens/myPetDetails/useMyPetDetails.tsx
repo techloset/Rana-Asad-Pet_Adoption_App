@@ -22,7 +22,7 @@ const useMyPetDetails = ({route, navigation}: UseMyPetDetailsProps) => {
   const dispatch = useAppDispatch();
   const {pet}: {pet: DonationPetData} = route.params || {
     pet: {} as DonationPetData,
-  }; // Provide a default value for pet
+  };
 
   useEffect(() => {
     navigation.setOptions({title: pet.petType});

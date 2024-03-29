@@ -1,5 +1,6 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {
+  ActivityIndicator,
   FlatList,
   Image,
   StyleSheet,
@@ -31,6 +32,8 @@ const SearchSinglePet: React.FC<Props> = ({navigation, searchTerm}) => {
   const dispatch = useAppDispatch();
   const userData = useAppSelector(state => state.user.userData);
   const donationData = useAppSelector(state => state.donationPets.data);
+  const [loading, setLoading] = useState(false);
+  const [loadingMap, setLoadingMap] = useState<{[key: string]: boolean}>({});
 
   useEffect(() => {
     dispatch(fetchCollectionData());
@@ -45,6 +48,11 @@ const SearchSinglePet: React.FC<Props> = ({navigation, searchTerm}) => {
 
   const handleAddToCart = async (item: DonationPetData) => {
     if (!userData) return;
+
+    setLoadingMap(prevState => ({
+      ...prevState,
+      [item.uid]: true, // Set loading for this pet to true
+    }));
 
     const cartProduct = {
       petType: item.petType,
@@ -80,15 +88,18 @@ const SearchSinglePet: React.FC<Props> = ({navigation, searchTerm}) => {
       );
 
       dispatch(fetchFavoriteData());
+      setLoadingMap(prevState => ({
+        ...prevState,
+        [item.uid]: false,
+      }));
     } else {
+      setLoadingMap(prevState => ({
+        ...prevState,
+        [item.uid]: false,
+      }));
       showToast('error', 'Error', 'Your pet already exists in favorite list.');
     }
   };
-
-  // setLikedPets(prevState => ({
-  //   ...prevState,
-  //   [item.uid]: !prevState[item.uid],
-  // }));
 
   const handlePetPress = (pet: DonationPetData) => {
     navigation.navigate('Details', {pet});
@@ -116,14 +127,18 @@ const SearchSinglePet: React.FC<Props> = ({navigation, searchTerm}) => {
               </View>
               <Text style={styles.gender}>{item.gender}</Text>
               <TouchableOpacity onPress={() => handleAddToCart(item)}>
-                <Image
-                  style={styles.likeIcon}
-                  source={
-                    // likedPets[item.uid]
-                    // ? require('../../assets/adoption/heartRed.png')
-                    require('../../assets/adoption/heartWhite.png')
-                  }
-                />
+                {loadingMap[item.uid] ? (
+                  <ActivityIndicator
+                    size="small"
+                    style={{left: 15}}
+                    color={Colors.primary}
+                  />
+                ) : (
+                  <Image
+                    style={styles.likeIcon}
+                    source={require('../../assets/adoption/heartWhite.png')}
+                  />
+                )}
               </TouchableOpacity>
             </View>
           </View>

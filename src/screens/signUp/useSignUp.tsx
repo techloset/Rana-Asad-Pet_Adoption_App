@@ -1,27 +1,12 @@
 import {useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import {Alert} from 'react-native';
-import {LoginScreenProps} from '../../constants/types';
+import {LoginScreenProps, State, User} from '../../constants/types';
 import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {showToast} from '../../components/toast/Toast';
 
-interface State {
-  userName: string;
-  email: string;
-  password: string;
-}
-
-interface User {
-  userName: string;
-  email: string;
-  password: string;
-  uid: string;
-  photoURL: string;
-}
-
 export const useSignUp = ({navigation}: LoginScreenProps) => {
-  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const [state, setState] = useState<State>({
@@ -54,10 +39,11 @@ export const useSignUp = ({navigation}: LoginScreenProps) => {
         email,
         password,
       );
+
       const user = userCredential.user;
       await createUserProfile(user);
-      navigation.navigate('Login');
       showToast('success', 'Success', 'User account signed up');
+      navigation.navigate('Login');
     } catch (error: any) {
       if (error.code === 'auth/invalid-email') {
         showToast('error', 'Error', 'That email address is invalid!');
@@ -74,11 +60,14 @@ export const useSignUp = ({navigation}: LoginScreenProps) => {
       email: user.email ?? '',
       password: state.password,
       uid: user.uid,
-      photoURL: 'https://via.placeholder.com/50x50',
+      photoURL:
+        'https://firebasestorage.googleapis.com/v0/b/petadoptionapp-d9647.appspot.com/o/profilePicture.png?alt=media&token=81733297-7f4e-46ca-942a-56081f1c7809',
     };
 
     try {
+      navigation.navigate('Login');
       await firestore().collection('Users').doc(user.uid).set(userData);
+      navigation.navigate('Login');
     } catch (error) {
       showToast('error', 'Error', 'Firestore error');
     }

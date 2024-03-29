@@ -1,11 +1,8 @@
-// useDetails.ts
-import {useEffect, useState} from 'react';
-import {useDispatch} from 'react-redux';
-// import {addToFavorite} from '../../store/slice/favoritePetsSlice';
+import {useState} from 'react';
 import {firebase} from '@react-native-firebase/firestore';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {fetchFavoriteData} from '../../store/slice/favoritePetsSlice';
-import {DonationPetData, LoginScreenProps} from '../../constants/types';
+import {DonationPetData} from '../../constants/types';
 import firestore from '@react-native-firebase/firestore';
 import {showToast} from '../../components/toast/Toast';
 
@@ -61,10 +58,7 @@ const useDetails = () => {
     year: 'numeric',
   });
 
-  const handleAdoptNow = (
-    pet: DonationPetData,
-    navigation: LoginScreenProps['navigation'],
-  ) => {
+  const handleAdoptNow = (pet: DonationPetData) => {
     setIsLoading(true);
     firebase
       .firestore()
@@ -74,7 +68,11 @@ const useDetails = () => {
       .get()
       .then(querySnapshot => {
         if (!querySnapshot.empty) {
-          console.log('Pet data already exists in Firestore');
+          showToast(
+            'error',
+            'Error',
+            'This pet request already send to the owner',
+          );
         } else {
           firebase
             .firestore()
@@ -102,7 +100,11 @@ const useDetails = () => {
             })
             .then(() => {
               console.log('Adoption Request Sent Successfully');
-              navigation.navigate('Home');
+              showToast(
+                'success',
+                'Success',
+                'Adoption request sent successfully',
+              );
             });
         }
       })

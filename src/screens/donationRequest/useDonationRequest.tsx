@@ -2,10 +2,41 @@ import {useEffect, useState} from 'react';
 import {useAppSelector} from '../../store/store';
 import {RequestPetData} from '../../constants/types';
 import firestore from '@react-native-firebase/firestore';
+import {BackHandler, Linking} from 'react-native';
+import {showToast} from '../../components/toast/Toast';
+import {useNavigation} from '@react-navigation/native';
 
 const useDonationRequest = () => {
+  const navigation = useNavigation();
   const [requestData, setRequestData] = useState<RequestPetData[]>([]);
   const userData = useAppSelector(state => state.user.userData);
+
+  useEffect(() => {
+    const handleBackPress = () => {
+      navigation.goBack();
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      handleBackPress,
+    );
+
+    return () => backHandler.remove();
+  }, [navigation]);
+
+  const handleSendEmailMessage = (email: string) => {
+    const mailtoLink = `mailto:${email}`;
+    Linking.openURL(mailtoLink)
+      .then()
+      .catch(error => {
+        showToast(
+          'error',
+          'Error',
+          'Failed to open Gmail. Please make sure you have Gmail installed.',
+        );
+      });
+  };
 
   useEffect(() => {
     const unsubscribe = firestore()
@@ -41,7 +72,7 @@ const useDonationRequest = () => {
     return () => unsubscribe();
   }, []);
 
-  return requestData;
+  return {requestData, handleSendEmailMessage};
 };
 
 export default useDonationRequest;

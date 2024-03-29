@@ -1,13 +1,12 @@
 import {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../store/store';
-import {LoginScreenProps} from '../../constants/types';
 import {
   fetchFavoriteData,
   removeFavoritePet,
 } from '../../store/slice/favoritePetsSlice';
 import {showToast} from '../../components/toast/Toast';
 
-const useFavorites = ({navigation}: LoginScreenProps) => {
+const useFavorites = ({navigation}: any) => {
   const dispatch = useAppDispatch();
   const userData = useAppSelector(state => state.user.userData);
   const favoriteData = useAppSelector(state => state.favoritePets.favoriteData);

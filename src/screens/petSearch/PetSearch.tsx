@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   ScrollView,
@@ -9,13 +9,12 @@ import {
   View,
 } from 'react-native';
 import SearchSinglePet from '../../components/searchSinglePet/SearchSinglePet';
-import {LoginScreenProps} from '../../constants/types';
 import usePetSearch from './usePetSearch';
 import {Colors} from '../../constants/color';
 
-const PetSearch = ({navigation}: LoginScreenProps) => {
+const PetSearch = ({navigation, route}: any) => {
   const {searchTerm, selectedCategory, handleCategorySearch, setSearchTerm} =
-    usePetSearch();
+    usePetSearch(route);
 
   return (
     <View style={styles.container}>
@@ -39,14 +38,14 @@ const PetSearch = ({navigation}: LoginScreenProps) => {
       <View>
         <ScrollView style={styles.categoryContainer} horizontal>
           <CategoryButton
-            label="Dog"
+            label="Dogs"
             onPress={() => handleCategorySearch('Dog')}
             isSelected={selectedCategory === 'Dog'}
           />
           <CategoryButton
-            label="Cat"
-            onPress={() => handleCategorySearch('Cat')}
-            isSelected={selectedCategory === 'Cat'}
+            label="Cats"
+            onPress={() => handleCategorySearch('Cats')}
+            isSelected={selectedCategory === 'Cats'}
           />
           <CategoryButton
             label="Bunnies"
@@ -54,19 +53,24 @@ const PetSearch = ({navigation}: LoginScreenProps) => {
             isSelected={selectedCategory === 'Bunnies'}
           />
           <CategoryButton
-            label="Birds"
-            onPress={() => handleCategorySearch('Birds')}
-            isSelected={selectedCategory === 'Birds'}
-          />
-          <CategoryButton
-            label="Turtle"
+            label="Turtles"
             onPress={() => handleCategorySearch('Turtle')}
             isSelected={selectedCategory === 'Turtle'}
           />
           <CategoryButton
-            label="Monkey"
-            onPress={() => handleCategorySearch('Monkey')}
-            isSelected={selectedCategory === 'Monkey'}
+            label="Cattles"
+            onPress={() => handleCategorySearch('Cattle')}
+            isSelected={selectedCategory === 'Cattle'}
+          />
+          <CategoryButton
+            label="Sheeps"
+            onPress={() => handleCategorySearch('Sheep')}
+            isSelected={selectedCategory === 'Sheep'}
+          />
+          <CategoryButton
+            label="Goats"
+            onPress={() => handleCategorySearch('Goat')}
+            isSelected={selectedCategory === 'Goat'}
           />
         </ScrollView>
       </View>

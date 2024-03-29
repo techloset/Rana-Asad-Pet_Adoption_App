@@ -17,8 +17,7 @@ const MyDonations = ({navigation}: LoginScreenProps) => {
     navigation.navigate('MyPetDetails', {pet});
   };
 
-  const {filteredDonationData, handleDeleteItem, loading} =
-    useMyDonations(navigation);
+  const {filteredDonationData, handleDeleteItem, loading} = useMyDonations();
 
   return (
     <View style={styles.container}>
@@ -126,7 +125,7 @@ const styles = StyleSheet.create({
   },
   smallContainer: {
     width: 341,
-    marginTop: 40,
+    marginTop: 20,
     height: 141,
     flexDirection: 'row',
     alignItems: 'center',

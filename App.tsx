@@ -1,4 +1,4 @@
-import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import {StatusBar} from 'react-native';
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import StackNavigation from './src/navigation/stack/StackNavigation';

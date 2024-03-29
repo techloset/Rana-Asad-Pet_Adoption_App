@@ -9,10 +9,12 @@ import {showToast} from '../../components/toast/Toast';
 
 const petType = [
   {label: 'Dog', value: 'Dog'},
-  {label: 'Cat', value: 'Cat'},
-  {label: 'Rabbit ', value: 'Rabbit '},
-  {label: 'Horse', value: 'Horse'},
-  {label: 'Cavachon dog', value: 'Cavachon dog'},
+  {label: 'Cat', value: 'Cats'},
+  {label: 'Bunnies ', value: 'Bunnies '},
+  {label: 'Turtle', value: 'Turtle'},
+  {label: 'Cattle', value: 'Cattle'},
+  {label: 'Sheep', value: 'Sheep'},
+  {label: 'Goat', value: 'Goat'},
 ];
 const vaccinatedData = [
   {label: 'Yes', value: 'Yes'},

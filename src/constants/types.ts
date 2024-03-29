@@ -34,6 +34,20 @@ export type MyPetDetailsProps = {
   navigation: MyPetDetailsNavigationProp;
 };
 
+export interface State {
+  userName: string;
+  email: string;
+  password: string;
+}
+
+export interface User {
+  userName: string;
+  email: string;
+  password: string;
+  uid: string;
+  photoURL: string;
+}
+
 export interface DonationScreen {
   petType: string;
   vaccinated: string;
@@ -106,6 +120,9 @@ export interface DonationPetData {
   currentUserEmail: string | '';
   currentUserName: string | '';
   email: string;
+}
+export interface searchPet {
+  petType: any;
 }
 
 export interface RequestPetData {

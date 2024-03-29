@@ -1,20 +1,13 @@
 import {
   ImageBackground,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import {Image} from 'react-native-elements';
-import {LoginScreenProps, MyPetDetailsProps} from '../../constants/types';
-import {useAppDispatch} from '../../store/store';
-import {RootStackparams} from '../../navigation/stack/StackNavigation';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RouteProp} from '@react-navigation/native';
-import {firebase} from '@react-native-firebase/firestore';
-import {removeDonationPet} from '../../store/slice/donationPetsSlice';
+import {MyPetDetailsProps} from '../../constants/types';
 import useMyPetDetails from './useMyPetDetails';
 import {Colors} from '../../constants/color';
 
@@ -81,7 +74,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
           style={{
             alignItems: 'center',
             justifyContent: 'center',
-            marginTop: 20,
+            marginTop: 15,
           }}>
           <View
             style={{
@@ -91,7 +84,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
               borderRadius: 16,
             }}></View>
         </View>
-        <View style={{paddingHorizontal: 30, paddingTop: 30}}>
+        <View style={{paddingHorizontal: 30, paddingTop: 20}}>
           <View
             style={{
               flexDirection: 'row',
@@ -322,7 +315,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                 fontFamily: 'Montserrat-Regular',
                 letterSpacing: 1,
               }}>
-              {pet.description.slice(0, 125)}
+              {pet.description.slice(0, 100)}
             </Text>
           </View>
         </View>

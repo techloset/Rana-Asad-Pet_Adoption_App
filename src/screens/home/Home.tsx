@@ -1,33 +1,21 @@
-import {
-  ImageBackground,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
-import React, {useEffect} from 'react';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
+import React from 'react';
 import {Image} from 'react-native';
-import {useAppDispatch} from '../../store/store';
-import {LoginScreenProps} from '../../constants/types';
+import {LoginScreenProps, searchPet} from '../../constants/types';
 import HomePageForYouSinglePet from '../../components/homePageForYou/HomePageForYouSinglePet';
 import {TouchableOpacity} from 'react-native';
-import {fetchCollectionData} from '../../store/slice/donationPetsSlice';
 import {FlatList} from 'react-native';
 import useHome from './useHome';
 import {Colors} from '../../constants/color';
-import {showToast} from '../../components/toast/Toast';
 
 const Home = ({navigation}: LoginScreenProps) => {
-  const dispatch = useAppDispatch();
-  const {setSearchTest, memoizedData, userData, openDrawer, handlePetPress} =
-    useHome({
-      navigation,
-    });
+  const {setSearchTest, memoizedData, userData, openDrawer} = useHome({
+    navigation,
+  });
 
-  useEffect(() => {
-    dispatch(fetchCollectionData());
-  }, [dispatch]);
+  const handlePetPress = (category: any) => {
+    navigation.navigate('PetSearch', {selectedCategory: category});
+  };
 
   return (
     <View>
@@ -146,7 +134,8 @@ const Home = ({navigation}: LoginScreenProps) => {
               renderItem={({item}) => (
                 <TouchableOpacity
                   activeOpacity={0.8}
-                  onPress={() => handlePetPress(item)}>
+                  // onPress={() => handlePetPress(item)}
+                  onPress={() => handlePetPress(item.petType)}>
                   <View
                     style={{
                       width: 72,

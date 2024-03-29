@@ -1,6 +1,5 @@
 import {
   ActivityIndicator,
-  Alert,
   Image,
   ScrollView,
   StyleSheet,
@@ -22,9 +21,9 @@ const Login = ({navigation}: LoginScreenProps) => {
     handleNavigationToForgot,
     handleNavigationToLogin,
     isLoading,
+    isChecked,
+    setIsChecked,
   } = useLogin({navigation});
-
-  const [isChecked, setIsChecked] = useState(false);
 
   return (
     <ScrollView style={styles.container}>
@@ -80,15 +79,25 @@ const Login = ({navigation}: LoginScreenProps) => {
               />
             }
             uncheckedIcon={
-              <Image
+              <View
                 style={{
                   width: 17,
                   height: 17,
                   backgroundColor: 'black',
                   borderWidth: 1,
-                }}
-                source={require('../../assets/login/Vector.png')}
-              />
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image
+                  style={{
+                    width: 10,
+                    height: 9,
+                    backgroundColor: 'black',
+                    borderWidth: 1,
+                  }}
+                  source={require('../../assets/login/Vector.png')}
+                />
+              </View>
             }
           />
           <Text style={styles.checkBoxLabel}>
@@ -168,12 +177,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.primary,
     fontSize: 16,
   },
-
-  //   checkboxContainer: {
-  //     flexDirection: 'row',
-  //     marginBottom: 20,
-  //     marginTop: 10,
-  //   },
 
   underlineText: {
     textDecorationLine: 'underline',

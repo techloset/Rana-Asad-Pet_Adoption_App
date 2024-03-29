@@ -1,52 +1,11 @@
-import {
-  Alert,
-  BackHandler,
-  Image,
-  Linking,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React, {useEffect} from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React from 'react';
 import {FlatList} from 'react-native';
 import useDonationRequest from './useDonationRequest';
-import {
-  MailComposerOptions,
-  MailComposerStatus,
-} from 'react-native-mail-composer';
-import {useNavigation} from '@react-navigation/native';
 import {Colors} from '../../constants/color';
 
 const DonationRequest = () => {
-  const navigation = useNavigation();
-  const requestData = useDonationRequest();
-
-  useEffect(() => {
-    const handleBackPress = () => {
-      navigation.goBack();
-      return true;
-    };
-
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      handleBackPress,
-    );
-
-    return () => backHandler.remove();
-  }, [navigation]);
-
-  const handleSendEmailMessage = (email: string) => {
-    const mailtoLink = `mailto:${email}`;
-    Linking.openURL(mailtoLink)
-      .then(() => console.log('Gmail opened successfully'))
-      .catch(error => {
-        console.error('Failed to open Gmail:', error);
-        Alert.alert(
-          'Failed to open Gmail. Please make sure you have Gmail installed.',
-        );
-      });
-  };
+  const {requestData, handleSendEmailMessage} = useDonationRequest();
 
   return (
     <View style={styles.container}>
@@ -98,7 +57,7 @@ const DonationRequest = () => {
                             fontSize: 18,
                             fontWeight: '700',
                           }}>
-                          {item.petBreed.slice(0, 6)} .
+                          {item.petBreed.slice(0, 8)} .
                         </Text>
                         <Text
                           style={{

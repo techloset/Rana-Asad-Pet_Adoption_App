@@ -10,7 +10,7 @@ import UpdataPassword from '../../screens/updataPassword/UpdataPassword';
 import Details from '../../screens/details/Details';
 import MyPetDetails from '../../screens/myPetDetails/MyPetDetails';
 import {useAppDispatch, useAppSelector} from '../../store/store';
-import {DonationPetData} from '../../constants/types';
+import {DonationPetData, User} from '../../constants/types';
 import SearchSinglePet from '../../components/searchSinglePet/SearchSinglePet';
 import Login from '../../screens/login/Login';
 import SignUp from '../../screens/signUp/SignUp';
@@ -20,7 +20,6 @@ import {fetchUserDataSuccess} from '../../store/slice/userSlice';
 import {UserData} from '../../constants/types';
 import DonateScreen from '../../screens/donateScreen/DonateScreen';
 import DrawerNavigation from '../drawer/DrawerNavigation';
-import {Colors} from '../../constants/color';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,7 +29,7 @@ export type RootStackparams = {
   ForgotPassword: undefined;
   Home: undefined;
   Profile: undefined;
-  PetSearch: undefined;
+  PetSearch: {selectedCategory: string | undefined};
   Favorite: undefined;
   UpdataPassword: undefined;
   MyDonations: undefined;
@@ -38,7 +37,7 @@ export type RootStackparams = {
   DonationRequest: undefined;
   Details: {pet: DonationPetData};
   SearchSinglePet: undefined;
-  MyPetDetails: undefined;
+  MyPetDetails: {pet: DonationPetData};
   DrawerNavigation: undefined;
 };
 

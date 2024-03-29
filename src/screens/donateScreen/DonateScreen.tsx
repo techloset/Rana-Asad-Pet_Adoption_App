@@ -205,7 +205,6 @@ const styles = StyleSheet.create({
   labelDescription: {
     marginTop: 15,
     fontSize: 18,
-    // height: 154,
     fontWeight: '600',
     color: Colors.primary,
     fontFamily: 'Montserrat-SemiBold',

@@ -7,23 +7,16 @@ import {
   View,
   ActivityIndicator,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {LoginScreenProps} from '../../constants/types';
 import useFavorites from './useFavorites';
-import {useAppDispatch} from '../../store/store';
-import {fetchFavoriteData} from '../../store/slice/favoritePetsSlice';
 import {Colors} from '../../constants/color';
 
 const Favorites = ({navigation}: LoginScreenProps) => {
-  const dispatch = useAppDispatch();
   const {filteredData, handleGoToPetSearch, loading, handleDeleteItem} =
     useFavorites({
       navigation,
     });
-
-  useEffect(() => {
-    dispatch(fetchFavoriteData());
-  }, [dispatch]);
 
   return (
     <ScrollView style={styles.container}>

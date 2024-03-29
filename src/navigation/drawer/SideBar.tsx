@@ -123,7 +123,7 @@ const SideBar = ({navigation}: LoginScreenProps) => {
               styles.item,
               selectedItem === 'DonateScreen' && {backgroundColor: 'lightgray'},
             ]}>
-            Add_Pet
+            Add Pet
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleNavigation('MyDonations')}>
