@@ -121,7 +121,7 @@ const Login = ({navigation}: LoginScreenProps) => {
         <View
           style={{
             justifyContent: 'center',
-            marginTop: 30,
+            marginTop: '10%',
             alignItems: 'center',
           }}>
           <Text
@@ -143,18 +143,18 @@ const styles = StyleSheet.create({
   },
   smallContainer: {
     width: '100%',
-    marginTop: 170,
-    paddingHorizontal: 30,
+    marginTop: '45%',
+    paddingHorizontal: '8%',
   },
   label: {
-    marginTop: 40,
+    marginTop: '13%',
     fontSize: 18,
     fontWeight: '600',
     color: Colors.primary,
     fontFamily: 'Montserrat-SemiBold',
   },
   label2: {
-    marginTop: 20,
+    marginTop: '6%',
     fontSize: 18,
     fontWeight: '600',
     color: Colors.primary,
@@ -170,8 +170,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderBottomWidth: 2,
-    width: 302,
-    height: 40,
+    width: '100%',
     color: Colors.primary,
     fontFamily: 'Montserrat-Regular',
     borderColor: Colors.primary,
@@ -184,13 +183,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat-SemiBold',
   },
   buttonContainer: {
-    width: 185,
+    // width: 185,
+    width: '54%',
     fontFamily: 'Montserrat-SemiBold',
     height: 79,
     backgroundColor: Colors.primary,
     borderRadius: 37,
     color: 'white',
-    marginTop: 20,
+    marginTop: '7%',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -209,8 +209,8 @@ const styles = StyleSheet.create({
   containerbox: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingRight: 60,
-    marginLeft: -9,
+    paddingRight: '18%',
+    marginLeft: '-3%',
   },
   checkBoxLabel: {
     fontSize: 14,

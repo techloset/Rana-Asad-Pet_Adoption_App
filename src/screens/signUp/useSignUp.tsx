@@ -4,8 +4,11 @@ import firestore from '@react-native-firebase/firestore';
 import {LoginScreenProps, State, User} from '../../constants/types';
 import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {showToast} from '../../components/toast/Toast';
+import {useAppDispatch} from '../../store/store';
+import {listenForAuthStateChanges} from '../../store/slice/userSlice';
 
 export const useSignUp = ({navigation}: LoginScreenProps) => {
+  const dispatch = useAppDispatch();
   const [isChecked, setIsChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -41,9 +44,9 @@ export const useSignUp = ({navigation}: LoginScreenProps) => {
       );
 
       const user = userCredential.user;
-      await createUserProfile(user);
       showToast('success', 'Success', 'User account signed up');
-      navigation.navigate('Login');
+      await createUserProfile(user);
+      dispatch(listenForAuthStateChanges());
     } catch (error: any) {
       if (error.code === 'auth/invalid-email') {
         showToast('error', 'Error', 'That email address is invalid!');
@@ -65,9 +68,7 @@ export const useSignUp = ({navigation}: LoginScreenProps) => {
     };
 
     try {
-      navigation.navigate('Login');
       await firestore().collection('Users').doc(user.uid).set(userData);
-      navigation.navigate('Login');
     } catch (error) {
       showToast('error', 'Error', 'Firestore error');
     }

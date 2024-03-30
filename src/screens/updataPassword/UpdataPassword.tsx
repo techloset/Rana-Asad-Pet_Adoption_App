@@ -25,9 +25,21 @@ const UpdatePassword = ({navigation}: LoginScreenProps) => {
   } = useUpdatePassword({navigation});
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.smallContainer}>
-        <Text style={styles.label}>Current Password</Text>
+        <View>
+          <Text
+            style={{
+              fontWeight: '700',
+              textAlign: 'center',
+              fontSize: 24,
+              color: Colors.primary,
+              fontFamily: 'Montserrat-SemiBold',
+            }}>
+            Update Password
+          </Text>
+        </View>
+        <Text style={styles.label1}>Current Password</Text>
         <TextInput
           style={styles.input}
           secureTextEntry
@@ -64,7 +76,7 @@ const UpdatePassword = ({navigation}: LoginScreenProps) => {
           )}
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -76,20 +88,25 @@ const styles = StyleSheet.create({
   },
   smallContainer: {
     width: '100%',
-    paddingHorizontal: 30,
-    marginTop: 20,
-    height: 730,
+    paddingHorizontal: '7%',
+    marginTop: '10%',
+    height: '90%',
+  },
+  label1: {
+    marginTop: '15%',
+    fontSize: 18,
+    fontWeight: '600',
+    color: Colors.primary,
   },
   label: {
-    marginTop: 40,
+    marginTop: '7%',
     fontSize: 18,
     fontWeight: '600',
     color: Colors.primary,
   },
   input: {
     borderBottomWidth: 2,
-    width: 302,
-    height: 40,
+    width: '100%',
     color: Colors.primary,
     borderColor: Colors.primary,
     fontSize: 16,
@@ -100,7 +117,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
     borderRadius: 37,
     color: 'white',
-    marginTop: 320,
+    top: '43%',
     alignItems: 'center',
     justifyContent: 'center',
   },

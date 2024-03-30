@@ -144,20 +144,28 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   smallContainer: {
-    width: 330,
+    width: '90%',
     paddingHorizontal: 10,
     marginTop: 20,
+    marginHorizontal: 15,
     height: 184,
-    borderRadius: 20,
+    marginBottom: 4,
     backgroundColor: '#fff',
-    shadowColor: 'black',
+    borderRadius: 20,
+
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 0.8,
+    shadowRadius: 1,
+    elevation: 4,
   },
 
   twoContainer: {
     flexDirection: 'row',
   },
   secondContainer: {
-    width: 249,
+    // width: 249,
+    width: '100%',
     marginTop: 15,
     marginStart: 5,
     flexDirection: 'row',

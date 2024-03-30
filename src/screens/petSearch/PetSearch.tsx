@@ -18,7 +18,7 @@ const PetSearch = ({navigation, route}: any) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.searchBarContainer}>
+      {/* <View style={styles.searchBarContainer}>
         <View style={styles.searchInputContainer}>
           <TextInput
             placeholder="Search for a pet"
@@ -33,10 +33,69 @@ const PetSearch = ({navigation, route}: any) => {
             />
           </View>
         </View>
+      </View> */}
+
+      <View>
+        <View
+          style={{
+            alignItems: 'center',
+            marginVertical: '5%',
+            marginLeft: 5,
+          }}>
+          <View
+            style={{
+              width: '92%',
+              height: 62,
+              flexDirection: 'row',
+              alignItems: 'center',
+              position: 'relative',
+            }}>
+            <View style={{width: '84%', height: 48}}>
+              <TextInput
+                placeholder="Search for a pet"
+                placeholderTextColor={Colors.primary}
+                onChangeText={val => setSearchTerm(val)}
+                style={{
+                  backgroundColor: '#e9ecef',
+                  color: Colors.primary,
+                  fontFamily: 'Montserrat-Regular',
+                  paddingHorizontal: 15,
+                  borderRadius: 20,
+                  opacity: 0.5,
+                }}
+              />
+            </View>
+            <View
+              style={{
+                width: '10%',
+                height: 62,
+                backgroundColor: Colors.primary,
+                borderRadius: 25,
+                // marginRight: 40,
+                // marginLeft: 245,
+                marginLeft: '70%',
+                justifyContent: 'center',
+                alignContent: 'center',
+                alignItems: 'center',
+                position: 'absolute',
+              }}>
+              <Image
+                style={{
+                  width: 19,
+                  height: 27,
+                }}
+                source={require('../../assets/components/search.png')}
+              />
+            </View>
+          </View>
+        </View>
       </View>
 
       <View>
-        <ScrollView style={styles.categoryContainer} horizontal>
+        <ScrollView
+          style={styles.categoryContainer}
+          horizontal
+          showsHorizontalScrollIndicator={false}>
           <CategoryButton
             label="Dogs"
             onPress={() => handleCategorySearch('Dog')}
@@ -116,7 +175,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   searchInputContainer: {
-    width: 329,
+    // width: 329,
+    width: '100%',
     height: 62,
     flexDirection: 'row',
     alignItems: 'center',
@@ -146,15 +206,16 @@ const styles = StyleSheet.create({
     height: 27,
   },
   categoryContainer: {
-    marginTop: 20,
+    // marginTop: '7%',
     gap: 40,
-    left: 30,
+    left: '33%',
     marginRight: 30,
   },
   categoryButtonContainer: {
-    width: 63,
+    // width: 63,
+    width: '100%',
     height: 31,
-    marginHorizontal: 5,
+    marginHorizontal: 15,
     borderRadius: 13,
     fontWeight: '600',
     fontSize: 14,

@@ -44,8 +44,8 @@ const Home = ({navigation}: LoginScreenProps) => {
               }}>
               <Image
                 style={{
-                  width: 46,
-                  height: 46,
+                  width: 56,
+                  height: 56,
                   borderRadius: 123,
                   backgroundColor: '#C4C4C4',
                 }}
@@ -60,10 +60,10 @@ const Home = ({navigation}: LoginScreenProps) => {
           <View>
             <View
               style={{
-                marginTop: 5,
-                width: 267,
+                marginTop: '3%',
+                width: '60%',
                 height: 139,
-                marginHorizontal: 30,
+                marginHorizontal: '8%',
               }}>
               <Text
                 style={{
@@ -76,16 +76,21 @@ const Home = ({navigation}: LoginScreenProps) => {
             </View>
           </View>
           <View>
-            <View style={{alignItems: 'center', marginVertical: 10}}>
+            <View
+              style={{
+                alignItems: 'center',
+                marginVertical: '5%',
+                marginLeft: '3%',
+              }}>
               <View
                 style={{
-                  width: 329,
+                  width: '92%',
                   height: 62,
                   flexDirection: 'row',
                   alignItems: 'center',
                   position: 'relative',
                 }}>
-                <View style={{width: 278, height: 48}}>
+                <View style={{width: '83%', height: 48}}>
                   <TextInput
                     placeholder="Search for a pet"
                     placeholderTextColor={Colors.primary}
@@ -102,12 +107,13 @@ const Home = ({navigation}: LoginScreenProps) => {
                 </View>
                 <View
                   style={{
-                    width: 82,
+                    width: '10%',
                     height: 62,
                     backgroundColor: Colors.primary,
                     borderRadius: 25,
-                    marginRight: 40,
-                    marginLeft: 245,
+                    // marginRight: 40,
+                    // marginLeft: 245,
+                    marginLeft: '70%',
                     justifyContent: 'center',
                     alignContent: 'center',
                     alignItems: 'center',
@@ -125,7 +131,7 @@ const Home = ({navigation}: LoginScreenProps) => {
             </View>
           </View>
 
-          <View style={{paddingHorizontal: 20}}>
+          <View style={{paddingHorizontal: '5%'}}>
             <FlatList
               data={memoizedData}
               horizontal
@@ -138,11 +144,12 @@ const Home = ({navigation}: LoginScreenProps) => {
                   onPress={() => handlePetPress(item.petType)}>
                   <View
                     style={{
-                      width: 72,
+                      // width: 72,
+                      width: '90%',
                       height: 132,
                       justifyContent: 'center',
                       alignItems: 'center',
-                      marginHorizontal: 10,
+                      marginHorizontal: 3,
                     }}>
                     <Image
                       style={{
@@ -169,7 +176,7 @@ const Home = ({navigation}: LoginScreenProps) => {
               )}
             />
           </View>
-          <View style={{paddingHorizontal: 30}}>
+          <View style={{paddingHorizontal: 30, marginTop: 10}}>
             <Text
               style={{
                 color: Colors.primary,
@@ -185,7 +192,8 @@ const Home = ({navigation}: LoginScreenProps) => {
             style={{
               paddingHorizontal: 20,
               marginVertical: 10,
-              height: 200,
+              // height: 300,
+              height: '34%',
             }}>
             <HomePageForYouSinglePet navigation={navigation} />
           </View>

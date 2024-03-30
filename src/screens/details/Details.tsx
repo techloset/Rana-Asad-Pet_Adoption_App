@@ -20,7 +20,8 @@ const Details: React.FC<Props> = ({route, navigation}) => {
     <View style={{}}>
       <View
         style={{
-          height: 340,
+          // height: 340,
+          height: '50%',
         }}>
         <ImageBackground
           style={styles.backgroundImagee}
@@ -35,7 +36,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
                   style={{
                     width: 25,
                     height: 22,
-                    marginTop: 20,
+                    marginTop: '30%',
                     marginLeft: 20,
                   }}
                   source={require('../../assets//donate/whiteArrow.png')}
@@ -48,7 +49,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
                   style={{
                     width: 25,
                     height: 22,
-                    marginTop: 20,
+                    marginTop: '38%',
                     marginRight: 20,
                   }}
                   source={require('../../assets/adoption/heartRed.png')}
@@ -63,23 +64,28 @@ const Details: React.FC<Props> = ({route, navigation}) => {
           backgroundColor: 'white',
           borderTopLeftRadius: 30,
           borderTopRightRadius: 30,
+          height: '52%',
           zIndex: 10,
         }}>
         <View
           style={{
             alignItems: 'center',
             justifyContent: 'center',
-            marginTop: 20,
+            marginTop: '6%',
           }}>
           <View
             style={{
-              width: 54,
+              width: '15%',
               height: 5,
               backgroundColor: '#E5E5E5',
               borderRadius: 16,
             }}></View>
         </View>
-        <View style={{paddingHorizontal: 30, paddingTop: 25}}>
+        <View
+          style={{
+            paddingHorizontal: '8%',
+            // paddingTop: '6%',
+          }}>
           <View
             style={{
               flexDirection: 'row',
@@ -100,14 +106,14 @@ const Details: React.FC<Props> = ({route, navigation}) => {
                   fontWeight: '700',
                   color: Colors.primary,
                 }}>
-                {pet.petBreed}
+                {pet.petBreed.slice(0, 12)}
               </Text>
             </View>
             <View>
               <Text
                 style={{
                   fontSize: 24,
-                  marginTop: 10,
+                  marginTop: '10%',
                   fontWeight: '700',
                   color: '#F6A530',
                 }}>
@@ -115,11 +121,15 @@ const Details: React.FC<Props> = ({route, navigation}) => {
               </Text>
             </View>
           </View>
-          <View style={{flexDirection: 'row', gap: 5, marginTop: 10}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 5,
+              marginVertical: '4%',
+            }}>
             <View
               style={{
-                height: 59,
-                width: 75,
+                width: '25%',
                 backgroundColor: 'rgba(246, 165, 48, 0.1)',
                 borderRadius: 18,
                 alignItems: 'center',
@@ -145,8 +155,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
             </View>
             <View
               style={{
-                height: 59,
-                width: 75,
+                width: '25%',
                 backgroundColor: 'rgba(246, 165, 48, 0.1)',
                 borderRadius: 18,
                 alignItems: 'center',
@@ -172,8 +181,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
             </View>
             <View
               style={{
-                height: 59,
-                width: 75,
+                width: '25%',
                 backgroundColor: 'rgba(246, 165, 48, 0.1)',
                 borderRadius: 18,
                 alignItems: 'center',
@@ -199,8 +207,8 @@ const Details: React.FC<Props> = ({route, navigation}) => {
             </View>
             <View
               style={{
-                height: 59,
-                width: 75,
+                height: 57,
+                width: '25%',
                 backgroundColor: 'rgba(246, 165, 48, 0.1)',
                 borderRadius: 18,
                 alignItems: 'center',
@@ -229,10 +237,9 @@ const Details: React.FC<Props> = ({route, navigation}) => {
           <View
             style={{
               flexDirection: 'row',
-              marginVertical: 10,
               height: 50,
               width: '105%',
-              marginTop: 20,
+              marginVertical: '2%',
               justifyContent: 'space-between',
               paddingHorizontal: 5,
               alignItems: 'center',
@@ -286,7 +293,11 @@ const Details: React.FC<Props> = ({route, navigation}) => {
           </View>
         </View>
 
-        <View style={{paddingHorizontal: 30, paddingVertical: 10}}>
+        <View
+          style={{
+            paddingHorizontal: '9%',
+            paddingVertical: '2%',
+          }}>
           <View style={{height: 50}}>
             <Text
               style={{
@@ -326,7 +337,7 @@ export default Details;
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    width: 321,
+    width: '86%',
     height: 74,
     backgroundColor: Colors.primary,
     borderRadius: 34,
@@ -346,7 +357,8 @@ const styles = StyleSheet.create({
   },
   backgroundImagee: {
     width: '100%',
-    height: 370,
+    // height: 370,
+    height: '105%',
     resizeMode: 'cover',
   },
 });

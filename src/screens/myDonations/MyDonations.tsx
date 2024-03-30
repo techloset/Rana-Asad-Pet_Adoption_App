@@ -26,6 +26,7 @@ const MyDonations = ({navigation}: LoginScreenProps) => {
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
+          marginBottom: 14,
           paddingHorizontal: 30,
         }}>
         <Text
@@ -124,25 +125,25 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   smallContainer: {
-    width: 341,
+    width: '100%',
     marginTop: 20,
-    height: 141,
+    height: 161,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 15,
   },
   one: {
-    width: 194,
-    height: 141,
+    width: '56%',
+    height: '100%',
     borderRadius: 25,
     backgroundColor: '#C4C4C4',
     zIndex: 100,
     resizeMode: 'stretch',
   },
   two: {
-    width: 147,
-    height: 126,
+    width: '40%',
+    height: '89%',
     right: 20,
     zIndex: 2,
     paddingLeft: 45,
@@ -150,6 +151,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     fontFamily: 'Montserrat-Regular',
     backgroundColor: '#FFFFFF',
+
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 0.8,
+    shadowRadius: 1,
+    elevation: 4,
   },
   petType: {
     fontSize: 18,

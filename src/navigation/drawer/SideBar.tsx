@@ -62,13 +62,12 @@ const SideBar = ({navigation}: LoginScreenProps) => {
           <View style={{alignItems: 'center', marginVertical: 30}}>
             <View
               style={{
-                width: 246,
-                height: 62,
+                width: '95%',
                 flexDirection: 'row',
                 alignItems: 'center',
                 position: 'relative',
               }}>
-              <View style={{width: 203, height: 48}}>
+              <View style={{width: '100%'}}>
                 <TextInput
                   placeholder="Search for a pet"
                   placeholderTextColor={Colors.primary}
@@ -83,11 +82,11 @@ const SideBar = ({navigation}: LoginScreenProps) => {
               </View>
               <View
                 style={{
-                  width: 72,
-                  height: 54,
+                  width: '30%',
+                  height: '110%',
                   backgroundColor: Colors.primary,
                   borderRadius: 25,
-                  marginRight: 40,
+                  marginRight: '16%',
                   marginLeft: 170,
                   justifyContent: 'center',
                   alignContent: 'center',
@@ -107,7 +106,7 @@ const SideBar = ({navigation}: LoginScreenProps) => {
         </View>
 
         <TouchableOpacity
-          style={{marginTop: 20}}
+          style={{marginTop: 10}}
           onPress={() => handleNavigation('Home')}>
           <Text
             style={[
@@ -147,7 +146,7 @@ const SideBar = ({navigation}: LoginScreenProps) => {
           </Text>
         </TouchableOpacity>
 
-        <View style={{left: 35, top: 180}}>
+        <View style={{left: '13%', top: '45%'}}>
           <TouchableOpacity onPress={handleLogout}>
             <Text style={{color: '#FB5D48', fontSize: 18, fontWeight: '600'}}>
               Log Out
@@ -163,17 +162,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingVertical: 20,
-    marginTop: 15,
-    paddingHorizontal: 10,
+    paddingVertical: '8%',
+    marginTop: '5%',
+    paddingHorizontal: '4%',
     zIndex: 100,
   },
   item: {
     fontSize: 18,
-    marginBottom: 15,
-    padding: 10,
-    paddingVertical: 14,
-    paddingLeft: 35,
+    marginBottom: '6%',
+    padding: '4%',
+    paddingVertical: '6%',
+    paddingLeft: '10%',
     color: Colors.primary,
     fontWeight: '600',
   },

@@ -26,7 +26,7 @@ const Profile = ({navigation}: LoginScreenProps) => {
   } = useProfile({navigation});
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.smallContainer}>
         <View>
           <Text
@@ -44,9 +44,9 @@ const Profile = ({navigation}: LoginScreenProps) => {
         <View style={{alignItems: 'center'}}>
           <View
             style={{
-              width: 129,
+              width: '41.7%',
               height: 129,
-              marginVertical: 30,
+              marginVertical: '9%',
               borderWidth: 1,
               borderStyle: 'dashed',
               padding: 1,
@@ -54,8 +54,8 @@ const Profile = ({navigation}: LoginScreenProps) => {
             }}>
             <Image
               style={{
-                width: 125,
-                height: 125,
+                width: '100%',
+                height: '100%',
                 borderWidth: 1,
                 borderRadius: 70,
               }}
@@ -92,7 +92,7 @@ const Profile = ({navigation}: LoginScreenProps) => {
           </Text>
         </View>
 
-        <View style={{top: 130}}>
+        <View style={{top: '19%'}}>
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={updateProfile}>
@@ -104,7 +104,7 @@ const Profile = ({navigation}: LoginScreenProps) => {
           </TouchableOpacity>
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -116,19 +116,19 @@ const styles = StyleSheet.create({
   },
   smallContainer: {
     width: '100%',
-    paddingHorizontal: 30,
-    marginTop: 20,
-    height: 675,
+    paddingHorizontal: '7%',
+    marginTop: '6%',
+    height: '90%',
   },
   label: {
-    marginTop: 20,
+    marginTop: '7%',
     fontSize: 18,
     fontWeight: '600',
     fontFamily: 'Montserrat-Bold',
     color: Colors.primary,
   },
   label2: {
-    marginTop: 20,
+    marginTop: '7%',
     fontSize: 18,
     fontWeight: '600',
     fontFamily: 'Montserrat-SemiBold',
@@ -136,8 +136,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderBottomWidth: 2,
-    width: 302,
-    height: 40,
+    width: '100%',
     fontFamily: 'Montserrat-SemiBold',
     color: Colors.primary,
     borderColor: Colors.primary,
@@ -149,7 +148,6 @@ const styles = StyleSheet.create({
     height: 74,
     backgroundColor: Colors.primary,
     borderRadius: 37,
-    marginTop: 10,
     color: 'white',
     alignItems: 'center',
     justifyContent: 'center',

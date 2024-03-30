@@ -24,8 +24,8 @@ const ForgotPassword = ({navigation}: LoginScreenProps) => {
             style={{
               width: 25,
               height: 22,
-              marginTop: 20,
-              marginLeft: 20,
+              marginTop: '6%',
+              marginLeft: '6%',
             }}
             source={require('../../assets/login/forgot.png')}
           />
@@ -82,9 +82,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   smallContainer: {
-    marginTop: 200,
+    marginTop: '55%',
     width: '100%',
-    paddingHorizontal: 30,
+    paddingHorizontal: '8.5%',
     flex: 12,
   },
   label: {
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderBottomWidth: 2,
-    width: 302,
+    width: '100%',
     height: 40,
     color: Colors.primary,
     fontFamily: 'Montserrat-Regular',
@@ -112,12 +112,12 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
-    width: 185,
+    width: '55%',
     height: 79,
     backgroundColor: Colors.primary,
     borderRadius: 37,
     color: 'white',
-    marginTop: 30,
+    marginTop: '10%',
     alignItems: 'center',
     justifyContent: 'center',
   },

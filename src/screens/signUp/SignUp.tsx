@@ -37,7 +37,7 @@ const SignUp: React.FC<SignUpScreenProps> = ({navigation}) => {
             Sign Up
           </Text>
         </View>
-        <View style={{marginTop: 30}}>
+        <View style={{marginTop: '10%'}}>
           <Text style={styles.label}>Username</Text>
           <TextInput
             style={styles.input}
@@ -125,7 +125,7 @@ const SignUp: React.FC<SignUpScreenProps> = ({navigation}) => {
         <View
           style={{
             justifyContent: 'center',
-            marginTop: 30,
+            marginTop: '10%',
             alignItems: 'center',
           }}>
           <Text
@@ -149,18 +149,19 @@ const styles = StyleSheet.create({
   },
   smallContainer: {
     width: '100%',
-    marginTop: 80,
+    marginTop: '22%',
+
     paddingHorizontal: 30,
   },
   label: {
-    marginTop: 20,
+    marginTop: '6%',
     fontSize: 18,
     fontWeight: '600',
     fontFamily: 'Montserrat-SemiBold',
     color: Colors.primary,
   },
   label2: {
-    marginTop: 20,
+    marginTop: '7%',
     fontSize: 18,
     fontWeight: '600',
     fontFamily: 'Montserrat-SemiBold',
@@ -168,8 +169,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderBottomWidth: 2,
-    width: 302,
-    height: 40,
+    width: '100%',
     color: Colors.primary,
     fontFamily: 'Montserrat-Regular',
     borderColor: Colors.primary,
@@ -182,8 +182,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   buttonContainer: {
-    width: 185,
+    width: '54%',
     height: 79,
+
     backgroundColor: Colors.primary,
     borderRadius: 37,
     color: 'white',
@@ -206,7 +207,7 @@ const styles = StyleSheet.create({
   containerbox: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingRight: 60,
+    paddingRight: '20%',
     marginLeft: -9,
     marginTop: 20,
     fontFamily: 'Montserrat-SemiBold',

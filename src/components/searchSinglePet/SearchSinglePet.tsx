@@ -118,10 +118,16 @@ const SearchSinglePet: React.FC<Props> = ({navigation, searchTerm}) => {
             <View style={styles.two}>
               <Text style={styles.petType}>{item.petType.slice(0, 8)}</Text>
               <Text style={styles.age}>Age 4 Months</Text>
-              <View style={{flexDirection: 'row', marginTop: 5}}>
-                <Text style={styles.location}>{item.location}</Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  marginTop: 5,
+                  marginEnd: 5,
+                  gap: 10,
+                }}>
+                <Text style={styles.location}>{item.location.slice(0, 4)}</Text>
                 <Image
-                  style={{width: 9, height: 13, marginLeft: 10}}
+                  style={{width: 9, height: 13}}
                   source={require('../../assets/donate/location.png')}
                 />
               </View>
@@ -151,31 +157,38 @@ const SearchSinglePet: React.FC<Props> = ({navigation, searchTerm}) => {
 
 const styles = StyleSheet.create({
   smallContainer: {
-    width: 341,
+    width: '100%',
     marginTop: 20,
-    height: 141,
+    height: 161,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 15,
   },
   one: {
-    width: 194,
-    height: 141,
+    width: '56%',
+    height: '100%',
     borderRadius: 25,
     backgroundColor: '#C4C4C4',
     resizeMode: 'stretch',
     zIndex: 100,
   },
   two: {
-    width: 147,
-    height: 126,
+    width: '40%',
+    height: '79%',
     right: 20,
     zIndex: 2,
     paddingLeft: 45,
     paddingTop: 10,
     borderRadius: 20,
+
     backgroundColor: '#FFFFFF',
+
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 0.8,
+    shadowRadius: 1,
+    elevation: 4,
   },
   petType: {
     fontSize: 18,

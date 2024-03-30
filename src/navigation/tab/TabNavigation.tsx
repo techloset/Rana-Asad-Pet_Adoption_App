@@ -1,15 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import PetSearch from '../../screens/petSearch/PetSearch';
 import Favorites from '../../screens/favorites/Favorites';
 import Profile from '../../screens/profile/Profile';
-import Home from '../../screens/home/Home';
 import {Image, StyleSheet, View} from 'react-native';
-import DonateScreen from '../../screens/donateScreen/DonateScreen';
-import FavoritePets from '../../components/favoritePets/FavoritePets';
-import MyDonations from '../../screens/myDonations/MyDonations';
-import DonationRequest from '../../screens/donationRequest/DonationRequest';
-import DrawerNavigation from '../drawer/DrawerNavigation';
 import DrawerHome from '../drawer/DrawerHome';
 
 const Tab = createBottomTabNavigator();
@@ -127,17 +121,18 @@ export default TabNavigation;
 const navbars = StyleSheet.create({
   navigation: {
     backgroundColor: 'white',
-    height: 70,
-    width: 'auto',
+    height: '9%',
+    paddingTop: 9,
+    width: '100%',
     zIndex: 1,
   },
 
   navbarContainer: {
-    width: 68,
-    height: 48,
+    width: '80%',
+    height: '80%',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 10,
+    borderRadius: 18,
   },
   iconFocused: {
     backgroundColor: 'black',

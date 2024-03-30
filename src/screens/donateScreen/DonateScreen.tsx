@@ -57,6 +57,7 @@ const DonateScreen = ({navigation}: LoginScreenProps) => {
               onChange={item => {
                 handleChange('petType', item?.value);
               }}
+              iconStyle={styles.dropdownIconStyle}
             />
           </View>
           <View>
@@ -91,6 +92,7 @@ const DonateScreen = ({navigation}: LoginScreenProps) => {
               onChange={item => {
                 handleChange('vaccinated', item?.value);
               }}
+              iconStyle={styles.dropdownIconStyle}
             />
           </View>
 
@@ -106,6 +108,7 @@ const DonateScreen = ({navigation}: LoginScreenProps) => {
               onChange={item => {
                 handleChange('gender', item?.value);
               }}
+              iconStyle={styles.dropdownIconStyle}
             />
           </View>
           <View>
@@ -191,9 +194,9 @@ const styles = StyleSheet.create({
   },
   smallContainer: {
     marginTop: 20,
-    width: 303,
+    width: '80%',
     flex: 12,
-    height: 1117,
+    height: '100%',
   },
   label: {
     marginTop: 15,
@@ -216,18 +219,9 @@ const styles = StyleSheet.create({
     color: Colors.primary,
     fontFamily: 'Montserrat-SemiBold',
   },
-  forgetPassword: {
-    marginTop: 10,
-    fontSize: 18,
-    textAlign: 'right',
-    fontWeight: '600',
-    color: Colors.primary,
-    fontFamily: 'Montserrat-SemiBold',
-  },
   input: {
     borderBottomWidth: 2,
-    width: 302,
-    height: 40,
+    width: '100%',
     color: Colors.primary,
     borderColor: Colors.primary,
     fontFamily: 'Montserrat-SemiBold',
@@ -241,6 +235,7 @@ const styles = StyleSheet.create({
     borderRadius: 37,
     color: 'white',
     marginTop: 30,
+    marginBottom: 10,
     alignItems: 'center',
     justifyContent: 'center',
     fontFamily: 'Montserrat-SemiBold',
@@ -274,6 +269,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 8,
     fontFamily: 'Montserrat-SemiBold',
+  },
+  dropdownIconStyle: {
+    height: 40,
+    tintColor: 'black',
   },
   icon: {
     marginRight: 5,

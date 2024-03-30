@@ -22,7 +22,8 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
     <View style={{}}>
       <View
         style={{
-          height: 340,
+          // height: 340,
+          height: '50%',
         }}>
         <ImageBackground
           style={styles.backgroundImagee}
@@ -37,7 +38,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                   style={{
                     width: 25,
                     height: 22,
-                    marginTop: 20,
+                    marginTop: '30%',
                     marginLeft: 20,
                   }}
                   source={require('../../assets//donate/whiteArrow.png')}
@@ -53,7 +54,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
                   style={{
                     width: 25,
                     height: 22,
-                    marginTop: 20,
+                    marginTop: '38%',
                     marginRight: 20,
                   }}
                   source={require('../../assets/donate/deleteWhite.png')}
@@ -68,23 +69,24 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
           backgroundColor: 'white',
           borderTopLeftRadius: 30,
           borderTopRightRadius: 30,
+          height: '52%',
           zIndex: 10,
         }}>
         <View
           style={{
             alignItems: 'center',
             justifyContent: 'center',
-            marginTop: 15,
+            marginTop: '6%',
           }}>
           <View
             style={{
-              width: 54,
+              width: '15%',
               height: 5,
               backgroundColor: '#E5E5E5',
               borderRadius: 16,
             }}></View>
         </View>
-        <View style={{paddingHorizontal: 30, paddingTop: 20}}>
+        <View style={{paddingHorizontal: '8%'}}>
           <View
             style={{
               flexDirection: 'row',
@@ -103,18 +105,18 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
               <Text
                 style={{
                   fontSize: 14,
-                  fontWeight: '700',
+                  fontWeight: '600',
                   color: Colors.primary,
                   fontFamily: 'Montserrat-Regular',
                 }}>
-                {pet.petBreed}
+                {pet.petBreed.slice(0, 12)}
               </Text>
             </View>
             <View>
               <Text
                 style={{
                   fontSize: 24,
-                  marginTop: 10,
+                  marginTop: '10%',
                   fontWeight: '700',
                   color: '#F6A530',
                   fontFamily: 'Montserrat-Regular',
@@ -123,11 +125,10 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
               </Text>
             </View>
           </View>
-          <View style={{flexDirection: 'row', gap: 5, marginTop: 20}}>
+          <View style={{flexDirection: 'row', gap: 5, marginTop: '4%'}}>
             <View
               style={{
-                height: 59,
-                width: 75,
+                width: '25%',
                 backgroundColor: 'rgba(246, 165, 48, 0.1)',
                 borderRadius: 18,
                 alignItems: 'center',
@@ -155,8 +156,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
             </View>
             <View
               style={{
-                height: 59,
-                width: 75,
+                width: '25%',
                 backgroundColor: 'rgba(246, 165, 48, 0.1)',
                 borderRadius: 18,
                 alignItems: 'center',
@@ -184,8 +184,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
             </View>
             <View
               style={{
-                height: 59,
-                width: 75,
+                width: '25%',
                 backgroundColor: 'rgba(246, 165, 48, 0.1)',
                 borderRadius: 18,
                 alignItems: 'center',
@@ -213,8 +212,8 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
             </View>
             <View
               style={{
-                height: 59,
-                width: 75,
+                height: 57,
+                width: '25%',
                 backgroundColor: 'rgba(246, 165, 48, 0.1)',
                 borderRadius: 18,
                 alignItems: 'center',
@@ -248,7 +247,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
               marginVertical: 10,
               height: 50,
               width: '105%',
-              marginTop: 20,
+              marginTop: '4%',
               justifyContent: 'space-between',
               paddingHorizontal: 5,
               alignItems: 'center',
@@ -304,7 +303,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
           </View>
         </View>
 
-        <View style={{paddingHorizontal: 30, paddingVertical: 10}}>
+        <View style={{paddingHorizontal: '9%', paddingVertical: '2%'}}>
           <View style={{height: 50}}>
             <Text
               style={{
@@ -324,7 +323,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
           style={{
             justifyContent: 'center',
             alignItems: 'center',
-            marginTop: 10,
+            // marginTop: 10,
           }}>
           <TouchableOpacity style={styles.buttonContainer}>
             <Text style={styles.buttonText}>Adopt Now</Text>
@@ -339,7 +338,7 @@ export default MyPetDetails;
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    width: 321,
+    width: '86%',
     height: 74,
     backgroundColor: Colors.primary,
     borderRadius: 34,
@@ -359,7 +358,7 @@ const styles = StyleSheet.create({
   },
   backgroundImagee: {
     width: '100%',
-    height: 370,
+    height: '105%',
     resizeMode: 'cover',
   },
 });
