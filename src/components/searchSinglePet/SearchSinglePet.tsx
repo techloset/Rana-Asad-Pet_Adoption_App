@@ -10,11 +10,7 @@ import {
 } from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {fetchCollectionData} from '../../store/slice/donationPetsSlice';
-import {
-  AddToFavoriteTypes,
-  DonationPetData,
-  DonationScreen,
-} from '../../constants/types';
+import {DonationPetData} from '../../constants/types';
 import firestore from '@react-native-firebase/firestore';
 import favoritePetsSlice, {
   fetchFavoriteData,
@@ -51,7 +47,7 @@ const SearchSinglePet: React.FC<Props> = ({navigation, searchTerm}) => {
 
     setLoadingMap(prevState => ({
       ...prevState,
-      [item.uid]: true, // Set loading for this pet to true
+      [item.uid]: true,
     }));
 
     const cartProduct = {
@@ -106,52 +102,72 @@ const SearchSinglePet: React.FC<Props> = ({navigation, searchTerm}) => {
   };
 
   return (
-    <FlatList
-      data={memoizedData}
-      keyExtractor={(item, index) => item.uid.toString() || index.toString()}
-      renderItem={({item}) => (
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={() => handlePetPress(item)}>
-          <View style={styles.smallContainer}>
-            <Image style={styles.one} source={{uri: item.image}}></Image>
-            <View style={styles.two}>
-              <Text style={styles.petType}>{item.petType.slice(0, 8)}</Text>
-              <Text style={styles.age}>Age 4 Months</Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  marginTop: 5,
-                  marginEnd: 5,
-                  gap: 10,
-                }}>
-                <Text style={styles.location}>{item.location.slice(0, 4)}</Text>
-                <Image
-                  style={{width: 9, height: 13}}
-                  source={require('../../assets/donate/location.png')}
-                />
+    <View style={{paddingHorizontal: '5%'}}>
+      {memoizedData.length === 0 ? (
+        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <Text
+            style={{
+              color: Colors.primary,
+              fontFamily: 'Montserrat-Regular',
+              fontSize: 15,
+              marginVertical: 30,
+            }}>
+            Pet not found
+          </Text>
+        </View>
+      ) : (
+        <FlatList
+          data={memoizedData}
+          keyExtractor={(item, index) =>
+            item.uid.toString() || index.toString()
+          }
+          renderItem={({item}) => (
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => handlePetPress(item)}>
+              <View style={styles.smallContainer}>
+                <Image style={styles.one} source={{uri: item.image}}></Image>
+                <View style={styles.two}>
+                  <Text style={styles.petType}>{item.petType.slice(0, 8)}</Text>
+                  <Text style={styles.age}>Age 4 Months</Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      marginTop: 5,
+                      marginEnd: 5,
+                      gap: 10,
+                    }}>
+                    <Text style={styles.location}>
+                      {item.location.slice(0, 4)}
+                    </Text>
+                    <Image
+                      style={{width: 9, height: 13}}
+                      source={require('../../assets/donate/location.png')}
+                    />
+                  </View>
+                  <Text style={styles.gender}>{item.gender}</Text>
+                  <TouchableOpacity onPress={() => handleAddToCart(item)}>
+                    {loadingMap[item.uid] ? (
+                      <ActivityIndicator
+                        size="small"
+                        style={{left: 15}}
+                        color={Colors.primary}
+                      />
+                    ) : (
+                      <Image
+                        style={styles.likeIcon}
+                        source={require('../../assets/adoption/heartWhite.png')}
+                      />
+                    )}
+                  </TouchableOpacity>
+                </View>
               </View>
-              <Text style={styles.gender}>{item.gender}</Text>
-              <TouchableOpacity onPress={() => handleAddToCart(item)}>
-                {loadingMap[item.uid] ? (
-                  <ActivityIndicator
-                    size="small"
-                    style={{left: 15}}
-                    color={Colors.primary}
-                  />
-                ) : (
-                  <Image
-                    style={styles.likeIcon}
-                    source={require('../../assets/adoption/heartWhite.png')}
-                  />
-                )}
-              </TouchableOpacity>
-            </View>
-          </View>
-        </TouchableOpacity>
+            </TouchableOpacity>
+          )}
+          showsVerticalScrollIndicator={false}
+        />
       )}
-      showsVerticalScrollIndicator={false}
-    />
+    </View>
   );
 };
 

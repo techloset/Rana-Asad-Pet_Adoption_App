@@ -10,7 +10,6 @@ import {useAppDispatch, useAppSelector} from '../../store/store';
 import {fetchCollectionData} from '../../store/slice/donationPetsSlice';
 import {FlatList} from 'react-native';
 import {DonationPetData, LoginScreenProps} from '../../constants/types';
-import {ScrollView} from 'react-native-gesture-handler';
 import {Colors} from '../../constants/color';
 
 const HomePageForYouSinglePet = ({navigation}: LoginScreenProps) => {
@@ -40,10 +39,8 @@ const HomePageForYouSinglePet = ({navigation}: LoginScreenProps) => {
               <ImageBackground
                 resizeMode="cover"
                 style={{
-                  // width: 321,
                   width: '100%',
                   height: 181,
-                  // height: '50%',
                   marginTop: 20,
                 }}
                 imageStyle={styles.imageStyle}

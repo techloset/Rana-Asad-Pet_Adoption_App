@@ -20,7 +20,6 @@ const Details: React.FC<Props> = ({route, navigation}) => {
     <View style={{}}>
       <View
         style={{
-          // height: 340,
           height: '50%',
         }}>
         <ImageBackground
@@ -357,7 +356,6 @@ const styles = StyleSheet.create({
   },
   backgroundImagee: {
     width: '100%',
-    // height: 370,
     height: '105%',
     resizeMode: 'cover',
   },

@@ -278,8 +278,6 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
 
-  // --------------------
-
   imageContainer: {
     height: 161,
     marginTop: 20,

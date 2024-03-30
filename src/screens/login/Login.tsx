@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import {CheckBox} from 'react-native-elements';
 import {LoginScreenProps} from '../../constants/types';
 import useLogin from './useLogin';

@@ -44,9 +44,9 @@ export const useSignUp = ({navigation}: LoginScreenProps) => {
       );
 
       const user = userCredential.user;
-      showToast('success', 'Success', 'User account signed up');
       await createUserProfile(user);
       dispatch(listenForAuthStateChanges());
+      showToast('success', 'Success', 'User account signed up');
     } catch (error: any) {
       if (error.code === 'auth/invalid-email') {
         showToast('error', 'Error', 'That email address is invalid!');

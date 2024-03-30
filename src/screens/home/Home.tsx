@@ -111,8 +111,6 @@ const Home = ({navigation}: LoginScreenProps) => {
                     height: 62,
                     backgroundColor: Colors.primary,
                     borderRadius: 25,
-                    // marginRight: 40,
-                    // marginLeft: 245,
                     marginLeft: '70%',
                     justifyContent: 'center',
                     alignContent: 'center',
@@ -132,49 +130,61 @@ const Home = ({navigation}: LoginScreenProps) => {
           </View>
 
           <View style={{paddingHorizontal: '5%'}}>
-            <FlatList
-              data={memoizedData}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              keyExtractor={item => item.uid}
-              renderItem={({item}) => (
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  // onPress={() => handlePetPress(item)}
-                  onPress={() => handlePetPress(item.petType)}>
-                  <View
-                    style={{
-                      // width: 72,
-                      width: '90%',
-                      height: 132,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      marginHorizontal: 3,
-                    }}>
-                    <Image
+            {memoizedData.length === 0 ? (
+              <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <Text
+                  style={{
+                    color: Colors.primary,
+                    fontFamily: 'Montserrat-Regular',
+                    fontSize: 15,
+                    marginVertical: 30,
+                  }}>
+                  Pet not found
+                </Text>
+              </View>
+            ) : (
+              <FlatList
+                data={memoizedData}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                keyExtractor={item => item.uid}
+                renderItem={({item}) => (
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => handlePetPress(item.petType)}>
+                    <View
                       style={{
-                        backgroundColor: '#C4C4C4',
-                        width: 72,
-                        height: 72,
-                        borderRadius: 36,
-                      }}
-                      source={{uri: item.image}}
-                    />
-                    <Text
-                      style={{
-                        lineHeight: 17,
-                        color: Colors.primary,
-                        marginTop: 11,
-                        fontSize: 14,
-                        fontWeight: '600',
-                        fontFamily: 'Montserrat-SemiBold',
+                        width: '90%',
+                        height: 132,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginHorizontal: 3,
                       }}>
-                      {item.petType.slice(0, 8)}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              )}
-            />
+                      <Image
+                        style={{
+                          backgroundColor: '#C4C4C4',
+                          width: 72,
+                          height: 72,
+                          borderRadius: 36,
+                        }}
+                        source={{uri: item.image}}
+                      />
+                      <Text
+                        style={{
+                          lineHeight: 17,
+                          color: Colors.primary,
+                          marginTop: 11,
+                          fontSize: 14,
+                          fontWeight: '600',
+                          fontFamily: 'Montserrat-SemiBold',
+                        }}>
+                        {item.petType.slice(0, 8)}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                )}
+              />
+            )}
           </View>
           <View style={{paddingHorizontal: 30, marginTop: 10}}>
             <Text
@@ -192,7 +202,6 @@ const Home = ({navigation}: LoginScreenProps) => {
             style={{
               paddingHorizontal: 20,
               marginVertical: 10,
-              // height: 300,
               height: '34%',
             }}>
             <HomePageForYouSinglePet navigation={navigation} />

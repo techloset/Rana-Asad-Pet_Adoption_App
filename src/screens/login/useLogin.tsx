@@ -1,7 +1,6 @@
-import {Alert, ToastAndroid} from 'react-native';
-import {useEffect, useState} from 'react';
-import {LoginScreenProps, UserData} from '../../constants/types';
-import {store, useAppDispatch} from '../../store/store';
+import {useState} from 'react';
+import {LoginScreenProps} from '../../constants/types';
+import {useAppDispatch} from '../../store/store';
 import auth from '@react-native-firebase/auth';
 import {listenForAuthStateChanges} from '../../store/slice/userSlice';
 import {showToast} from '../../components/toast/Toast';

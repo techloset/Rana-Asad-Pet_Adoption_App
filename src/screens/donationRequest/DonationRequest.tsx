@@ -164,7 +164,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   secondContainer: {
-    // width: 249,
     width: '100%',
     marginTop: 15,
     marginStart: 5,
