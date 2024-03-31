@@ -7,6 +7,7 @@ import {
   View,
   Image,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
 import {LoginScreenProps} from '../../constants/types';
 import useProfile from './useProfile';
@@ -51,17 +52,19 @@ const Profile = ({navigation}: LoginScreenProps) => {
               padding: 1,
               borderRadius: 70,
             }}>
-            <Image
-              style={{
-                width: '100%',
-                height: '100%',
-                borderWidth: 1,
-                borderRadius: 70,
-              }}
-              source={{uri: selectedImage || userData?.photoURL}}
-            />
+            <TouchableOpacity activeOpacity={0.3} onPress={handleImagePicker}>
+              <Image
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  borderWidth: 1,
+                  borderRadius: 70,
+                }}
+                source={{uri: selectedImage || userData?.photoURL}}
+              />
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={handleImagePicker}>
+          <TouchableOpacity>
             <View style={{alignItems: 'flex-end', top: -50, left: 35}}>
               <Image source={require('../../assets/login/border.png')} />
             </View>
@@ -91,7 +94,7 @@ const Profile = ({navigation}: LoginScreenProps) => {
           </Text>
         </View>
 
-        <View style={{top: '19%'}}>
+        <View style={{top: '11%'}}>
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={updateProfile}>
@@ -117,7 +120,6 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: '7%',
     marginTop: '6%',
-    height: '90%',
   },
   label: {
     marginTop: '7%',

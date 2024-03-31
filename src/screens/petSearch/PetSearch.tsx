@@ -72,52 +72,48 @@ const PetSearch = ({navigation, route}: any) => {
         </View>
       </View>
 
-      {searchTerm ? (
-        <></>
-      ) : (
-        <View>
-          <ScrollView
-            style={styles.categoryContainer}
-            horizontal
-            showsHorizontalScrollIndicator={false}>
-            <CategoryButton
-              label="Dogs"
-              onPress={() => handleCategorySearch('Dog')}
-              isSelected={selectedCategory === 'Dog'}
-            />
-            <CategoryButton
-              label="Cats"
-              onPress={() => handleCategorySearch('Cats')}
-              isSelected={selectedCategory === 'Cats'}
-            />
-            <CategoryButton
-              label="Bunnies"
-              onPress={() => handleCategorySearch('Bunnies')}
-              isSelected={selectedCategory === 'Bunnies'}
-            />
-            <CategoryButton
-              label="Turtles"
-              onPress={() => handleCategorySearch('Turtle')}
-              isSelected={selectedCategory === 'Turtle'}
-            />
-            <CategoryButton
-              label="Cattles"
-              onPress={() => handleCategorySearch('Cattle')}
-              isSelected={selectedCategory === 'Cattle'}
-            />
-            <CategoryButton
-              label="Sheeps"
-              onPress={() => handleCategorySearch('Sheep')}
-              isSelected={selectedCategory === 'Sheep'}
-            />
-            <CategoryButton
-              label="Goats"
-              onPress={() => handleCategorySearch('Goat')}
-              isSelected={selectedCategory === 'Goat'}
-            />
-          </ScrollView>
-        </View>
-      )}
+      <View>
+        <ScrollView
+          style={styles.categoryContainer}
+          horizontal
+          showsHorizontalScrollIndicator={false}>
+          <CategoryButton
+            label="Dogs"
+            onPress={() => handleCategorySearch('Dog')}
+            isSelected={selectedCategory === 'Dog'}
+          />
+          <CategoryButton
+            label="Cats"
+            onPress={() => handleCategorySearch('Cats')}
+            isSelected={selectedCategory === 'Cats'}
+          />
+          <CategoryButton
+            label="Bunnies"
+            onPress={() => handleCategorySearch('Bunnies')}
+            isSelected={selectedCategory === 'Bunnies'}
+          />
+          <CategoryButton
+            label="Turtles"
+            onPress={() => handleCategorySearch('Turtle')}
+            isSelected={selectedCategory === 'Turtle'}
+          />
+          <CategoryButton
+            label="Cattles"
+            onPress={() => handleCategorySearch('Cattle')}
+            isSelected={selectedCategory === 'Cattle'}
+          />
+          <CategoryButton
+            label="Sheeps"
+            onPress={() => handleCategorySearch('Sheep')}
+            isSelected={selectedCategory === 'Sheep'}
+          />
+          <CategoryButton
+            label="Goats"
+            onPress={() => handleCategorySearch('Goat')}
+            isSelected={selectedCategory === 'Goat'}
+          />
+        </ScrollView>
+      </View>
 
       <View style={styles.searchResultsContainer}>
         <SearchSinglePet navigation={navigation} searchTerm={searchTerm} />

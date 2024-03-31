@@ -19,10 +19,9 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
   });
 
   return (
-    <View style={{}}>
+    <View style={{backgroundColor: 'white'}}>
       <View
         style={{
-          // height: 340,
           height: '50%',
         }}>
         <ImageBackground
@@ -69,7 +68,7 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
           backgroundColor: 'white',
           borderTopLeftRadius: 30,
           borderTopRightRadius: 30,
-          height: '52%',
+          height: '50%',
           zIndex: 10,
         }}>
         <View
@@ -323,7 +322,6 @@ const MyPetDetails: React.FC<MyPetDetailsProps> = ({route, navigation}) => {
           style={{
             justifyContent: 'center',
             alignItems: 'center',
-            // marginTop: 10,
           }}>
           <TouchableOpacity style={styles.buttonContainer}>
             <Text style={styles.buttonText}>Adopt Now</Text>

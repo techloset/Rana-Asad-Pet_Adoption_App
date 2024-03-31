@@ -102,7 +102,7 @@ const SearchSinglePet: React.FC<Props> = ({navigation, searchTerm}) => {
   };
 
   return (
-    <View style={{paddingHorizontal: '5%'}}>
+    <View style={{}}>
       {memoizedData.length === 0 ? (
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
           <Text
@@ -112,7 +112,7 @@ const SearchSinglePet: React.FC<Props> = ({navigation, searchTerm}) => {
               fontSize: 15,
               marginVertical: 30,
             }}>
-            Pet not found
+            not found
           </Text>
         </View>
       ) : (
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   smallContainer: {
     width: '100%',
     marginTop: 20,
-    height: 161,
+    height: 157,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
   },
   two: {
     width: '40%',
-    height: '79%',
+    height: '83%',
     right: 20,
     zIndex: 2,
     paddingLeft: 45,

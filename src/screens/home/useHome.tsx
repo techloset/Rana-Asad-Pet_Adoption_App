@@ -18,6 +18,10 @@ const useHome = ({navigation}: LoginScreenProps) => {
     dispatch(fetchCollectionData());
   }, [dispatch]);
 
+  const handlePetSearch = (category: any) => {
+    navigation.navigate('PetSearch', {selectedCategory: category});
+  };
+
   const openDrawer = () => {
     navigation.dispatch(DrawerActions.openDrawer());
   };
@@ -32,6 +36,7 @@ const useHome = ({navigation}: LoginScreenProps) => {
   return {
     setSearchTest,
     memoizedData,
+    handlePetSearch,
     openDrawer,
     userData,
     handlePetPress,

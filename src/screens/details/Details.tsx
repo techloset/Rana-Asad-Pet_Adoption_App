@@ -17,7 +17,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
   const {pet} = route.params;
 
   return (
-    <View style={{}}>
+    <View style={{backgroundColor: 'white'}}>
       <View
         style={{
           height: '50%',
@@ -63,7 +63,7 @@ const Details: React.FC<Props> = ({route, navigation}) => {
           backgroundColor: 'white',
           borderTopLeftRadius: 30,
           borderTopRightRadius: 30,
-          height: '52%',
+          height: '50%',
           zIndex: 10,
         }}>
         <View
@@ -83,7 +83,6 @@ const Details: React.FC<Props> = ({route, navigation}) => {
         <View
           style={{
             paddingHorizontal: '8%',
-            // paddingTop: '6%',
           }}>
           <View
             style={{

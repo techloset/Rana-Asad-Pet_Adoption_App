@@ -9,13 +9,10 @@ import useHome from './useHome';
 import {Colors} from '../../constants/color';
 
 const Home = ({navigation}: LoginScreenProps) => {
-  const {setSearchTest, memoizedData, userData, openDrawer} = useHome({
-    navigation,
-  });
-
-  const handlePetPress = (category: any) => {
-    navigation.navigate('PetSearch', {selectedCategory: category});
-  };
+  const {setSearchTest, handlePetSearch, memoizedData, userData, openDrawer} =
+    useHome({
+      navigation,
+    });
 
   return (
     <View>
@@ -38,6 +35,7 @@ const Home = ({navigation}: LoginScreenProps) => {
               />
             </TouchableOpacity>
             <TouchableOpacity
+              style={{marginTop: '-2%'}}
               activeOpacity={0.6}
               onPress={() => {
                 navigation.navigate('Profile');
@@ -60,9 +58,8 @@ const Home = ({navigation}: LoginScreenProps) => {
           <View>
             <View
               style={{
-                marginTop: '3%',
+                marginTop: '5%',
                 width: '60%',
-                height: 139,
                 marginHorizontal: '8%',
               }}>
               <Text
@@ -79,7 +76,7 @@ const Home = ({navigation}: LoginScreenProps) => {
             <View
               style={{
                 alignItems: 'center',
-                marginVertical: '5%',
+                marginVertical: '4%',
                 marginLeft: '3%',
               }}>
               <View
@@ -139,7 +136,7 @@ const Home = ({navigation}: LoginScreenProps) => {
                     fontSize: 15,
                     marginVertical: 30,
                   }}>
-                  Pet not found
+                  not found
                 </Text>
               </View>
             ) : (
@@ -151,7 +148,7 @@ const Home = ({navigation}: LoginScreenProps) => {
                 renderItem={({item}) => (
                   <TouchableOpacity
                     activeOpacity={0.8}
-                    onPress={() => handlePetPress(item.petType)}>
+                    onPress={() => handlePetSearch(item.petType)}>
                     <View
                       style={{
                         width: '90%',
@@ -203,6 +200,7 @@ const Home = ({navigation}: LoginScreenProps) => {
               paddingHorizontal: 20,
               marginVertical: 10,
               height: '34%',
+              marginBottom: '-57%',
             }}>
             <HomePageForYouSinglePet navigation={navigation} />
           </View>

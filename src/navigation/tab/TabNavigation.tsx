@@ -13,6 +13,7 @@ const TabNavigation = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarShowLabel: false,
+        tabBarHideOnKeyboard: true,
         headerShown: false,
         tabBarStyle: {
           ...navbars.navigation,
@@ -121,7 +122,7 @@ export default TabNavigation;
 const navbars = StyleSheet.create({
   navigation: {
     backgroundColor: 'white',
-    height: '9%',
+    height: '11%',
     paddingTop: 9,
     width: '100%',
     zIndex: 1,
