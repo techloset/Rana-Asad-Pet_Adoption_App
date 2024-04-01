@@ -146,7 +146,7 @@ const SideBar = ({navigation}: LoginScreenProps) => {
           </Text>
         </TouchableOpacity>
 
-        <View style={{left: '13%', top: '32%'}}>
+        <View style={{left: '13%', top: '36%'}}>
           <TouchableOpacity onPress={handleLogout}>
             <Text style={{color: '#FB5D48', fontSize: 18, fontWeight: '600'}}>
               Log Out

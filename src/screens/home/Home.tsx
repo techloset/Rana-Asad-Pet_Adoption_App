@@ -200,7 +200,6 @@ const Home = ({navigation}: LoginScreenProps) => {
               paddingHorizontal: 20,
               marginVertical: 10,
               height: '34%',
-              marginBottom: '-57%',
             }}>
             <HomePageForYouSinglePet navigation={navigation} />
           </View>

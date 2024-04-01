@@ -94,7 +94,7 @@ const Profile = ({navigation}: LoginScreenProps) => {
           </Text>
         </View>
 
-        <View style={{top: '11%'}}>
+        <View style={{marginTop: '30%'}}>
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={updateProfile}>

@@ -122,7 +122,7 @@ export default TabNavigation;
 const navbars = StyleSheet.create({
   navigation: {
     backgroundColor: 'white',
-    height: '11%',
+    height: '10%',
     paddingTop: 9,
     width: '100%',
     zIndex: 1,
