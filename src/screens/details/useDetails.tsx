@@ -99,7 +99,6 @@ const useDetails = () => {
               adoptedDate: currentDate,
             })
             .then(() => {
-              console.log('Adoption Request Sent Successfully');
               showToast(
                 'success',
                 'Success',

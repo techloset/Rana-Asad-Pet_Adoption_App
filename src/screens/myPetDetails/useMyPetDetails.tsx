@@ -6,6 +6,7 @@ import {firebase} from '@react-native-firebase/firestore';
 import {removeDonationPet} from '../../store/slice/donationPetsSlice';
 import {DonationPetData} from '../../constants/types';
 import {RootStackparams} from '../../navigation/stack/StackNavigation';
+import {showToast} from '../../components/toast/Toast';
 
 type DetailsScreenRouteProp = RouteProp<RootStackparams, 'MyPetDetails'>;
 type DetailsScreenNavigationProp = StackNavigationProp<
@@ -35,7 +36,7 @@ const useMyPetDetails = ({route, navigation}: UseMyPetDetailsProps) => {
       .doc(uid)
       .delete()
       .then(() => {
-        console.log('Document successfully deleted!');
+        showToast('success', 'Success', 'Document successfully deleted!');
         dispatch(removeDonationPet(uid));
         navigation.navigate('MyDonations');
       })
